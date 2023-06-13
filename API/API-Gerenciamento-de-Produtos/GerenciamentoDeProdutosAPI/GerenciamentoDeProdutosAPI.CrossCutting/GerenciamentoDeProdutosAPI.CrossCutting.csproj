@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GerenciamentoDeProdutosAPI.Data\GerenciamentoDeProdutosAPI.Data.csproj" />
+    <ProjectReference Include="..\GerenciamentoDeProdutosAPI.Migration\GerenciamentoDeProdutosAPI.Migration.csproj" />
+  </ItemGroup>
+
+</Project>
