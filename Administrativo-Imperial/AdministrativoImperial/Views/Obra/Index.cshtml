@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Obras";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6 class="titulo-lista">Lista de Obras</h6>
+                    <button class="btn btn-primary float-end" onclick="ModalObra()">Cadastrar</button>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                   
+                    <div class="divListar"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Obra -->
+<div class="modal fade" id="modalObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Obra</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+                        <form role="form" class="text-left">
+                            
+                            <partial name="_DadosFormulario" />
+
+                            <div class="text-center">
+                                <button onclick="ModalObraFechar()" type="button" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                                <button onclick="ModalObraSalvar()" type="button" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/Obra/index.js" asp-append-version="true"></script>
+<script src="~/js/Pages/Obra/salvar.js" asp-append-version="true"></script>

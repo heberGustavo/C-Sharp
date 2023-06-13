@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Funcionários";
+    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.FuncaoFuncionario>
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6 class="titulo-lista">Lista Função de Funcionários</h6>
+                    <button class="btn btn-primary float-end" onclick="ModalFuncao()">Cadastrar</button>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table id="tabelaFuncao" class="table align-items-center mt-2 mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Status</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-3 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.nome</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middletext-sm">
+                                            @if (item.excluido == false)
+                                            {
+                                                <span class="badge badge-sm bg-gradient-success">Ativo</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-sm bg-gradient-secondary">Desativo</span>
+                                            }
+                                        </td>
+                                        <td class="align-middle">
+                                            <button class="btn btn-border-red" type="button" onclick="AlterarFuncao(@item.id_funcao_funcionario, '@item.nome', @item.excluido)" data-toggle="tooltip" data-original-title="Editar Função">
+                                                <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
+                                            </button>
+                                            <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.id_funcao_funcionario, '@item.nome')" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
+                                                <span class="btn-inner--icon color-blue"><i class="fa-solid fa-trash"></i></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Função -->
+<div class="modal fade" id="modalFuncao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Função</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+
+                        <partial name="_DadosFormulario" />
+
+                        <div class="text-center">
+                            <button type="button" onclick="ModalFuncaoFechar()" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                            <button type="button" onclick="ModalFuncaoSalvar()" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/FuncaoFuncionario/index.js" asp-append-version="true"></script>
+<script src="~/js/Pages/FuncaoFuncionario/salvar.js" asp-append-version="true"></script>
+<script src="~/js/Pages/FuncaoFuncionario/excluir.js" asp-append-version="true"></script>

@@ -1,0 +1,65 @@
+﻿@using AdministrativoImperial.Common
+
+@{
+    Layout = "";
+    @model IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.Obra>
+    var DateMin = Convert.ToDateTime(DataDictionary.DATE_MIN);
+}
+
+<div class="table-responsive p-0">
+    <table id="tabelaObra" class="table align-items-center mt-2 mb-0">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Apelido</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Início - Fim</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Orçamento</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Gasto Total</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Lucro</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex px-3 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">@item.apelido</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text-xs font-weight-bold mb-0">
+                            <span class="data-inicio">@item.data_inicio.ToString("dd/MM/yyyy")</span>
+                            -
+                            @if (DateMin != item.data_fim)
+                            {
+                                <span class="data-fim">
+                                    @item.data_fim.ToString("dd/MM/yyyy")
+                                </span>
+                            }
+                        </p>
+                    </td>
+                    <td class="align-middle">
+                        <p class="text-xs font-weight-bold mb-0">@item.orcamento.ToString("C")</p>
+                    </td>
+                    <td class="align-middle">
+                        <p class="text-xs font-weight-bold mb-0">0.00</p>
+                    </td>
+                    <td class="align-middletext-sm">
+                        <p class="text-xs font-weight-bold mb-0">000.00</p>
+                    </td>
+                    <td class="align-middle">
+                        <button class="btn btn-icon btn-2 btn-info" type="button" data-toggle="tooltip" data-original-title="Editar Função">
+                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        </button>
+                        <button class="btn btn-icon btn-2 btn-danger" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-trash"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

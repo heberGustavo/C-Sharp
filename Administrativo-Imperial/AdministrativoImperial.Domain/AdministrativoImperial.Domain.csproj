@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Body\" />
+    <Folder Include="Models\NotMapped\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Effortless.Net.Encryption" Version="4.0.0" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdministrativoImperial.Common\AdministrativoImperial.Common.csproj" />
+  </ItemGroup>
+
+</Project>

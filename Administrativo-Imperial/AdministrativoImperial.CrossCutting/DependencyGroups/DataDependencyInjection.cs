@@ -1,0 +1,18 @@
+﻿using AdministrativoImperial.Data;
+using AdministrativoImperial.Data.Repository;
+using AdministrativoImperial.Domain.IRepository;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace AdministrativoImperial.CrossCutting.DependencyGroups
+{
+    public class DataDependencyInjection
+    {
+        public static void Register(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddScoped<SqlDataContext, SqlDataContext>();
+            serviceCollection.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
+            serviceCollection.AddTransient<IFuncaoFuncionarioRepository, FuncaoFuncionarioRepository>();
+            serviceCollection.AddTransient<IObraRepository, ObraRepository>();
+        }
+    }
+}

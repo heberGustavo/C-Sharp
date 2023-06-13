@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\202204150936_CREATE_TABLE_FUNCAO_FUNCIONARIO_E_TABLE_FUNCIONARIO.sql" />
+    <None Remove="Scripts\202204221224_CREATE_TABLE_OBRA.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\202204221224_CREATE_TABLE_OBRA.sql" />
+    <EmbeddedResource Include="Scripts\202204150936_CREATE_TABLE_FUNCAO_FUNCIONARIO_E_TABLE_FUNCIONARIO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.5.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdministrativoImperial.Common\AdministrativoImperial.Common.csproj" />
+    <ProjectReference Include="..\AdministrativoImperial.Domain\AdministrativoImperial.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

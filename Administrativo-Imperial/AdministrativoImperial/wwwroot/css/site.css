@@ -1,0 +1,35 @@
+﻿.titulo-lista{
+    display: inline-block !important;
+}
+
+.navbar-vertical.navbar-expand-xs{
+    z-index: 1020;
+}
+
+.text-danger{
+    font-size: 15px;
+}
+
+.btn {
+    padding: 8px 13px !important;
+}
+
+.color-red{
+    color: red !important;
+}
+
+.color-blue {
+    color: blue !important;
+}
+
+.btn-border-red {
+    border: 1px solid red !important;
+}
+
+.btn-border-blue {
+    border: 1px solid blue !important;
+}
+
+.swal-modal .swal-text{
+    text-align: center !important;
+}
