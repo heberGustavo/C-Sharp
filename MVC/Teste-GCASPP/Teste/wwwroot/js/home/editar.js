@@ -23,7 +23,7 @@ function EditarFuncionario(id) {
 
 function PreencherCamposEditar(dados) {
 
-    var data = ConverterDataParaUSA(dados.data_de_nascimento);
+    var data = ConverterDataParaUSARead(dados.data_de_nascimento);
     var salario = FormatDinheiro(ConverterParaFloat(dados.salario))
 
     $("#idEditar").val(dados.id);

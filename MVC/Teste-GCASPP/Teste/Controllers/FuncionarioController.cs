@@ -23,66 +23,54 @@ namespace Teste.Controllers
             _filhoBusiness = filhoBusiness;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Funcionario>> ObterTodosFuncionarios()
-            => await _funcionarioBusiness.ObterTodosFuncionarios();
+        #region Write
 
         [HttpPost]
         public async Task<JsonResult> Cadastrar(string nome, string data, decimal salario)
         {
             try
             {
-                var result = await _funcionarioBusiness.VerificaSeExisteCadastrado(nome, salario);
+                //var result = await _funcionarioBusiness.VerificaSeExisteCadastrado(nome, salario);
 
-                if (result < 1)
+                var model = new Funcionario
                 {
-                    var model = new Funcionario
-                    {
-                        nome = nome,
-                        data_de_nascimento = Convert.ToDateTime(data),
-                        salario = salario
-                    };
+                    nome = nome,
+                    data_de_nascimento = Convert.ToDateTime(data),
+                    salario = salario
+                };
 
-                    var resultado = await _funcionarioBusiness.Cadastrar(model);
+                var resultado = await _funcionarioBusiness.Cadastrar(model);
 
-                    return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
-                }
+                return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
 
-                return Json(new { erro = true, mensagem = "Já existe funcionário com esses dados!" });
-                
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Json(new { erro = true, mensagem = "Ocorreu um erro. Contate o administrador." });
             }
         }
-        
+
         [HttpPost]
         public async Task<JsonResult> Editar(int id, string nome, string data, decimal salario)
         {
             try
             {
-                var result = await _funcionarioBusiness.VerificaSeExisteCadastrado(nome, salario);
+                //var result = await _funcionarioBusiness.VerificaSeExisteCadastrado(nome, salario);
 
-                if (result < 1)
+                var model = new Funcionario
                 {
-                    var model = new Funcionario
-                    {
-                        id = id,
-                        nome = nome,
-                        data_de_nascimento = Convert.ToDateTime(data),
-                        salario = salario
-                    };
+                    id = id,
+                    nome = nome,
+                    data_de_nascimento = Convert.ToDateTime(data),
+                    salario = salario
+                };
 
-                    var resultado = await _funcionarioBusiness.Editar(model);
+                var resultado = await _funcionarioBusiness.Editar(model);
 
-                    return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
-                }
-
-                return Json(new { erro = true, mensagem = "Já existe funcionário com esses dados!" });
+                return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Json(new { erro = true, mensagem = "Ocorreu um erro. Contate o administrador." });
             }
@@ -95,19 +83,27 @@ namespace Teste.Controllers
             {
                 var listaFilho = await _filhoBusiness.VerificaSeExisteFilhoCadastrado(id);
 
-                if(listaFilho >= 1)
+                if (listaFilho >= 1)
                 {
-                    return Json(new { erro = true, mensagem = "Não é possivel excluir um funcionário com algum filho cadastrado. Verifique e tente novamente!" } );
+                    return Json(new { erro = true, mensagem = "Não é possivel excluir um funcionário com algum filho cadastrado. Verifique e tente novamente!" });
                 }
 
                 var result = await _funcionarioBusiness.Excluir(id);
                 return Json(new { erro = result.erro, mensagem = result.mensagem });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Json(new { erro = true, mensagem = "Ocorreu um erro. Contate o administrador." });
             }
         }
+
+        #endregion
+
+        #region Read
+
+        [HttpGet]
+        public async Task<IEnumerable<Funcionario>> ObterTodosFuncionarios()
+            => await _funcionarioBusiness.ObterTodosFuncionarios();
 
         [HttpGet]
         public async Task<JsonResult> ObterFuncionarioPorId(int id)
@@ -122,6 +118,8 @@ namespace Teste.Controllers
                 return Json("Ocorreu um erro. Contate o administrador.");
             }
         }
+
+        #endregion
 
     }
 }

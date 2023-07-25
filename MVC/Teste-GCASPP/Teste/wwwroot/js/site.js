@@ -23,6 +23,21 @@ function ConverterDataParaUSA(data) {
     return dataFormatada;
 }
 
+function ConverterDataParaUSARead(data) {
+    var dataPadrao = new Date(data);
+
+    var diaPadrao = dataPadrao.getDate();
+    var mesPadrao = dataPadrao.getMonth() + 1;
+    var anoPadrao = dataPadrao.getFullYear();
+
+    var dia = ("00" + diaPadrao).slice(-2); // "00"
+    var mes = ("00" + mesPadrao).slice(-2); // "00"
+    var ano = ("0000" + anoPadrao).slice(-4); // "0000"
+
+    var dataFormatada = ano + '-' + mes + '-' + dia;
+    return dataFormatada;
+}
+
 function ConverterParaFloat(stringValor) {
     if (IsString(stringValor))
         return parseFloat(stringValor.replace("R$", '').trim().replace('.', '').replace(',', '.'));
