@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h4>Cadastro de Filho</h4>
+                <hr />
+
+                <input type="hidden" id="idEditar" />
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="nome">Nome:</label>
+                        <input type="text" class="form-control" id="nome" placeholder="Nome e sobrenome">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="data">Date de Nascimento:</label>
+                        <input type="date" class="form-control" id="data">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="selectFuncionario">Funcionário:</label>
+                        <select id="selectFuncionario" title="Selecione" class="selectpicker form-control" data-live-search="true">
+                            <option id="0" data-tokens="Selecione" selected disabled>Selecione</option>
+                            @foreach (var item in (IEnumerable<Teste.Domain.Models.EntityDomain.Funcionario>)ViewBag.Funcionarios)
+                            {
+                                <option value="@item.id">@item.nome</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-12 d-flex justify-content-center mt-4 mb-0">
+                        <button onclick="Cadastrar()" id="cadastrar" type="button" class="btn btn-primary btn-sm mr-1">Cadastrar</button>
+                        <button onclick="LimparCampos()" type="button" class="btn btn-secondary btn-sm ml-1">Limpar Campos</button>
+                    </div>
+                </div>
+                <br /><br />
+
+                <div id="divListarFilho"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Confirmação -->
+<div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="idExcluir" />
+            <div class="modal-body">
+                Tem certeza que deseja excluir esse item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="ConfirmarExclusao()">Confirmar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/filho/index.js" asp-append-version="true"></script>
+<script src="~/js/filho/criar.js" asp-append-version="true"></script>
+<script src="~/js/filho/editar.js" asp-append-version="true"></script>
+<script src="~/js/filho/excluir.js" asp-append-version="true"></script>

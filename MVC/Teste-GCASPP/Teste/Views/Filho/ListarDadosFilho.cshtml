@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "";
+    @model IEnumerable<Teste.Domain.Models.Body.FilhoBody>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Data de Nas.</th>
+            <th scope="col">Funcionário</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.nome</td>
+                    <td>@item.data_de_nascimento.ToString("dd/MM/yyyy")</td>
+                    <td>@item.nome_funcionario</td>
+                    <td>
+                        <button onclick="EditarFilho(@item.id)" class="btn btn-sm btn-warning btn-sm"><span class="material-icons">edit</span></button>
+                        <button onclick="AbrirModalConfirmacao(@item.id)" class="btn btn-sm btn-danger btn-sm"><span class="material-icons">delete</span></button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>Nenhum registro encontrado</td>
+            </tr>
+        }
+    </tbody>
+</table>
