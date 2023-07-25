@@ -23,7 +23,7 @@ function EditarFilho(id) {
 
 function PreencherCamposEditar(dados) {
 
-    var data = ConverterDataParaUSA(dados.data_de_nascimento);
+    var data = ConverterDataParaUSARead(dados.data_de_nascimento);
 
     $("#idEditar").val(dados.id);
     $("#nome").val(dados.nome);
