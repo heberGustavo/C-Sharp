@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    @model IEnumerable<BestProjects.Domain.Models.EntityDomain.Usuario>;
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h4>Novo Contato</h4>
+                <hr />
+
+
+                <form>
+                    <div class="form-group">
+                        <label for="nome">Nome </label>
+                        <input type="text" class="form-control" id="nome" placeholder="Ex: Heber Gustavo">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefono Res. </label>
+                        <input type="text" class="form-control telefone_res" id="telefone" placeholder="Ex: (00) 0000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Celular </label>
+                        <input type="text" class="form-control celular" id="celular" placeholder="Ex: (00) 00000-0000">
+                    </div>
+                    <div class="form-group d-flex justify-content-center mt-4 mb-0">
+                        <button onclick="CadastrarContato()" type="button" class="btn btn-outline-primary">Adicionar</button>
+                    </div>
+                </form>
+
+                <hr />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Telefone Res.</th>
+                            <th scope="col">Celular</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.nome</td>
+                                    <td>@item.telefone</td>
+                                    <td>@item.celular</td>
+                                    <td>
+                                        <button onclick="AbrirModalRemoverContato(@item.id_usuario, '@item.nome')" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Nenhum registro encontrado</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Excluir -->
+<div class="modal fade" id="modalExcluirContato" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="idUsuarioExcluir" type="hidden"/>
+                Você tem certeza que deseja excluir o contato "<b><text id="nomeContato"></text></b>" ? 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button onclick="ConfirmarExclusao()" type="button" class="btn btn-success">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/home/index.js" asp-append-version="true"></script>
+<script src="~/js/home/criar.js" asp-append-version="true"></script>
+<script src="~/js/home/excluir.js" asp-append-version="true"></script>

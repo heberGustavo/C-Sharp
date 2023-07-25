@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\202120210017_CriacaoTabelaUsuario.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\202120210017_CriacaoTabelaUsuario.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BestProjects.Common\BestProjects.Common.csproj" />
+    <ProjectReference Include="..\BestProjects.Domain\BestProjects.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.5.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
