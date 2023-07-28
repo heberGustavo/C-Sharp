@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CalculadoraPRO.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CalculadoraPRO.CrossCutting.DependencyGroups
 {
@@ -9,6 +8,7 @@ namespace CalculadoraPRO.CrossCutting.DependencyGroups
         public static void Register(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<SqlDataContext, SqlDataContext>();
+            
             //serviceCollection.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
         }
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CalculadoraPRO.Domain.IBusiness.Migration
+﻿namespace CalculadoraPRO.Domain.IBusiness.Migration
 {
     public interface IMigrationBusiness
     {

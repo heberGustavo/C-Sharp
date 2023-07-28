@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CalculadoraPRO.Domain.IBusiness.Migration;
+using CrossCutting.Migration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CalculadoraPRO.CrossCutting.DependencyGroups
 {

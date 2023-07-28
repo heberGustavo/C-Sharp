@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CalculadoraPRO.Common;
+using CalculadoraPRO.Domain.IBusiness.Migration;
+using DbUp;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace CrossCutting.Migration
 {

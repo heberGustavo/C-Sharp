@@ -1,6 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using CalculadoraPRO.Domain.IRepository.Base;
+using Dapper;
+using Dapper.Contrib.Extensions;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CalculadoraPRO.Data.Repository.Base
 {

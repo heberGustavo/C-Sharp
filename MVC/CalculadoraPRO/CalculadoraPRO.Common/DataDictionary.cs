@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CalculadoraPRO.Common
+﻿namespace CalculadoraPRO.Common
 {
     public class DataDictionary
     {

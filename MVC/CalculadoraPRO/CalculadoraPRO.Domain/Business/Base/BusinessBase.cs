@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CalculadoraPRO.Domain.IBusiness.Base;
+using CalculadoraPRO.Domain.IRepository.Base;
+using CalculadoraPRO.Domain.Models.Common;
+using System;
+using System.Threading.Tasks;
 
 namespace CalculadoraPRO.Domain.Business.Base
 {
