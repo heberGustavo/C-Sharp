@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace CalculadoraPRO.Controllers
 {
-    public class HomeController : Controller
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+
     }
 }

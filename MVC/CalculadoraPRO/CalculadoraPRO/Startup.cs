@@ -71,7 +71,7 @@ namespace CalculadoraPRO
                    options.Cookie.HttpOnly = true;
                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                    options.Cookie.SameSite = SameSiteMode.None;
-                   options.Cookie.Name = ".AdministrativoImperial.AuthCookie";
+                   options.Cookie.Name = ".CalculadoraPRO.AuthCookie";
                    options.LoginPath = "/Login/Index";
                    options.LogoutPath = "/Logout";
                    options.Cookie.MaxAge = TimeSpan.FromDays(1);
@@ -118,7 +118,7 @@ namespace CalculadoraPRO
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=FuncaoFuncionario}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
