@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace CalculadoraPRO.Controllers
 {
-    public class LoginController : Controller
+    public class ContasController : Controller
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "Contas Cadastradas";
+
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Login()
+        public ViewResult Listar()
         {
             return View();
         }
-
+        
     }
 }

@@ -1,0 +1,10 @@
+﻿<form asp-action="Listar" method="get" id="formFiltro">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nome da conta</label>
+        <input type="text" class="form-control" id="txtNomeConta" placeholder="Digite o nome da conta">
+    </div>
+
+    <a asp-action="Listar" class="btn btn-success">Pesquisar</a>
+</form>
+
+<script src="~/js/Pages/Login/LoginAPI.js" asp-append-version="true"></script>
