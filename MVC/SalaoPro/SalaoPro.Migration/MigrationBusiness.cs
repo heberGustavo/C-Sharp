@@ -1,5 +1,5 @@
-﻿using Teste.Common;
-using Teste.Domain.IBusiness.Migration;
+﻿using SalaoPro.Common;
+using SalaoPro.Domain.IBusiness.Migration;
 using DbUp;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-namespace Teste.Migration
+namespace SalaoPro.Migration
 {
     public class MigrationBusiness : IMigrationBusiness
     {

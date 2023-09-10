@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Migration", "4-Migration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Migration", "SalaoPro.Migration\SalaoPro.Migration.csproj", "{7C51BA61-7171-40BF-80DB-24F898BCE4F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Common", "SalaoPro.Common\SalaoPro.Common.csproj", "{256354B2-B029-41FD-AE58-7B3A0F32556B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.CrossCutting", "SalaoPro.CrossCutting\SalaoPro.CrossCutting.csproj", "{0793CDE4-C518-481F-8E70-263F2D8D159C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256354B2-B029-41FD-AE58-7B3A0F32556B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256354B2-B029-41FD-AE58-7B3A0F32556B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256354B2-B029-41FD-AE58-7B3A0F32556B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256354B2-B029-41FD-AE58-7B3A0F32556B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +50,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BBB3933D-0FAF-4228-85A9-2E714B0C3991} = {D48075E9-C3E5-4D4D-AA2B-5E62DA4F6872}
 		{7C51BA61-7171-40BF-80DB-24F898BCE4F5} = {09E279B7-2DF7-4A80-ACAC-3F78BC93CA78}
+		{256354B2-B029-41FD-AE58-7B3A0F32556B} = {5698232E-721C-4288-A911-E64E1AA58BAB}
+		{0793CDE4-C518-481F-8E70-263F2D8D159C} = {5698232E-721C-4288-A911-E64E1AA58BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23001784-6FB1-4753-8D26-98C2D28AF730}
