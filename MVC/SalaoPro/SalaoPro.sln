@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro", "SalaoPro\SalaoPro.csproj", "{BBB3933D-0FAF-4228-85A9-2E714B0C3991}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Portal", "SalaoPro\SalaoPro.Portal.csproj", "{BBB3933D-0FAF-4228-85A9-2E714B0C3991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Portal", "0-Portal", "{D48075E9-C3E5-4D4D-AA2B-5E62DA4F6872}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Domain", "1-Domain", "{73C09799-2634-48F6-AA7C-025A03850742}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Data", "2-Data", "{39173367-CEF7-4493-B1EE-90B315F86FF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Utils", "3-Utils", "{5698232E-721C-4288-A911-E64E1AA58BAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Migration", "4-Migration", "{09E279B7-2DF7-4A80-ACAC-3F78BC93CA78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Migration", "SalaoPro.Migration\SalaoPro.Migration.csproj", "{7C51BA61-7171-40BF-80DB-24F898BCE4F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +27,17 @@ Global
 		{BBB3933D-0FAF-4228-85A9-2E714B0C3991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB3933D-0FAF-4228-85A9-2E714B0C3991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB3933D-0FAF-4228-85A9-2E714B0C3991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C51BA61-7171-40BF-80DB-24F898BCE4F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBB3933D-0FAF-4228-85A9-2E714B0C3991} = {D48075E9-C3E5-4D4D-AA2B-5E62DA4F6872}
+		{7C51BA61-7171-40BF-80DB-24F898BCE4F5} = {09E279B7-2DF7-4A80-ACAC-3F78BC93CA78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23001784-6FB1-4753-8D26-98C2D28AF730}
