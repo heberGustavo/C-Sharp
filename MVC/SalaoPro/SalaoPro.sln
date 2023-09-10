@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Common", "SalaoPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.CrossCutting", "SalaoPro.CrossCutting\SalaoPro.CrossCutting.csproj", "{0793CDE4-C518-481F-8E70-263F2D8D159C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaoPro.Data", "SalaoPro.Data\SalaoPro.Data.csproj", "{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0793CDE4-C518-481F-8E70-263F2D8D159C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{7C51BA61-7171-40BF-80DB-24F898BCE4F5} = {09E279B7-2DF7-4A80-ACAC-3F78BC93CA78}
 		{256354B2-B029-41FD-AE58-7B3A0F32556B} = {5698232E-721C-4288-A911-E64E1AA58BAB}
 		{0793CDE4-C518-481F-8E70-263F2D8D159C} = {5698232E-721C-4288-A911-E64E1AA58BAB}
+		{62EC8412-9BFC-4B8F-AD9A-0D2617C29A52} = {39173367-CEF7-4493-B1EE-90B315F86FF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23001784-6FB1-4753-8D26-98C2D28AF730}
