@@ -58,3 +58,14 @@ function FormatDinheiro(numero) {
         return "0,00";
     }
 }
+
+function ConfirmacaoNaoRobo() {
+    var numeroPremiado = Math.floor(Math.random() * 100);
+
+    var retornoNumero = prompt('Confirme que você não é um robo. Digite o numero: ' + numeroPremiado);
+
+    if (parseInt(retornoNumero) == numeroPremiado)
+        return true;
+    else
+        return false;
+}

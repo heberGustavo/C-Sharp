@@ -4,6 +4,11 @@
 
 function Cadastrar() {
 
+    if (!ConfirmacaoNaoRobo()) {
+        swal("Opss", "Tente novamente, parece que você é um robo!", "error");
+        return
+    }
+
     if (VerificaSeCamposObrigatoriosPreenchidos()) {
 
         if ($('#idEditar').val() == "") { //REALIZAR CADASTRO
