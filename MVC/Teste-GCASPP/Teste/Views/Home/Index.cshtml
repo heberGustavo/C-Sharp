@@ -9,6 +9,7 @@
         <div class="card">
             <div class="card-body">
                 <h4>Cadastro de Funcionario</h4>
+                <span class="font-italic">Preencha os campos abaixo</span>
                 <hr />
 
                 <input type="hidden" id="idEditar" />
@@ -57,6 +58,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="ConfirmarExclusao()">Confirmar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalBoasVindas" tabindex="-1" role="dialog" aria-labelledby="modalBoasVindas" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content bg-blue-gradient">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-700 text-light" id="exampleModalLongTitle">Seja bem-vindo!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-light">
+                Esse é um sistema de cadastro de <strong>Funcionários e Filhos</strong>.
+                <br />
+                Onde a tela inicial é o cadastro do Funcionário, acessando o menu no item "Filhos" você consegue fazer o cadastro vinculando o Filho ao Funcionário.
+                <br />
+                Divirta-se testando!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning font-weight-700">Vamos-lá!</button>
             </div>
         </div>
     </div>

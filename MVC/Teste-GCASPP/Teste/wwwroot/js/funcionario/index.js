@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $("#modalBoasVindas").modal('show')
     ListarDadosFuncionario();
 });
 
