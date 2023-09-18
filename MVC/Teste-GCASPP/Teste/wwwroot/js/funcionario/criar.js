@@ -16,7 +16,7 @@ function Cadastrar() {
             var jsonBody = {
                 nome: $("#nome").val().trim(),
                 data: ConverterDataParaUSA($('#data').val()),
-                salario: FormatDinheiro($("#salario").val())
+                salario: $("#salario").val()
             };
 
             $.ajax({
@@ -49,7 +49,7 @@ function Cadastrar() {
                 id: parseInt($('#idEditar').val()),
                 nome: $("#nome").val().trim(),
                 data: ConverterDataParaUSA($('#data').val()),
-                salario: FormatDinheiro($("#salario").val())
+                salario: $("#salario").val()
             };
 
             $.ajax({
