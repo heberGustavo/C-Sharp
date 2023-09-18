@@ -2,7 +2,14 @@
     $('.telefone_res').mask('(00) 0000-0000');
     $('.celular').mask('(00) 00000-0000');
     $('.money').mask('000.000.000.000.000,00', { reverse: true });
+
+    InputDataAtual();
 });
+
+function InputDataAtual() {
+    var today = new Date().toISOString().split('T')[0];
+    $("#data").attr("max", today)
+}
 
 function IsString(value) {
     return typeof value === 'string' || value instanceof String;
