@@ -52,6 +52,7 @@ namespace Teste
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, [FromServices] IMigrationBusiness migrationBusiness)
         {
             #region Definindo a cultura padrão: pt-BR
+
             var supportedCultures = new[] { new CultureInfo("pt-BR") };
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
@@ -59,6 +60,7 @@ namespace Teste
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
+
             #endregion
 
             migrationBusiness.ExecutarAtualizacaoBancoDados();
