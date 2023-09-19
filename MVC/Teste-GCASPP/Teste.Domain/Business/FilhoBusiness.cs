@@ -13,24 +13,33 @@ namespace Teste.Domain.Business
     public class FilhoBusiness : BusinessBase<Filho>, IFilhoBusiness
     {
         private readonly IFilhoRepository _filhoRepository;
+        private readonly IFuncionarioRepository _funcionarioRepository;
 
-        public FilhoBusiness(IFilhoRepository filhoRepository) : base(filhoRepository)
+        public FilhoBusiness(IFilhoRepository filhoRepository, IFuncionarioRepository funcionarioRepository) : base(filhoRepository)
         {
             _filhoRepository = filhoRepository;
+            _funcionarioRepository = funcionarioRepository;
         }
 
         public async Task<ResultResponseModel> Cadastrar(Filho model)
         {
             try
             {
-                var result = await _filhoRepository.CreateAsync(model);
-                if (result == 0) return new ResultResponseModel(true, "Erro ao cadastrar Filho. Tente novamente!");
+                var resultFuncionario = await _funcionarioRepository.GetById(model.id_funcionario);
 
-                return new ResultResponseModel(false, "Filho cadastrado com sucesso!");
+                if(model.data_de_nascimento <= resultFuncionario.data_de_nascimento)
+                {
+                    return new ResultResponseModel(true, "Opa, perai! O Depentende nasceu antes do pai!? Algo de errado não está certo! Por favor tente novamente.");
+                }
+
+                var result = await _filhoRepository.CreateAsync(model);
+                if (result == 0) return new ResultResponseModel(true, "Erro ao cadastrar Dependente. Tente novamente!");
+
+                return new ResultResponseModel(false, "Dependente cadastrado com sucesso!");
             }
             catch (Exception e)
             {
-                return new ResultResponseModel(true, "Erro ao cadastrar Filho. Contate o administrador.");
+                return new ResultResponseModel(true, "Erro ao cadastrar Dependente. Contate o administrador.");
             }
         }
 
@@ -38,10 +47,17 @@ namespace Teste.Domain.Business
         {
             try
             {
-                var result = await _filhoRepository.UpdateAsync(model);
-                if (result == null) return new ResultResponseModel(true, "Erro ao editar Filho. Tente novamente.");
+                var resultFuncionario = await _funcionarioRepository.GetById(model.id_funcionario);
 
-                return new ResultResponseModel(false, "Filho alterado com sucesso!");
+                if (model.data_de_nascimento <= resultFuncionario.data_de_nascimento)
+                {
+                    return new ResultResponseModel(true, "Opa, perai! O Depentende nasceu antes do pai!? Algo de errado não está certo! Por favor tente novamente.");
+                }
+
+                var result = await _filhoRepository.UpdateAsync(model);
+                if (result == null) return new ResultResponseModel(true, "Erro ao editar Dependente. Tente novamente.");
+
+                return new ResultResponseModel(false, "Dependente alterado com sucesso!");
             }
             catch (Exception e)
             {
