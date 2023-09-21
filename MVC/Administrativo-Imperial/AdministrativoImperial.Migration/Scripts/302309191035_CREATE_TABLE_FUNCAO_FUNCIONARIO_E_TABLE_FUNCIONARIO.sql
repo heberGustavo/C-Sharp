@@ -1,26 +1,31 @@
-﻿CREATE TABLE dbo.FuncaoFuncionario
-(
-	id_funcao_funcionario INT IDENTITY(1,1) NOT NULL,
-	nome varchar(40) NOT NULL,
-	excluido bit NOT NULL DEFAULT 0,
+﻿IF NOT EXISTS(SELECT * FROM SYS.tables WHERE NAME = 'TB_FUNCAO_FUNCIONARIO')
+BEGIN
+	CREATE TABLE dbo.TB_FUNCAO_FUNCIONARIO
+	(
+		  FNF_ID INT IDENTITY(1,1) NOT NULL
+		, FNF_NOME VARCHAR(40) NOT NULL
+		, FNF_STATUS BIT NOT NULL DEFAULT 0
 
-	constraint pk_FuncaoFuncionario primary key clustered(id_funcao_funcionario)
-)
-GO 
+		, CONSTRAINT PK_TB_FUNCAO_FUNCIONARIO_FNF_ID PRIMARY KEY(FNF_ID)
+	)
+END
+GO
 
 
-
-CREATE TABLE dbo.Funcionario
-(
-	id_funcionario INT IDENTITY(1,1) NOT NULL,
-	nome VARCHAR(40) NOT NULL,
-	id_funcao_funcionario int NOT NULL,
-	diaria decimal(8,2) NULL,
-	mensal decimal(8,2) NULL,
-	data_contratacao date NULL,
-	excluido bit NOT NULL DEFAULT 0,
+IF NOT EXISTS(SELECT * FROM SYS.tables WHERE NAME = 'TB_FUNCIONARIO')
+BEGIN
+	CREATE TABLE dbo.TB_FUNCIONARIO
+	(
+		  FUN_ID INT IDENTITY(1,1) NOT NULL
+		, FNF_ID INT NOT NULL --FK
+		, FUN_NOME VARCHAR(40) NOT NULL
+		, FUN_DIARIA DECIMAL(8,2) NULL
+		, FUN_MENSAL DECIMAL(8,2) NULL
+		, FUN_DATA_CONTRATACAO DATETIME NULL
+		, FUN_STATUS BIT NOT NULL DEFAULT 0
 	
-	constraint pk_Funcionario primary key clustered(id_funcionario),
-	constraint fk_FuncionarioFuncaoFuncionario FOREIGN KEY(id_funcao_funcionario) REFERENCES dbo.FuncaoFuncionario
-)
+		, CONSTRAINT PK_TB_FUNCIONARIO_FUN_ID PRIMARY KEY(FUN_ID)
+		, CONSTRAINT FK_TB_FUNCIONARIO_TB_FUNCAO_FUNCIONARIO_FNF_ID FOREIGN KEY(FNF_ID) REFERENCES TB_FUNCAO_FUNCIONARIO
+	)
+END
 GO
