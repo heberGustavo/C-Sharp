@@ -1,12 +1,20 @@
-﻿.titulo-lista{
+﻿/*  
+    SEQUENCIA DE FUNCIONALIDADES
+    - GERAIS
+    - LOGIN
+    - NAVBAR
+*/
+
+/*GERAIS*/
+.titulo-lista {
     display: inline-block !important;
 }
 
-.navbar-vertical.navbar-expand-xs{
+.navbar-vertical.navbar-expand-xs {
     z-index: 1020;
 }
 
-.text-danger{
+.text-danger {
     font-size: 15px;
 }
 
@@ -14,7 +22,7 @@
     padding: 8px 13px !important;
 }
 
-.color-red{
+.color-red {
     color: red !important;
 }
 
@@ -30,20 +38,28 @@
     border: 1px solid blue !important;
 }
 
-.swal-modal .swal-text{
+.swal-modal .swal-text {
     text-align: center !important;
 }
 
+/*LOGIN*/
+.tela-login .titulo {
+    font-size: 35px;
+}
+
+.tela-login .descricao {
+    font-style: italic;
+}
+
 /*NAVBAR*/
-.acesso-usuario .bloco-principal{
+.acesso-usuario .bloco-principal {
     text-align: center;
 }
 
-.acesso-usuario .bloco-principal p.nome-usuario{
-    margin-top: 5px;
-}
+    .acesso-usuario .bloco-principal p.nome-usuario {
+        margin-top: 5px;
+    }
 
 .sidenav .navbar-brand {
     padding: 10px 0;
 }
-
