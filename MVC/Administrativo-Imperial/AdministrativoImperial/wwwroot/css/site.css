@@ -33,3 +33,17 @@
 .swal-modal .swal-text{
     text-align: center !important;
 }
+
+/*NAVBAR*/
+.acesso-usuario .bloco-principal{
+    text-align: center;
+}
+
+.acesso-usuario .bloco-principal p.nome-usuario{
+    margin-top: 5px;
+}
+
+.sidenav .navbar-brand {
+    padding: 10px 0;
+}
+

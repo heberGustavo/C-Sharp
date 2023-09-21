@@ -108,7 +108,7 @@ namespace AdministrativoImperial
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=FuncaoFuncionario}/{action=Index}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }
