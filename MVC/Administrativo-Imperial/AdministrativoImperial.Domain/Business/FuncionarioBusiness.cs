@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.Business
 {
-    public class FuncionarioBusiness : BusinessBase<Funcionario>, IFuncionarioBusiness
+    public class FuncionarioBusiness : BusinessBase<FuncionarioDTO>, IFuncionarioBusiness
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
 
@@ -19,7 +19,7 @@ namespace AdministrativoImperial.Domain.Business
             _funcionarioRepository = funcionarioRepository;
         }
 
-        public async Task<ResultResponseModel> Cadastrar(Funcionario funcioanrio)
+        public async Task<ResultResponseModel> Cadastrar(FuncionarioDTO funcioanrio)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace AdministrativoImperial.Domain.Business
             }
         }
 
-        public async Task<IEnumerable<Funcionario>> ObterCadastrados()
+        public async Task<IEnumerable<FuncionarioDTO>> ObterCadastrados()
             => await _funcionarioRepository.ObterCadastrados();
     }
 }

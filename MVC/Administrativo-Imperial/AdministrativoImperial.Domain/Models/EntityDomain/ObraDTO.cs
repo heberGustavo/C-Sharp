@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdministrativoImperial.Domain.Models.EntityDomain
 {
-    public class Obra
+    public class ObraDTO
     {
         public int id_obra { get; set; }
         public string apelido { get; set; }

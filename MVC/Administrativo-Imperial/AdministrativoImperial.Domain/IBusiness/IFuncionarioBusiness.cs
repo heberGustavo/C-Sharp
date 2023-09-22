@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.IBusiness
 {
-    public interface IFuncionarioBusiness : IBusinessBase<Funcionario>
+    public interface IFuncionarioBusiness : IBusinessBase<FuncionarioDTO>
     {
-        Task<IEnumerable<Funcionario>> ObterCadastrados();
-        Task<ResultResponseModel> Cadastrar(Funcionario funcioanrio);
+        Task<IEnumerable<FuncionarioDTO>> ObterCadastrados();
+        Task<ResultResponseModel> Cadastrar(FuncionarioDTO funcioanrio);
     }
 }

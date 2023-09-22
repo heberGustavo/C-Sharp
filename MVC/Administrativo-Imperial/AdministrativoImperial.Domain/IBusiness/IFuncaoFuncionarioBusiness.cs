@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.IBusiness
 {
-    public interface IFuncaoFuncionarioBusiness : IBusinessBase<FuncaoFuncionario>
+    public interface IFuncaoFuncionarioBusiness : IBusinessBase<FuncaoFuncionarioDTO>
     {
-        Task<IEnumerable<FuncaoFuncionario>> ObterCadastrados();
-        Task<ResultResponseModel> Cadastrar(FuncaoFuncionario funcaoFuncionario);
-        Task<IEnumerable<FuncaoFuncionario>> ObterCadastradosAtivos();
+        Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastrados();
+        Task<ResultResponseModel> Cadastrar(FuncaoFuncionarioDTO funcaoFuncionario);
+        Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos();
         Task<ResultResponseModel> Deletar(int id);
     }
 }

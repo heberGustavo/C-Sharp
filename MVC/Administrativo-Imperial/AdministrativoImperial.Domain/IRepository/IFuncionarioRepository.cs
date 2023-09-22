@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.IRepository
 {
-    public interface IFuncionarioRepository : IRepositoryBase<Funcionario>
+    public interface IFuncionarioRepository : IRepositoryBase<FuncionarioDTO>
     {
-        Task<IEnumerable<Funcionario>> ObterCadastrados();
+        Task<IEnumerable<FuncionarioDTO>> ObterCadastrados();
     }
 }

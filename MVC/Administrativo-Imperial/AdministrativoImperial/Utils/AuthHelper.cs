@@ -17,13 +17,13 @@ namespace AdministrativoImperial.Portal.Utils
         private static IHttpContextAccessor _httpContextAccessor;
         public static void Configure(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
-        public static Usuario USUARIO_LOGADO()
+        public static UsuarioDTO USUARIO_LOGADO()
         {
             try
             {
                 var usuario = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == PolicyKeys.USUARIO_LOGADO)?.Value;
 
-                return JsonConvert.DeserializeObject<Usuario>(usuario);
+                return JsonConvert.DeserializeObject<UsuarioDTO>(usuario);
             }
             catch (Exception e)
             {
@@ -31,7 +31,7 @@ namespace AdministrativoImperial.Portal.Utils
             }
         }
 
-        public static ClaimsPrincipal GerarClaimsUsuarioLogado(Usuario usuario)
+        public static ClaimsPrincipal GerarClaimsUsuarioLogado(UsuarioDTO usuario)
         {
             var claims = new List<Claim>{
                 new Claim(ClaimTypes.Name, Guid.NewGuid().ToString())
