@@ -14,7 +14,7 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
         public string FunNome { get; set; }
 
         [DataMember]
-        public decimal FunDiario { get; set; }
+        public decimal FunDiaria { get; set; }
 
         [DataMember]
         public decimal FunMensal { get; set; }
