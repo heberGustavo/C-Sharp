@@ -4,6 +4,7 @@ using AdministrativoImperial.Domain.IRepository;
 using AdministrativoImperial.Domain.IRepository.Base;
 using AdministrativoImperial.Domain.Models.Common;
 using AdministrativoImperial.Domain.Models.EntityDomain;
+using Gpnet.Common.ExecutionManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -69,7 +70,9 @@ namespace AdministrativoImperial.Domain.Business
         #region Read
 
         public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastrados()
-            => await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
+        {
+            return await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
+        }
 
         public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos()
            => await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfStatus == false);

@@ -23,4 +23,10 @@
     <ProjectReference Include="..\AdministrativoImperial.Common\AdministrativoImperial.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Gpnet.Common.ExecutionManager">
+      <HintPath>..\AdministrativoImperial.Library\dlls\Gpnet.Common.ExecutionManager.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

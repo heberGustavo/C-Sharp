@@ -15,15 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Utils", "3-Utils", "{923C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Migration", "4-Migration", "{0059319C-1B7D-4DC2-9CF0-37375E84359D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.Domain", "AdministrativoImperial.Domain\AdministrativoImperial.Domain.csproj", "{8AD0636E-EAF8-4D2A-8C60-CFE61C35DC37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrativoImperial.Domain", "AdministrativoImperial.Domain\AdministrativoImperial.Domain.csproj", "{8AD0636E-EAF8-4D2A-8C60-CFE61C35DC37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.Data", "AdministrativoImperial.Data\AdministrativoImperial.Data.csproj", "{AB504BEF-3824-433C-A434-DDFB68F0F336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrativoImperial.Data", "AdministrativoImperial.Data\AdministrativoImperial.Data.csproj", "{AB504BEF-3824-433C-A434-DDFB68F0F336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.Common", "AdministrativoImperial.Common\AdministrativoImperial.Common.csproj", "{3EE2EEB9-FCD3-42A0-B517-54B904DB3CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrativoImperial.Common", "AdministrativoImperial.Common\AdministrativoImperial.Common.csproj", "{3EE2EEB9-FCD3-42A0-B517-54B904DB3CFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.CrossCutting", "AdministrativoImperial.CrossCutting\AdministrativoImperial.CrossCutting.csproj", "{1F121F09-98E7-4E34-B97C-166F7921579F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrativoImperial.CrossCutting", "AdministrativoImperial.CrossCutting\AdministrativoImperial.CrossCutting.csproj", "{1F121F09-98E7-4E34-B97C-166F7921579F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.Migration", "AdministrativoImperial.Migration\AdministrativoImperial.Migration.csproj", "{6DF81FEE-425D-4F83-9E37-E555F0489C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrativoImperial.Migration", "AdministrativoImperial.Migration\AdministrativoImperial.Migration.csproj", "{6DF81FEE-425D-4F83-9E37-E555F0489C40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Outros", "5-Outros", "{F08AB1AE-B8C0-4EC2-B132-64D9F422C4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrativoImperial.Library", "AdministrativoImperial.Library\AdministrativoImperial.Library.csproj", "{F44EAEC6-E6A0-4765-B1FE-C500DC516F63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{6DF81FEE-425D-4F83-9E37-E555F0489C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DF81FEE-425D-4F83-9E37-E555F0489C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DF81FEE-425D-4F83-9E37-E555F0489C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F44EAEC6-E6A0-4765-B1FE-C500DC516F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F44EAEC6-E6A0-4765-B1FE-C500DC516F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F44EAEC6-E6A0-4765-B1FE-C500DC516F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F44EAEC6-E6A0-4765-B1FE-C500DC516F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{3EE2EEB9-FCD3-42A0-B517-54B904DB3CFB} = {923CB223-54E9-477F-AE8D-31830559BCD6}
 		{1F121F09-98E7-4E34-B97C-166F7921579F} = {923CB223-54E9-477F-AE8D-31830559BCD6}
 		{6DF81FEE-425D-4F83-9E37-E555F0489C40} = {0059319C-1B7D-4DC2-9CF0-37375E84359D}
+		{F44EAEC6-E6A0-4765-B1FE-C500DC516F63} = {F08AB1AE-B8C0-4EC2-B132-64D9F422C4B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D0C0043-9024-4853-80F7-2FF87ADDAB93}
