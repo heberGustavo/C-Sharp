@@ -11,6 +11,8 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
         public int FunId { get; set; }
 
         [DataMember]
+        [StringLength(40, ErrorMessage = "O campo não deve ser maior que 40 caracteres")]
+        [Required(ErrorMessage = "O campo Nome é obrigatório")]
         public string FunNome { get; set; }
 
         [DataMember]
@@ -24,8 +26,9 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
 
         [DataMember]
         public bool FunStatus { get; set; }
-        
+
         [DataMember]
+        [Required(ErrorMessage = "O campo Função do Funcionário é obrigatório")]
         public int FnfId { get; set; }
 
         [DataMember]
