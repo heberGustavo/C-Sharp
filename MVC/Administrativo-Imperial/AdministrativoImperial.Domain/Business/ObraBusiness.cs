@@ -22,7 +22,7 @@ namespace AdministrativoImperial.Domain.Business
 
         public async Task<ResultResponseModel> Cadastrar(ObraDTO obra)
         {
-            obra.data_fim = Convert.ToDateTime(DataDictionary.DATE_MIN);
+            obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
 
             try
             {

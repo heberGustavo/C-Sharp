@@ -1,17 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace AdministrativoImperial.Domain.Models.EntityDomain
 {
     public class ObraDTO
     {
-        public int id_obra { get; set; }
-        public string apelido { get; set; }
-        public DateTime data_inicio { get; set; }
-        public DateTime data_fim { get; set; }
-        public string endereco { get; set; }
-        public decimal orcamento { get; set; }
-        public bool excluido { get; set; }
+        [DataMember]
+        public int ObrId { get; set; }
+
+        [DataMember]
+        public string ObrApelido { get; set; }
+
+        [DataMember]
+        public DateTime ObrDataInicio { get; set; }
+
+        [DataMember]
+        public DateTime ObrDataFim { get; set; }
+
+        [DataMember]
+        public string ObrEndereco { get; set; }
+
+        [DataMember]
+        public decimal ObrOrcamento { get; set; }
+
+        [DataMember]
+        public bool ObrStatus { get; set; }
     }
 }
