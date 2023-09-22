@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.Business
 {
-    public class FuncaoFuncionarioBusiness : BusinessBase<FuncaoFuncionario>, IFuncaoFuncionarioBusiness
+    public class FuncaoFuncionarioBusiness : BusinessBase<FuncaoFuncionarioDTO>, IFuncaoFuncionarioBusiness
     {
         private readonly IFuncaoFuncionarioRepository _funcaoFuncionarioRepository;
 
@@ -22,13 +22,13 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Write
 
-        public async Task<ResultResponseModel> Cadastrar(FuncaoFuncionario funcaoFuncionario)
+        public async Task<ResultResponseModel> Cadastrar(FuncaoFuncionarioDTO funcaoFuncionario)
         {
             try
             {
                 var retorno = new ResultResponseModel();
 
-                if (funcaoFuncionario.id_funcao_funcionario <= 0)
+                if (funcaoFuncionario.FnfId <= 0)
                     retorno = await Inserir(funcaoFuncionario);
                 else
                     retorno = await Alterar(funcaoFuncionario);
@@ -50,11 +50,11 @@ namespace AdministrativoImperial.Domain.Business
                     return new ResultResponseModel(true, "Erro ao selecionar identificador. Tente novamente!");
 
                 var funcaoSelecionada = await _funcaoFuncionarioRepository.GetById(id);
-                funcaoSelecionada.excluido = true;
+                funcaoSelecionada.FnfStatus = true;
 
                 var result = await _funcaoFuncionarioRepository.UpdateAsync(funcaoSelecionada);
                 if (result != null)
-                    return new ResultResponseModel(false, result.nome + " excluido com sucesso!");
+                    return new ResultResponseModel(false, result.FnfNome + " excluido com sucesso!");
                 else
                     return new ResultResponseModel(true, "Erro ao deletar Função. Tente novamente.");
             }
@@ -68,19 +68,19 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Read
 
-        public async Task<IEnumerable<FuncaoFuncionario>> ObterCadastrados()
-            => await _funcaoFuncionarioRepository.GetAllAsync(x => x.nome, y => y.excluido == true);
+        public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastrados()
+            => await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
 
-        public async Task<IEnumerable<FuncaoFuncionario>> ObterCadastradosAtivos()
-           => await _funcaoFuncionarioRepository.GetAllAsync(x => x.excluido == false);
+        public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos()
+           => await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfStatus == false);
 
         #endregion
 
         #region Metodos Privados
 
-        public async Task<ResultResponseModel> Inserir(FuncaoFuncionario funcaoFuncionario)
+        public async Task<ResultResponseModel> Inserir(FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(nome => nome.nome == funcaoFuncionario.nome);
+            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(nome => nome.FnfNome == funcaoFuncionario.FnfNome);
 
             if (funcionariosMesmoNome.Count > 0)
                 return new ResultResponseModel(true, "Função já cadastrada.");
@@ -93,9 +93,9 @@ namespace AdministrativoImperial.Domain.Business
                 return new ResultResponseModel(true, "Erro ao cadastrar Função. Tente novamente!");
         }
 
-        public async Task<ResultResponseModel> Alterar(FuncaoFuncionario funcaoFuncionario)
+        public async Task<ResultResponseModel> Alterar(FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(item => item.nome == funcaoFuncionario.nome && item.id_funcao_funcionario != funcaoFuncionario.id_funcao_funcionario);
+            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(item => item.FnfNome == funcaoFuncionario.FnfNome && item.FnfId != funcaoFuncionario.FnfId);
 
             if (funcionariosMesmoNome.Count > 0)
                 return new ResultResponseModel(true, "Função já cadastrada.");

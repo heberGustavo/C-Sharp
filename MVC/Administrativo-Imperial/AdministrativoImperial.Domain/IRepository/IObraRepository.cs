@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.IRepository
 {
-    public interface IObraRepository : IRepositoryBase<Obra>
+    public interface IObraRepository : IRepositoryBase<ObraDTO>
     {
     }
 }

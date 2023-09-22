@@ -2,7 +2,7 @@
 
 @{
     Layout = "";
-    @model IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.Obra>
+    @model IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.ObraDTO>
     var DateMin = Convert.ToDateTime(DataDictionary.DATE_MIN);
 }
 
@@ -25,24 +25,24 @@
                     <td>
                         <div class="d-flex px-3 py-1">
                             <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">@item.apelido</h6>
+                                <h6 class="mb-0 text-sm">@item.ObrApelido</h6>
                             </div>
                         </div>
                     </td>
                     <td>
                         <p class="text-xs font-weight-bold mb-0">
-                            <span class="data-inicio">@item.data_inicio.ToString("dd/MM/yyyy")</span>
+                            <span class="data-inicio">@item.ObrDataInicio.ToString("dd/MM/yyyy")</span>
                             -
-                            @if (DateMin != item.data_fim)
+                            @if (DateMin != item.ObrDataFim)
                             {
                                 <span class="data-fim">
-                                    @item.data_fim.ToString("dd/MM/yyyy")
+                                    @item.ObrDataFim.ToString("dd/MM/yyyy")
                                 </span>
                             }
                         </p>
                     </td>
                     <td class="align-middle">
-                        <p class="text-xs font-weight-bold mb-0">@item.orcamento.ToString("C")</p>
+                        <p class="text-xs font-weight-bold mb-0">@item.ObrOrcamento.ToString("C")</p>
                     </td>
                     <td class="align-middle">
                         <p class="text-xs font-weight-bold mb-0">0.00</p>

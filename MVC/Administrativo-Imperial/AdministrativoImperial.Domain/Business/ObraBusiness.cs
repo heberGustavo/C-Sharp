@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.Business
 {
-    public class ObraBusiness : BusinessBase<Obra>, IObraBusiness
+    public class ObraBusiness : BusinessBase<ObraDTO>, IObraBusiness
     {
         private readonly IObraRepository _obraRepository;
 
@@ -20,9 +20,9 @@ namespace AdministrativoImperial.Domain.Business
             _obraRepository = obraRepository;
         }
 
-        public async Task<ResultResponseModel> Cadastrar(Obra obra)
+        public async Task<ResultResponseModel> Cadastrar(ObraDTO obra)
         {
-            obra.data_fim = Convert.ToDateTime(DataDictionary.DATE_MIN);
+            obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
 
             try
             {
@@ -38,7 +38,7 @@ namespace AdministrativoImperial.Domain.Business
             }
         }
 
-        public async Task<IEnumerable<Obra>> ObterCadastrados()
+        public async Task<IEnumerable<ObraDTO>> ObterCadastrados()
             => await _obraRepository.GetAllAsync();
     }
 }

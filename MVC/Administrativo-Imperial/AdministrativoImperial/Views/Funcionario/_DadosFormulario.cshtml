@@ -6,9 +6,9 @@
     <label>Selecione Função</label>
     <select class="form-control" id="selectFuncao">
         <option disabled selected value="0">Selecione</option>
-        @foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.FuncaoFuncionario>)ViewBag.FuncaoFuncionario)
+        @foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.FuncaoFuncionarioDTO>)ViewBag.FuncaoFuncionario)
         {
-            <option value="@item.id_funcao_funcionario">@item.nome</option>
+            <option value="@item.FnfId">@item.FnfNome</option>
         }
     </select>
 </div>

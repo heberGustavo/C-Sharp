@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Funcionários";
-    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.Funcionario>
+    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.FuncionarioDTO>
 }
 
 <div class="container-fluid py-4">
@@ -31,18 +31,18 @@
                                     <td>
                                         <div class="d-flex px-3 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@item.nome</h6>
+                                                <h6 class="mb-0 text-sm">@item.FunNome</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.nome_funcao</p>
+                                        <p class="text-xs font-weight-bold mb-0">@item.FnfNome</p>
                                     </td>
                                     <td class="align-middle">
                                         <p class="text-xs font-weight-bold mb-0">
-                                            @if (item.diaria > 0)
+                                            @if (item.FunDiaria > 0)
                                             {
-                                                <span>@item.diaria.ToString("C")</span>
+                                                <span>@item.FunDiaria.ToString("C")</span>
                                             }
                                             else
                                             {
@@ -52,9 +52,9 @@
                                     </td>
                                     <td class="align-middle">
                                         <p class="text-xs font-weight-bold mb-0">
-                                            @if (item.mensal > 0)
+                                            @if (item.FunMensal > 0)
                                             {
-                                                <span>@item.mensal.ToString("C")</span>
+                                                <span>@item.FunMensal.ToString("C")</span>
                                             }
                                             else
                                             {
@@ -63,7 +63,7 @@
                                         </p>
                                     </td>
                                     <td class="align-middletext-sm">
-                                        @if (item.excluido == false)
+                                        @if (item.FunStatus == false)
                                         {
                                             <span class="badge badge-sm bg-gradient-success">Ativo</span>
                                         }

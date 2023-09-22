@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\NotMapped\**" />
+    <EmbeddedResource Remove="Models\NotMapped\**" />
+    <None Remove="Models\NotMapped\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Body\" />
-    <Folder Include="Models\NotMapped\" />
   </ItemGroup>
 
   <ItemGroup>

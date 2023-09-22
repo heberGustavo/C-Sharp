@@ -31,7 +31,7 @@ namespace AdministrativoImperial.Controllers
 
         [HttpPost]
         [Route("[controller]/[action]")]
-        public async Task<JsonResult> Cadastrar([FromBody] FuncaoFuncionario funcaoFuncionario)
+        public async Task<JsonResult> Cadastrar([FromBody] FuncaoFuncionarioDTO funcaoFuncionario)
         {
             var resultado = await _funcaoFuncionarioBusiness.Cadastrar(funcaoFuncionario);
             return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Data.Repository
 {
-    public class FuncionarioRepository : RepositoryBase<Funcionario, FuncionarioData>, IFuncionarioRepository
+    public class FuncionarioRepository : RepositoryBase<FuncionarioDTO, FuncionarioData>, IFuncionarioRepository
     {
         public FuncionarioRepository(SqlDataContext dataContext, IMapper mapper) : base(dataContext, mapper)
         {
         }
 
-        public Task<IEnumerable<Funcionario>> ObterCadastrados()
-            => _dataContext.Connection.QueryAsync<Funcionario>(@"SELECT f.*, ff.nome as nome_funcao
+        public Task<IEnumerable<FuncionarioDTO>> ObterCadastrados()
+            => _dataContext.Connection.QueryAsync<FuncionarioDTO>(@"SELECT f.*, ff.nome as nome_funcao
                                                                  FROM Funcionario f
                                                                  INNER JOIN FuncaoFuncionario ff ON ff.id_funcao_funcionario = f.id_funcao_funcionario
                                                                  ORDER BY f.excluido asc, f.nome");
