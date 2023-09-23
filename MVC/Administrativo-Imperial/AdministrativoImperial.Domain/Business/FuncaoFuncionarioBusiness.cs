@@ -69,9 +69,20 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Read
 
-        public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastrados()
+        public async Task<ResultInfo<FuncaoFuncionarioDTO>> GetAllAsync()
         {
-            return await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
+            var result = new ResultInfo<FuncaoFuncionarioDTO>();
+
+            try
+            {
+                result.Items = await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
         }
 
         public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos()

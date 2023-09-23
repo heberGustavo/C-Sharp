@@ -23,7 +23,7 @@ namespace AdministrativoImperial.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _funcaoFuncionarioBusiness.ObterCadastrados();
+            var result = await _funcaoFuncionarioBusiness.GetAllAsync();
             return View(result);
         }
 
