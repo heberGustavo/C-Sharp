@@ -2,6 +2,7 @@
 using AdministrativoImperial.Domain.Models.Common;
 using AdministrativoImperial.Domain.Models.EntityDomain;
 using AdministrativoImperial.Models;
+using Gpnet.Common.ExecutionManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,7 +25,7 @@ namespace AdministrativoImperial.Controllers
         public async Task<IActionResult> Index()
         {
             var result = await _funcaoFuncionarioBusiness.GetAllAsync();
-            return View(result);
+            return View(result.Items);
         }
 
         #region Writer
@@ -33,8 +34,12 @@ namespace AdministrativoImperial.Controllers
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var resultado = await _funcaoFuncionarioBusiness.Cadastrar(funcaoFuncionario);
-            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
+            var resultado = await _funcaoFuncionarioBusiness.Create(funcaoFuncionario);
+
+            if(resultado.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = resultado.Messages });
+
+            return Json(new { erro = false, mensagem = resultado.Messages });
         }
 
         [HttpGet]
@@ -53,7 +58,7 @@ namespace AdministrativoImperial.Controllers
         [Route("[controller]/[action]")]
         public async Task<JsonResult> ObterTodasFuncoes()
         {
-            var resultado = await _funcaoFuncionarioBusiness.ObterCadastrados();
+            var resultado = await _funcaoFuncionarioBusiness.GetAllAsync();
             return Json(new { resultado });
         }
 

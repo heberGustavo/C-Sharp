@@ -23,23 +23,26 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Write
 
-        public async Task<ResultResponseModel> Cadastrar(FuncaoFuncionarioDTO funcaoFuncionario)
+        public async Task<ResultInfo> Create(FuncaoFuncionarioDTO model)
         {
+            var result = new ResultInfo();
+
             try
             {
-                var retorno = new ResultResponseModel();
 
-                if (funcaoFuncionario.FnfId <= 0)
-                    retorno = await Inserir(funcaoFuncionario);
-                else
-                    retorno = await Alterar(funcaoFuncionario);
+                if (model.FnfId <= 0)
+                    result = await Insert(model);
+                //else
+                //    result = await Update(model);
 
-                return retorno;
+                return result;
 
             }
             catch (Exception e)
             {
-                return new ResultResponseModel(true, "Erro ao cadastrar Função. Entre em contato com o Administrador.");
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar Função. Entre em contato com o Administrador.");
+                return result;
             }
         }
 
@@ -92,26 +95,51 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Metodos Privados
 
-        public async Task<ResultResponseModel> Inserir(FuncaoFuncionarioDTO funcaoFuncionario)
+        public async Task<ResultInfo> Insert(FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(nome => nome.FnfNome == funcaoFuncionario.FnfNome);
+            var result = new ResultInfo();
 
-            if (funcionariosMesmoNome.Count > 0)
-                return new ResultResponseModel(true, "Função já cadastrada.");
+            try
+            {
+                var funcaoSameName = await _funcaoFuncionarioRepository.GetAllAsync(nome => nome.FnfNome == funcaoFuncionario.FnfNome);
 
-            var idCadastrado = await _funcaoFuncionarioRepository.CreateAsync(funcaoFuncionario);
+                if (funcaoSameName.Count > 0)
+                {
+                    result.Messages.Add("Função já cadastrada!");
+                    result.Type = ResultType.ValidationError;
+                    return result;
+                }
 
-            if (idCadastrado > 0)
-                return new ResultResponseModel(false, "Função cadastrada com sucesso!");
-            else
-                return new ResultResponseModel(true, "Erro ao cadastrar Função. Tente novamente!");
+                var idResult = await _funcaoFuncionarioRepository.CreateAsync(funcaoFuncionario);
+
+                if (idResult > 0)
+                {
+                    result.Type = ResultType.CompleteExecution;
+                    result.Messages.Add("Função cadastrada com sucesso!");
+                    return result;
+                }
+                else
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao cadastrar Função. Tente novamente!");
+                    return result;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar Função. Entre em contato com o Administrador.");
+                return result;
+            }
+            
         }
 
-        public async Task<ResultResponseModel> Alterar(FuncaoFuncionarioDTO funcaoFuncionario)
+        public async Task<ResultResponseModel> Update(FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var funcionariosMesmoNome = await _funcaoFuncionarioRepository.GetAllAsync(item => item.FnfNome == funcaoFuncionario.FnfNome && item.FnfId != funcaoFuncionario.FnfId);
+            var funcaoSameName = await _funcaoFuncionarioRepository.GetAllAsync(item => item.FnfNome == funcaoFuncionario.FnfNome && item.FnfId != funcaoFuncionario.FnfId);
 
-            if (funcionariosMesmoNome.Count > 0)
+            if (funcaoSameName.Count > 0)
                 return new ResultResponseModel(true, "Função já cadastrada.");
 
             var modelFuncao = await _funcaoFuncionarioRepository.UpdateAsync(funcaoFuncionario);

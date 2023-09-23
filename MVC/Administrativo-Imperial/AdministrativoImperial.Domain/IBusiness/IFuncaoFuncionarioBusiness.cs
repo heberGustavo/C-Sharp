@@ -12,7 +12,7 @@ namespace AdministrativoImperial.Domain.IBusiness
     public interface IFuncaoFuncionarioBusiness : IBusinessBase<FuncaoFuncionarioDTO>
     {
         Task<ResultInfo<FuncaoFuncionarioDTO>> GetAllAsync();
-        Task<ResultResponseModel> Cadastrar(FuncaoFuncionarioDTO funcaoFuncionario);
+        Task<ResultInfo> Create(FuncaoFuncionarioDTO funcaoFuncionario);
         Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos();
         Task<ResultResponseModel> Deletar(int id);
     }
