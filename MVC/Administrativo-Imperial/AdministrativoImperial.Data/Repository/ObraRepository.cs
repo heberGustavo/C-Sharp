@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Data.Repository
 {
-    public class ObraRepository : RepositoryBase<ObraDTO, ObraData>, IObraRepository
+    public class ObraRepository : RepositoryBase<ObraDTO, Obra>, IObraRepository
     {
         public ObraRepository(SqlDataContext dataContext, IMapper mapper) : base(dataContext, mapper)
         {

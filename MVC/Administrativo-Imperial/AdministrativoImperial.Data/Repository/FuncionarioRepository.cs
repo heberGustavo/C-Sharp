@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Data.Repository
 {
-    public class FuncionarioRepository : RepositoryBase<FuncionarioDTO, FuncionarioData>, IFuncionarioRepository
+    public class FuncionarioRepository : RepositoryBase<FuncionarioDTO, Funcionario>, IFuncionarioRepository
     {
         public FuncionarioRepository(SqlDataContext dataContext, IMapper mapper) : base(dataContext, mapper)
         {

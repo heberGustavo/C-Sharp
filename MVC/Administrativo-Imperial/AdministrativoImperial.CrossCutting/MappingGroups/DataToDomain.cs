@@ -8,9 +8,9 @@ namespace AdministrativoImperial.CrossCutting.MappingGroups
     {
         public DataToDomain()
         {
-            CreateMap<FuncionarioData, FuncionarioDTO>();
-            CreateMap<FuncaoFuncionarioData, FuncaoFuncionarioDTO>();
-            CreateMap<ObraData, ObraDTO>();
+            CreateMap<Funcionario, FuncionarioDTO>();
+            CreateMap<FuncaoFuncionario, FuncaoFuncionarioDTO>();
+            CreateMap<Obra, ObraDTO>();
         }
     }
 }

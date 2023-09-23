@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace AdministrativoImperial.Data.Repository
 {
-    public class FuncaoFuncionarioRepository : RepositoryBase<FuncaoFuncionarioDTO, FuncaoFuncionarioData>, IFuncaoFuncionarioRepository
+    public class FuncaoFuncionarioRepository : RepositoryBase<FuncaoFuncionarioDTO, FuncaoFuncionario>, IFuncaoFuncionarioRepository
     {
         public FuncaoFuncionarioRepository(SqlDataContext dataContext, IMapper mapper) : base(dataContext, mapper)
         {
