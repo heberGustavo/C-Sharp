@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "";
+    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.FuncaoFuncionarioDTO>
+}
+
+<table id="tabelaFuncao" class="table align-items-center mt-2 mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Status</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var itemStatus = @item.FnfStatus == true ? 1 : 0;
+
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">@item.FnfNome</h6>
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middletext-sm">
+                    @if (itemStatus == 0)
+                    {
+                        <span class="badge badge-sm bg-gradient-success">Ativo</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-sm bg-gradient-secondary">Desativo</span>
+                    }
+                </td>
+                <td class="align-middle">
+
+                    <button class="btn btn-border-red" type="button" onclick="AlterarFuncao(@item.FnfId, '@item.FnfNome', @itemStatus)" data-toggle="tooltip" data-original-title="Editar Função">
+                        <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
+                    </button>
+                    <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.FnfId, '@item.FnfNome')" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
+                        <span class="btn-inner--icon color-blue"><i class="fa-solid fa-trash"></i></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

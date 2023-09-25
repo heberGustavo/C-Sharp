@@ -48,25 +48,26 @@ function ObterDadosTelaJsonCadastrar() {
 }
 
 function AlterarFuncao(id, nome, excluido) {
-    ModalFuncao(id, nome, excluido);
-}
-
-function ModalFuncao(id, nome, excluido) {
-    LimparCamposModal();
-
     try {
-        if (id > 0 && nome.length > 0) {
-            txtIdFuncaoTemp.val(id);
-            txtNomeFuncao.val(nome);
-            selectExcluido.val(excluido);
-        }
-        else
+        if (id <= 0 && nome.length <= 0) {
             MostrarAlertMensagemErro("Erro ao selecionar dados. Tente novamente!");
+            return;
+        }
+
+        ModalFuncao(id, nome, excluido);
 
     } catch (e) {
         MostrarAlertMensagemErro("Erro ao selecionar dados. Contate o Administrador");
         console.log(e);
     }
+}
+
+function ModalFuncao(id, nome, excluido) {
+    LimparCamposModal();
+
+    txtIdFuncaoTemp.val(id);
+    txtNomeFuncao.val(nome);
+    selectExcluido.val(excluido);
 
     $('#modalFuncao').modal('show');
 }

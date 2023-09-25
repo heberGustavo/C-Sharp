@@ -24,8 +24,14 @@ namespace AdministrativoImperial.Controllers
 
         public async Task<IActionResult> Index()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ViewResult> ListagemDadosFuncao()
+        {
             var result = await _funcaoFuncionarioBusiness.GetAllAsync();
-            return View(result.Items);
+            return View("ListagemDados", result.Items);
         }
 
         #region Writer
