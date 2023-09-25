@@ -8,6 +8,5 @@ namespace AdministrativoImperial.Data.EntityData
         [Key]
         public int FnfId { get; set; }
         public string FnfNome { get; set; }
-        public bool FnfStatus { get; set; }
     }
 }

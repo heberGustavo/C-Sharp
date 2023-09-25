@@ -58,7 +58,6 @@ namespace AdministrativoImperial.Domain.Business
                 }
 
                 var funcaoSelecionada = await _funcaoFuncionarioRepository.GetById(id);
-                funcaoSelecionada.FnfStatus = true;
 
                 var modelResult = await _funcaoFuncionarioRepository.DeleteAsync(funcaoSelecionada);
                 if (modelResult == null)
@@ -172,18 +171,20 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                result.Items = await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome, y => y.FnfStatus == true);
+                result.Items = await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfNome);
             }
             catch (Exception ex)
             {
-                throw;
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao listar dados. Entre em contato com o Administrador.");
+                return result;
             }
 
             return result;
         }
 
         public async Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos()
-           => await _funcaoFuncionarioRepository.GetAllAsync(x => x.FnfStatus == false);
+           => await _funcaoFuncionarioRepository.GetAllAsync();
 
         #endregion
 

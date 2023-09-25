@@ -14,7 +14,5 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
         [Required(ErrorMessage = "O campo Nome é obrigatório")]
         public string FnfNome { get; set; }
 
-        [DataMember]
-        public bool FnfStatus { get; set; }
     }
 }

@@ -42,19 +42,18 @@ function ModalFuncaoSalvar() {
 function ObterDadosTelaJsonCadastrar() {
     return {
         FnfId: parseInt(txtIdFuncaoTemp.val()) > 0 ? parseInt(txtIdFuncaoTemp.val()) : 0,
-        FnfNome: txtNomeFuncao.val(),
-        FnfStatus: selectExcluido.val() == '0' ? false : true
+        FnfNome: txtNomeFuncao.val()
     }
 }
 
-function AlterarFuncao(id, nome, excluido) {
+function AlterarFuncao(id, nome) {
     try {
         if (id <= 0 && nome.length <= 0) {
             MostrarAlertMensagemErro("Erro ao selecionar dados. Tente novamente!");
             return;
         }
 
-        ModalFuncao(id, nome, excluido);
+        ModalFuncao(id, nome);
 
     } catch (e) {
         MostrarAlertMensagemErro("Erro ao selecionar dados. Contate o Administrador");
@@ -62,12 +61,11 @@ function AlterarFuncao(id, nome, excluido) {
     }
 }
 
-function ModalFuncao(id, nome, excluido) {
+function ModalFuncao(id, nome) {
     LimparCamposModal();
 
     txtIdFuncaoTemp.val(id);
     txtNomeFuncao.val(nome);
-    selectExcluido.val(excluido);
 
     $('#modalFuncao').modal('show');
 }
