@@ -29,7 +29,6 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-
                 if (model.FnfId <= 0)
                     result = await Insert(model);
                 //else

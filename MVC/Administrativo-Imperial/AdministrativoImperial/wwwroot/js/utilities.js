@@ -439,11 +439,18 @@ function MostrarModalErro(nomeDoCampoNaMensagem, nomeCampo) {
     return false;
 }
 
-
 function MostrarModalErroMensagemPersonalizada(mensgem) {
 
     swal("Atenção", mensgem, "warning");
     return false;
+}
+
+function MostrarAlertMensagemErro(mensagem) {
+    Toast.danger(mensagem, {
+        showProgress: true,
+        duration: 5000,
+        toastLocation: 'top'
+    });
 }
 
 function IsString(value) {

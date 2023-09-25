@@ -42,6 +42,12 @@
     text-align: center !important;
 }
 
+/*MESSAGE ALERT*/
+.sh-toast-container {
+    font-size: 18px;
+    max-width: 100%;
+}
+
 /*LOGIN*/
 .tela-login .titulo {
     font-size: 35px;
@@ -56,9 +62,9 @@
     text-align: center;
 }
 
-    .acesso-usuario .bloco-principal p.nome-usuario {
-        margin-top: 5px;
-    }
+.acesso-usuario .bloco-principal p.nome-usuario {
+    margin-top: 5px;
+}
 
 .sidenav .navbar-brand {
     padding: 10px 0;

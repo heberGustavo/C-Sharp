@@ -25,9 +25,8 @@ function ModalFuncaoSalvar() {
                     });
                 }
                 else {
-                    //COLOCA ALERTA FLUTUANTE
                     $.each(response.mensagem, function (index, value) {
-                        swal("Opss", value, "error");
+                        MostrarAlertMensagemErro(value)
                     });
                 }
             },
