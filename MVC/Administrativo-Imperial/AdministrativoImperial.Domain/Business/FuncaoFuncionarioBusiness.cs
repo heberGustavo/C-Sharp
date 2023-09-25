@@ -31,8 +31,8 @@ namespace AdministrativoImperial.Domain.Business
             {
                 if (model.FnfId <= 0)
                     result = await Insert(model);
-                //else
-                //    result = await Update(model);
+                else
+                    result = await Update(model);
 
                 return result;
 
@@ -134,19 +134,44 @@ namespace AdministrativoImperial.Domain.Business
             
         }
 
-        public async Task<ResultResponseModel> Update(FuncaoFuncionarioDTO funcaoFuncionario)
+        public async Task<ResultInfo> Update(FuncaoFuncionarioDTO funcaoFuncionario)
         {
-            var funcaoSameName = await _funcaoFuncionarioRepository.GetAllAsync(item => item.FnfNome == funcaoFuncionario.FnfNome && item.FnfId != funcaoFuncionario.FnfId);
+            var result = new ResultInfo();
 
-            if (funcaoSameName.Count > 0)
-                return new ResultResponseModel(true, "Função já cadastrada.");
+            try
+            {
+                var funcaoSameName = await _funcaoFuncionarioRepository.GetAllAsync(item => item.FnfNome == funcaoFuncionario.FnfNome && item.FnfId != funcaoFuncionario.FnfId);
 
-            var modelFuncao = await _funcaoFuncionarioRepository.UpdateAsync(funcaoFuncionario);
+                if (funcaoSameName.Count > 0)
+                {
+                    result.Messages.Add("Função já cadastrada!");
+                    result.Type = ResultType.ValidationError;
+                    return result;
+                }
 
-            if (modelFuncao != null)
-                return new ResultResponseModel(false, "Função cadastrada com sucesso!");
-            else
-                return new ResultResponseModel(true, "Erro ao cadastrar Função. Tente novamente!");
+                var modelFuncao = await _funcaoFuncionarioRepository.UpdateAsync(funcaoFuncionario);
+
+                if (modelFuncao != null)
+                {
+                    result.Type = ResultType.CompleteExecution;
+                    result.Messages.Add("Função alterada com sucesso!");
+                    return result;
+                }
+                else
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao alterar Função. Tente novamente!");
+                    return result;
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar Função. Entre em contato com o Administrador.");
+                return result;
+            }
+
         }
 
         #endregion

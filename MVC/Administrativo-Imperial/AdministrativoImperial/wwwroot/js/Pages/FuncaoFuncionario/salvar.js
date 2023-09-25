@@ -54,12 +54,18 @@ function AlterarFuncao(id, nome, excluido) {
 function ModalFuncao(id, nome, excluido) {
     LimparCamposModal();
 
-    if (id && nome && excluido) {
-        var situacaoItem = excluido.toLowerCase() == "true" ? 1 : 0;
+    try {
+        if (id > 0 && nome.length > 0) {
+            txtIdFuncaoTemp.val(id);
+            txtNomeFuncao.val(nome);
+            selectExcluido.val(excluido);
+        }
+        else
+            MostrarAlertMensagemErro("Erro ao selecionar dados. Tente novamente!");
 
-        txtIdFuncaoTemp.val(id);
-        txtNomeFuncao.val(nome);
-        selectExcluido.val(situacaoItem);
+    } catch (e) {
+        MostrarAlertMensagemErro("Erro ao selecionar dados. Contate o Administrador");
+        console.log(e);
     }
 
     $('#modalFuncao').modal('show');

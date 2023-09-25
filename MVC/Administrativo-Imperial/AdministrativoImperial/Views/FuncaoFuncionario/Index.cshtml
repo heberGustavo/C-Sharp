@@ -24,6 +24,8 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    var itemStatus = @item.FnfStatus == true ? 1 : 0;
+
                                     <tr>
                                         <td>
                                             <div class="d-flex px-3 py-1">
@@ -33,7 +35,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middletext-sm">
-                                            @if (item.FnfStatus == false)
+                                            @if (itemStatus == 0)
                                             {
                                                 <span class="badge badge-sm bg-gradient-success">Ativo</span>
                                             }
@@ -43,7 +45,8 @@
                                             }
                                         </td>
                                         <td class="align-middle">
-                                            <button class="btn btn-border-red" type="button" onclick="AlterarFuncao(@item.FnfId, '@item.FnfNome', @item.FnfStatus)" data-toggle="tooltip" data-original-title="Editar Função">
+
+                                            <button class="btn btn-border-red" type="button" onclick="AlterarFuncao(@item.FnfId, '@item.FnfNome', @itemStatus)" data-toggle="tooltip" data-original-title="Editar Função">
                                                 <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
                                             </button>
                                             <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.FnfId, '@item.FnfNome')" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
