@@ -24,7 +24,7 @@ function Variaveis() {
 function BuscarListaFuncaoFuncionario() {
 
     $.ajax({
-        url: "/FuncaoFuncionario/ListagemDadosFuncao",
+        url: "/FuncaoFuncionario/Listar",
         type: "GET",
         cache: false,
         success: function (response) {

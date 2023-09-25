@@ -28,10 +28,10 @@ namespace AdministrativoImperial.Controllers
         }
 
         [HttpGet]
-        public async Task<ViewResult> ListagemDadosFuncao()
+        public async Task<ViewResult> Listar()
         {
             var result = await _funcaoFuncionarioBusiness.GetAllAsync();
-            return View("ListagemDados", result.Items);
+            return View("Listar", result.Items);
         }
 
         #region Writer
