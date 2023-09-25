@@ -14,6 +14,6 @@ namespace AdministrativoImperial.Domain.IBusiness
         Task<ResultInfo<FuncaoFuncionarioDTO>> GetAllAsync();
         Task<ResultInfo> Create(FuncaoFuncionarioDTO funcaoFuncionario);
         Task<IEnumerable<FuncaoFuncionarioDTO>> ObterCadastradosAtivos();
-        Task<ResultResponseModel> Deletar(int id);
+        Task<ResultInfo> Deletar(int id);
     }
 }

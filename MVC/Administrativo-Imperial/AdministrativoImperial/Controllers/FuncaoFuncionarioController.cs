@@ -22,16 +22,9 @@ namespace AdministrativoImperial.Controllers
             _funcaoFuncionarioBusiness = funcaoFuncionarioBusiness;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
-        }
-
-        [HttpGet]
-        public async Task<ViewResult> Listar()
-        {
-            var result = await _funcaoFuncionarioBusiness.GetAllAsync();
-            return View("Listar", result.Items);
         }
 
         #region Writer
@@ -53,19 +46,23 @@ namespace AdministrativoImperial.Controllers
         public async Task<JsonResult> Deletar(int id)
         {
             var resultado = await _funcaoFuncionarioBusiness.Deletar(id);
-            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
+
+            if (resultado.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = resultado.Messages });
+
+            return Json(new { erro = false, mensagem = resultado.Messages });
         }
 
         #endregion
 
         #region Read
 
+
         [HttpGet]
-        [Route("[controller]/[action]")]
-        public async Task<JsonResult> ObterTodasFuncoes()
+        public async Task<ViewResult> Listar()
         {
-            var resultado = await _funcaoFuncionarioBusiness.GetAllAsync();
-            return Json(new { resultado });
+            var result = await _funcaoFuncionarioBusiness.GetAllAsync();
+            return View("Listar", result.Items);
         }
 
         #endregion

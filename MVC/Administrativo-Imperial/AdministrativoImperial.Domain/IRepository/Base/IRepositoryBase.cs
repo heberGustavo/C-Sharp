@@ -16,5 +16,7 @@ namespace AdministrativoImperial.Domain.IRepository.Base
         Task<TDomain> GetById(int? id);
         Task<int> CreateAsync(TDomain model);
         Task<TDomain> UpdateAsync(TDomain model);
+        Task<TDomain> DeleteAsync(TDomain model);
+
     }
 }

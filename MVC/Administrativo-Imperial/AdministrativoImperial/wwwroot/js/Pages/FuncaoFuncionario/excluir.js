@@ -22,7 +22,7 @@ function DeletarFuncao(id) {
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
-                swal("Sucesso", response.mensagem, "success").then((confirm) => {
+                swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
                         BuscarListaFuncaoFuncionario();
                     }

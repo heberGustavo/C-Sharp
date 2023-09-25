@@ -74,6 +74,24 @@ namespace AdministrativoImperial.Data.Repository
             }
         }
 
+        public async Task<TDomain> DeleteAsync(TDomain model)
+        {
+            try
+            {
+                var delete = await _dataContext.Connection.DeleteAsync<TData>(_mapper.Map<TData>(model));
+
+                if (!delete)
+                    throw new Exception("Erro ao realizar exclusão");
+
+                return model;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.WriteLine(ex);
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<TDomain>> GetAllAsync()
         {
             try
