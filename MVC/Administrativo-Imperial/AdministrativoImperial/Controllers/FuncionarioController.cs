@@ -38,7 +38,11 @@ namespace AdministrativoImperial.Controllers
         public async Task<JsonResult> Cadastrar([FromBody] FuncionarioDTO funcioanrio)
         {
             var resultado = await _funcionarioBusiness.Cadastrar(funcioanrio);
-            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
+            
+            if (resultado.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = resultado.Messages });
+
+            return Json(new { erro = false, mensagem = resultado.Messages });
         }
 
         #endregion

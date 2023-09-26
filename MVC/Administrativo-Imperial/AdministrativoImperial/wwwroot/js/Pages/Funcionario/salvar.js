@@ -15,7 +15,7 @@ function ModalFuncionarioSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
-                    swal("Sucesso", response.mensagem, "success").then((confirm) => {
+                    swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaFuncionarios();
                             LimparCamposModal();
@@ -24,7 +24,9 @@ function ModalFuncionarioSalvar() {
                     });
                 }
                 else {
-                    swal("Opss", response.mensagem, "error");
+                    $.each(response.mensagem, function (index, value) {
+                        MostrarAlertMensagemErro(value)
+                    });
                 }
             },
             error: function (response) {
@@ -52,10 +54,10 @@ function ObterDadosTelaJsonCadastrar() {
         mensalFloat = 0.0;
 
     return {
-        nome: nome.val(),
-        id_funcao_funcionario: parseInt(selectFuncao.val()),
-        diaria: diariaFloat,
-        mensal: mensalFloat,
-        data_contratacao: dataContratacao.val()
+        FunNome: nome.val(),
+        FnfId: parseInt(selectFuncao.val()),
+        FunDiaria: diariaFloat,
+        FunMensal: mensalFloat,
+        FunDataContratacao: dataContratacao.val()
     }
 }

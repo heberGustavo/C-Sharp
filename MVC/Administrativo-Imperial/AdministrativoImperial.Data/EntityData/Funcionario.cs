@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AdministrativoImperial.Data.EntityData
 {
-    [Table("Funcionario")]
+    [Table("TB_FUNCIONARIO")]
     public class Funcionario
     {
         [Key]
