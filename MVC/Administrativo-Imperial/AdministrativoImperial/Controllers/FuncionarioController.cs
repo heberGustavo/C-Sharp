@@ -1,6 +1,7 @@
 ﻿using AdministrativoImperial.Domain.IBusiness;
 using AdministrativoImperial.Domain.Models.EntityDomain;
 using AdministrativoImperial.Models;
+using Gpnet.Common.ExecutionManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,16 +28,22 @@ namespace AdministrativoImperial.Controllers
             ViewBag.FuncaoFuncionario = await _funcaoFuncionarioBusiness.ObterCadastradosAtivos();
 
             var result = await _funcionarioBusiness.ObterCadastrados();
-            return View(result);
+            return View(result.Items);
         }
+
+        #region Write
 
         [HttpPost]
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] FuncionarioDTO funcioanrio)
         {
             var resultado = await _funcionarioBusiness.Cadastrar(funcioanrio);
-            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem } );
+            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
         }
+
+        #endregion
+
+        #region Read
 
         [HttpGet]
         [Route("[controller]/[action]")]
@@ -45,6 +52,8 @@ namespace AdministrativoImperial.Controllers
             var resultado = await _funcionarioBusiness.ObterCadastrados();
             return Json(new { resultado });
         }
+
+        #endregion
 
     }
 }

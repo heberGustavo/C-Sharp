@@ -7,6 +7,6 @@ namespace AdministrativoImperial.Domain.IRepository
 {
     public interface IFuncionarioRepository : IRepositoryBase<FuncionarioDTO>
     {
-        Task<IEnumerable<FuncionarioDTO>> ObterCadastrados();
+        Task<IList<FuncionarioDTO>> ObterCadastrados();
     }
 }

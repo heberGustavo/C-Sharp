@@ -3,6 +3,7 @@ using AdministrativoImperial.Domain.IBusiness;
 using AdministrativoImperial.Domain.IRepository;
 using AdministrativoImperial.Domain.Models.Common;
 using AdministrativoImperial.Domain.Models.EntityDomain;
+using Gpnet.Common.ExecutionManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,7 +36,22 @@ namespace AdministrativoImperial.Domain.Business
             }
         }
 
-        public async Task<IEnumerable<FuncionarioDTO>> ObterCadastrados()
-            => await _funcionarioRepository.ObterCadastrados();
+        public async Task<ResultInfo<FuncionarioDTO>> ObterCadastrados()
+        {
+            var result = new ResultInfo<FuncionarioDTO>();
+
+            try
+            {
+                result.Items = await _funcionarioRepository.ObterCadastrados();
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao obter dados dos Funcionários");
+            }
+
+            return result;
+        }
+
     }
 }

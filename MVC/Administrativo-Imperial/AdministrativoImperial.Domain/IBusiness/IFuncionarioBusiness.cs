@@ -1,6 +1,7 @@
 ﻿using AdministrativoImperial.Domain.IBusiness.Base;
 using AdministrativoImperial.Domain.Models.Common;
 using AdministrativoImperial.Domain.Models.EntityDomain;
+using Gpnet.Common.ExecutionManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ namespace AdministrativoImperial.Domain.IBusiness
 {
     public interface IFuncionarioBusiness : IBusinessBase<FuncionarioDTO>
     {
-        Task<IEnumerable<FuncionarioDTO>> ObterCadastrados();
+        Task<ResultInfo<FuncionarioDTO>> ObterCadastrados();
         Task<ResultResponseModel> Cadastrar(FuncionarioDTO funcioanrio);
     }
 }

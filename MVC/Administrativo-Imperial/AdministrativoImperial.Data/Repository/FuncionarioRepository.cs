@@ -5,6 +5,7 @@ using AutoMapper;
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,10 +17,25 @@ namespace AdministrativoImperial.Data.Repository
         {
         }
 
-        public Task<IEnumerable<FuncionarioDTO>> ObterCadastrados()
-            => _dataContext.Connection.QueryAsync<FuncionarioDTO>(@"SELECT f.*, ff.nome as nome_funcao
-                                                                 FROM Funcionario f
-                                                                 INNER JOIN FuncaoFuncionario ff ON ff.id_funcao_funcionario = f.id_funcao_funcionario
-                                                                 ORDER BY f.excluido asc, f.nome");
+        public async Task<IList<FuncionarioDTO>> ObterCadastrados()
+        {
+            var resultData = await _dataContext.Connection.QueryAsync<FuncionarioDTO>(@"
+                                                                                        SELECT 
+	                                                                                          Fun.FunId
+	                                                                                        , Fun.FunNome
+	                                                                                        , Fun.FunDiaria
+	                                                                                        , Fun.FunMensal
+	                                                                                        , Fun.FunDataContratacao
+	                                                                                        , Fun.FunStatus
+	                                                                                        , Fnf.FnfNome as NomeFuncao
+                                                                                        FROM 
+	                                                                                        TB_FUNCIONARIO Fun
+	                                                                                        INNER JOIN TB_FUNCAO_FUNCIONARIO Fnf ON Fnf.FnfId = Fun.FnfId
+                                                                                        ORDER BY 
+	                                                                                        FUN.FunNome
+                                                                                       ");
+            return resultData.ToList();
+        }
+
     }
 }

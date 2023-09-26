@@ -32,6 +32,6 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
         public int FnfId { get; set; }
 
         [DataMember]
-        public string FnfNome { get; set; }
+        public string NomeFuncao { get; set; }
     }
 }
