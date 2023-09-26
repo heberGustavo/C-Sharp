@@ -20,6 +20,8 @@ namespace AdministrativoImperial.Domain.Business
             _funcionarioRepository = funcionarioRepository;
         }
 
+        #region Write
+
         public async Task<ResultInfo> Cadastrar(FuncionarioDTO model)
         {
             var result = new ResultInfo();
@@ -28,9 +30,11 @@ namespace AdministrativoImperial.Domain.Business
             {
                 if (model.FunId <= 0)
                     result = await Inserir(model);
-                
+                else
+                    result = await Alterar(model);
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 result.Type = ResultType.ValidationError;
                 result.Messages.Add("Erro ao cadastrar Funcionário. Tente novamente!");
@@ -55,7 +59,33 @@ namespace AdministrativoImperial.Domain.Business
                     result.Type = ResultType.ValidationError;
                     result.Messages.Add("Erro ao cadastrar Funcionário");
                 }
-                    
+
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar Funcionário. Tente novamente.");
+            }
+
+            return result;
+        }
+
+        private async Task<ResultInfo> Alterar(FuncionarioDTO model)
+        {
+            var result = new ResultInfo();
+
+            try
+            {
+                var modelAtualizada = await _funcionarioRepository.UpdateAsync(model);
+
+                if (modelAtualizada != null)
+                    result.Messages.Add("Funcionário atualizado com sucesso!");
+                else
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao atualizar Funcionário");
+                }
+
             }
             catch (Exception e)
             {
@@ -67,6 +97,10 @@ namespace AdministrativoImperial.Domain.Business
         }
 
         #endregion
+
+        #endregion
+
+        #region Read
 
         public async Task<ResultInfo<FuncionarioDTO>> ObterCadastrados()
         {
@@ -84,6 +118,25 @@ namespace AdministrativoImperial.Domain.Business
 
             return result;
         }
+
+        public async Task<ResultInfo<FuncionarioDTO>> Selecionar(int funId)
+        {
+            var result = new ResultInfo<FuncionarioDTO>();
+
+            try
+            {
+                result.Item = await _funcionarioRepository.GetById(funId);
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao selecionar funcionário");
+            }
+
+            return result;
+        }
+
+        #endregion
 
     }
 }

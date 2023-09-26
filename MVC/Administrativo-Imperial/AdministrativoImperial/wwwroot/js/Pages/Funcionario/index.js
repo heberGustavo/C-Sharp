@@ -20,13 +20,62 @@ function Variaveis() {
     valorDiaria = $('#valorDiaria');
     valorMensal = $('#valorMensal');
     dataContratacao = $('#dataContratacao');
+    txtIdFuncionarioTemp = $('#txtIdFuncionarioTemp');
+
     tabelaFuncionario = $('#tabelaFuncionarios tbody');
 }
 
-function ModalFuncionario() {
-    $('#modalFuncionario').modal('show');
+/*MODAL*/
+function ModalFuncionarioCadastrar() {
+    AlterarVisibilidadeAtualModal('modalFuncionario');
 }
 
+function ModalFuncionarioAtualizar(funId) {
+
+    $("#txtIdFuncionarioTemp").val(funId);
+
+    $.ajax({
+        url: "/Funcionario/Selecionar/" + parseInt(funId),
+        type: "GET",
+        contentType: 'application/json; charset=UTF-8',
+        dataType: "json",
+        success: function (response) {
+            PreencherCamposModalFuncionario(response);
+            AlterarVisibilidadeAtualModal('modalFuncionario');
+        },
+        error: function (response) {
+            console.log(response);
+            swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
+        }
+    });
+
+}
+
+function ModalFuncionarioFechar() {
+    LimparCamposModal();
+    AlterarVisibilidadeAtualModal('modalFuncionario');
+}
+
+
+/*AJAX*/
+function BuscarListaFuncionarios() {
+
+    $.ajax({
+        url: "/Funcionario/Listar",
+        type: "GET",
+        contentType: 'application/json; charset=UTF-8',
+        success: function (response) {
+            $("#divListar").html(response);
+        },
+        error: function (response) {
+            console.log(response);
+            swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
+        }
+    });
+
+}
+
+/*MÉTODOS GERAIS*/
 function VerificaCheckClicado() {
 
     var selecionado = RetornaSelecionado();
@@ -36,10 +85,12 @@ function VerificaCheckClicado() {
     if (itemSelecionado == 'customRadioDiaria') {
         $('#grupo-diaria').removeClass('d-none');
         $('#grupo-mensal').addClass('d-none');
+        $('#grupo-mensal input').val("");
     }
     else if (itemSelecionado == 'customRadioMensal') {
         $('#grupo-mensal').removeClass('d-none');
         $('#grupo-diaria').addClass('d-none');
+        $('#grupo-diaria input').val("");
     }
 
 }
@@ -72,23 +123,6 @@ function VerificarCamposObrigatorios() {
     return true;
 }
 
-function BuscarListaFuncionarios() {
-
-    $.ajax({
-        url: "/Funcionario/Listar",
-        type: "GET",
-        contentType: 'application/json; charset=UTF-8',
-        success: function (response) {
-            $("#divListar").html(response);
-        },
-        error: function (response) {
-            console.log(response);
-            swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
-        }
-    });
-
-}
-
 function LimparCamposModal() {
     nome.val('')
     selectFuncao.val('0');
@@ -97,7 +131,27 @@ function LimparCamposModal() {
     dataContratacao.val('')
 }
 
-function ModalFuncionarioFechar() {
-    LimparCamposModal();
-    AlterarVisibilidadeAtualModal('modalFuncionario');
+function PreencherCamposModalFuncionario(dados) {
+    var campo = dados.item;
+
+    nome.val(campo.funNome);
+    selectFuncao.val(campo.fnfId);
+    dataContratacao.val(ConverterDataParaUSA(campo.funDataContratacao));
+    ValidaPreenchimentoEClickNoRadioButtonModalFuncionario(campo.funDiaria, campo.funMensal);
+
+}
+
+function ValidaPreenchimentoEClickNoRadioButtonModalFuncionario(campoDiaria, campoMensal) {
+    var valorDiariaConvertido = campoDiaria <= 0 || null ? "" : FormatDinheiro(campoDiaria);
+    var valorMensalConvertido = campoMensal <= 0 || null ? "" : FormatDinheiro(campoMensal);
+
+    valorDiaria.val(valorDiariaConvertido);
+    valorMensal.val(valorMensalConvertido);
+
+    //Click na Tab Atual
+    if (valorDiariaConvertido.length > 0)
+        $("#customRadioDiaria").trigger('click')
+    else if (valorMensalConvertido.length > 0)
+        $("#customRadioMensal").trigger('click')
+    
 }
