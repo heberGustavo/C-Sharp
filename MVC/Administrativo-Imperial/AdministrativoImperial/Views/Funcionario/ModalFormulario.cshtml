@@ -1,0 +1,65 @@
+﻿<div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Funcionário</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+
+                        <div class="form-group">
+                            <label class="control-label">Nome</label>
+                            <input id="nome" type="text" class="form-control" placeholder="Nome do Funcionário" />
+                        </div>
+                        <div class="form-group">
+                            <label>Selecione Função</label>
+                            <select class="form-control" id="selectFuncao">
+                                <option disabled selected value="0">Selecione</option>
+                                @foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.FuncaoFuncionarioDTO>)ViewBag.FuncaoFuncionario)
+                                {
+                                    <option value="@item.FnfId">@item.FnfNome</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <div class="form-check mb-3" style="display: inline-block">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadioDiaria" onclick="VerificaCheckClicado()">
+                                <label class="custom-control-label" for="customRadioDiaria">Diária</label>
+                            </div>
+                            <div class="form-check" style="display: inline-block; margin-left: 10px">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="customRadioMensal" onclick="VerificaCheckClicado()">
+                                <label class="custom-control-label" for="customRadioMensal">Mensal</label>
+                            </div>
+                        </div>
+                        <div class="grupo">
+                            <div id="grupo-diaria" class="d-none">
+                                <label>Diária</label>
+                                <div class="input-group mb-3">
+                                    <input id="valorDiaria" type="text" class="form-control money" placeholder="R$ 0,00">
+                                </div>
+                            </div>
+                            <div id="grupo-mensal" class="d-none">
+                                <label>Mensal</label>
+                                <div class="input-group mb-3">
+                                    <input id="valorMensal" type="text" class="form-control money" placeholder="R$ 0,00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label"></label>
+                            <input id="dataContratacao" class="form-control" type="date" />
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" onclick="ModalFuncionarioFechar()" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                            <button type="button" onclick="ModalFuncionarioSalvar()" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

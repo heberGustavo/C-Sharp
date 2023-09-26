@@ -27,8 +27,7 @@ namespace AdministrativoImperial.Controllers
         {
             ViewBag.FuncaoFuncionario = await _funcaoFuncionarioBusiness.ObterCadastradosAtivos();
 
-            var result = await _funcionarioBusiness.ObterCadastrados();
-            return View(result.Items);
+            return View();
         }
 
         #region Write
@@ -48,6 +47,13 @@ namespace AdministrativoImperial.Controllers
         #endregion
 
         #region Read
+
+        [HttpGet]
+        public async Task<ViewResult> Listar()
+        {
+            var result = await _funcionarioBusiness.ObterCadastrados();
+            return View(result.Items);
+        }
 
         [HttpGet]
         [Route("[controller]/[action]")]

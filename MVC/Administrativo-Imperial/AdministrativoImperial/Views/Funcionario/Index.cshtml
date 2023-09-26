@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Funcionários";
-    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.FuncionarioDTO>
 }
 
 <div class="container-fluid py-4">
@@ -12,79 +11,7 @@
                     <button class="btn btn-primary float-end" onclick="ModalFuncionario()">Cadastrar</button>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table id="tabelaFuncionarios" class="table align-items-center mt-2 mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Função</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Diária</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Mensal</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-3 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@item.FunNome</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.NomeFuncao</p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <p class="text-xs font-weight-bold mb-0">
-                                            @if (item.FunDiaria > 0)
-                                            {
-                                                <span>@item.FunDiaria.ToString("C")</span>
-                                            }
-                                            else
-                                            {
-                                                <span>-</span>
-                                            }
-                                        </p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <p class="text-xs font-weight-bold mb-0">
-                                            @if (item.FunMensal > 0)
-                                            {
-                                                <span>@item.FunMensal.ToString("C")</span>
-                                            }
-                                            else
-                                            {
-                                                <span>-</span>
-                                            }
-                                        </p>
-                                    </td>
-                                    <td class="align-middletext-sm">
-                                        @if (item.FunStatus == false)
-                                        {
-                                            <span class="badge badge-sm bg-gradient-success">Ativo</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-sm bg-gradient-secondary">Desativo</span>
-                                        }
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-icon btn-2 btn-info" type="button" data-toggle="tooltip" data-original-title="Editar Função">
-                                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                        </button>
-                                        <button class="btn btn-icon btn-2 btn-danger" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
-                                            <span class="btn-inner--icon"><i class="fa-solid fa-trash"></i></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="divListar" class="table-responsive p-0"></div>
                 </div>
             </div>
         </div>
@@ -92,30 +19,7 @@
 </div>
 
 <!-- Modal Funcionario -->
-<div class="modal fade" id="modalFuncionario" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="card card-plain">
-                    <div class="card-header pb-0 text-left">
-                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Funcionário</h3>
-                        <p class="mb-0">Preencha os campos abaixo</p>
-                    </div>
-                    <div class="card-body pb-3">
-
-                        <partial name="_DadosFormulario" />
-
-                        <div class="text-center">
-                            <button type="button" onclick="ModalFuncionarioFechar()" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
-                            <button type="button" onclick="ModalFuncionarioSalvar()" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="ModalFormulario"/>
 
 <script src="~/js/Pages/Funcionario/index.js" asp-append-version="true"></script>
 <script src="~/js/Pages/Funcionario/salvar.js" asp-append-version="true"></script>

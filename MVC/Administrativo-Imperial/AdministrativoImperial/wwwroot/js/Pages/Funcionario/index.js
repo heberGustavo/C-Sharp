@@ -6,10 +6,15 @@ var dataContratacao;
 var tabelaFuncionario;
 
 $(document).ready(function () {
-    InicializaVariaveis();
+    Init();
 });
 
-function InicializaVariaveis() {
+function Init() {
+    Variaveis();
+    BuscarListaFuncionarios();
+}
+
+function Variaveis() {
     nome = $('#nome');
     selectFuncao = $('#selectFuncao');
     valorDiaria = $('#valorDiaria');
@@ -70,12 +75,11 @@ function VerificarCamposObrigatorios() {
 function BuscarListaFuncionarios() {
 
     $.ajax({
-        url: "/Funcionario/ObterTodosFuncionarios",
+        url: "/Funcionario/Listar",
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
-        dataType: "json",
         success: function (response) {
-            PreencherTabelaFuncionarios(response);
+            $("#divListar").html(response);
         },
         error: function (response) {
             console.log(response);
@@ -83,55 +87,6 @@ function BuscarListaFuncionarios() {
         }
     });
 
-}
-
-function PreencherTabelaFuncionarios(dados) {
-    tabelaFuncionario.html("");
-
-    $(dados.resultado).each(function () {
-        var linhaParte1;
-        var linhaParte2;
-        var linhaParte3;
-
-        linhaParte1 = `<tr>
-                        <td>
-                            <div class="d-flex px-3 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm">${this.nome}</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="text-xs font-weight-bold mb-0">${this.id_funcao_funcionario}</p>
-                        </td>
-                        <td class="align-middle">
-                            <p class="text-xs font-weight-bold mb-0">R$ ${!IsNullOrEmpty(this.mensal) ? FormatDinheiro(ConverterParaFloat(this.mensal)) : ''} </p>
-                        </td>
-                        <td class="align-middle">
-                            <p class="text-xs font-weight-bold mb-0">R$ ${!IsNullOrEmpty(this.diaria) ? FormatDinheiro(ConverterParaFloat(this.diaria)) : ''}</p>
-                        </td>
-                        <td class="align-middletext-sm">`
-
-                            if (this.excluido == false)
-                            {
-                                linhaParte2 = `<span class="badge badge-sm bg-gradient-success">Ativo</span>`
-                            }
-                            else
-                            {
-                                linhaParte2 = `<span class="badge badge-sm bg-gradient-secondary">Desativo</span>`
-                            }
-
-                        linhaParte3 = 
-                        `</td>
-                        <td class="align-middle">
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                Edit
-                            </a>
-                        </td>
-                    </tr>`;
-
-        tabelaFuncionario.append(linhaParte1 + linhaParte2 + linhaParte3)
-    });
 }
 
 function LimparCamposModal() {
