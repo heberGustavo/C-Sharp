@@ -44,6 +44,18 @@ namespace AdministrativoImperial.Controllers
             return Json(new { erro = false, mensagem = resultado.Messages });
         }
 
+        [HttpGet]
+        [Route("[controller]/[action]/{funId:int}")]
+        public async Task<JsonResult> Desativar(int funId)
+        {
+            var result = await _funcionarioBusiness.Desativar(funId);
+
+            if (result.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = result.Messages });
+
+            return Json(new { erro = false, mensagem = result.Messages });
+        }
+
         #endregion
 
         #region Read

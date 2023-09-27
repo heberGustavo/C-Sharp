@@ -14,5 +14,6 @@ namespace AdministrativoImperial.Domain.IBusiness
         Task<ResultInfo<FuncionarioDTO>> ObterCadastrados();
         Task<ResultInfo<FuncionarioDTO>> Selecionar(int funId);
         Task<ResultInfo> Cadastrar(FuncionarioDTO funcioanrio);
+        Task<ResultInfo> Desativar(int funId);
     }
 }

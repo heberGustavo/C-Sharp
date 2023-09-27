@@ -29,7 +29,9 @@ function DeletarFuncao(id) {
                 });
             }
             else {
-                swal("Opss", response.mensagem, "error");
+                $.each(response.mensagem, function (index, value) {
+                    MostrarAlertMensagemErro(value)
+                });
             }
         },
         error: function (response) {

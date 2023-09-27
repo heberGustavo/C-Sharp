@@ -59,6 +59,6 @@ function ObterDadosTelaJsonCadastrar() {
         FunDiaria: diariaFloat,
         FunMensal: mensalFloat,
         FunDataContratacao: dataContratacao.val(),
-        FunId: parseInt(txtIdFuncionarioTemp.val())
+        FunId: txtIdFuncionarioTemp.val().length <= 0 ? 0 : parseInt(txtIdFuncionarioTemp.val())
     }
 }

@@ -32,7 +32,7 @@ namespace AdministrativoImperial.Data.Repository
 	                                                                                        TB_FUNCIONARIO Fun
 	                                                                                        INNER JOIN TB_FUNCAO_FUNCIONARIO Fnf ON Fnf.FnfId = Fun.FnfId
                                                                                         ORDER BY 
-	                                                                                        FUN.FunNome
+	                                                                                        Fun.FunNome ASC, Fun.FunStatus ASC
                                                                                        ");
             return resultData.ToList();
         }

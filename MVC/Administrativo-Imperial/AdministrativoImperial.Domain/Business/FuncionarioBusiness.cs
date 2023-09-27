@@ -43,6 +43,36 @@ namespace AdministrativoImperial.Domain.Business
             return result;
         }
 
+        public async Task<ResultInfo> Desativar(int funId)
+        {
+            var result = new ResultInfo();
+
+            try
+            {
+                var funcionarioDesativar = await _funcionarioRepository.GetById(funId);
+                if(funcionarioDesativar == null)
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao selecionar Funcionário");
+                }
+
+                funcionarioDesativar.FunStatus = true;
+
+                var funcionarioAtualizado = await _funcionarioRepository.UpdateAsync(funcionarioDesativar);
+                if(funcionarioAtualizado != null)
+                    result.Messages.Add("Funcionário desativado com sucesso!");
+                else
+                    result.Messages.Add("Erro ao desativar Funcionário");
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar Funcionário. Tente novamente!");
+            }
+
+            return result;
+        }
+
         #region Métodos privados
 
         private async Task<ResultInfo> Inserir(FuncionarioDTO model)
