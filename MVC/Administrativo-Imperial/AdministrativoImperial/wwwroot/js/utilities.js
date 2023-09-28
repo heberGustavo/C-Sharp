@@ -290,7 +290,7 @@ function FormatDinheiro(numero) {
 
 function ConverterParaFloat(stringValor) {
     if (IsString(stringValor))
-        return parseFloat(stringValor.replace("R$", '').trim().replace('.', '').replace(',', '.'));
+        return parseFloat(stringValor.replaceAll("R$", '').trim().replaceAll('.', '').replaceAll(',', '.'));
     else
         return stringValor;
 }

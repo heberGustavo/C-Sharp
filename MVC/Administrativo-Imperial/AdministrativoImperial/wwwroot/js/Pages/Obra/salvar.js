@@ -15,7 +15,7 @@ function ModalObraSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
-                    swal("Sucesso", response.mensagem, "success").then((confirm) => {
+                    swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaObras();
                             LimparCamposModal();
@@ -24,7 +24,9 @@ function ModalObraSalvar() {
                     });
                 }
                 else {
-                    swal("Opss", response.mensagem, "error");
+                    $.each(response.mensagem, function (index, value) {
+                        MostrarAlertMensagemErro(value)
+                    });
                 }
             },
             error: function (response) {
@@ -46,9 +48,9 @@ function ObterDadosTelaJsonCadastrar() {
         orcamentoFloat = 0.0;
 
     return {
-        data_inicio: dataInicio.val(),
-        apelido: apelido.val(),
-        endereco: endereco.val(),
-        orcamento: orcamentoFloat
+        ObrDataInicio: dataInicio.val(),
+        ObrApelido: apelido.val(),
+        ObrEndereco: endereco.val(),
+        ObrOrcamento: orcamentoFloat
     }
 }

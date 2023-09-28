@@ -23,22 +23,31 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Write
 
-        public async Task<ResultResponseModel> Cadastrar(ObraDTO obra)
+        public async Task<ResultInfo> Cadastrar(ObraDTO obra)
         {
-            obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
+            var result = new ResultInfo();
 
             try
             {
+                obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
+
                 var idCadastrado = await _obraRepository.CreateAsync(obra);
                 if (idCadastrado > 0)
-                    return new ResultResponseModel(false, "Obra cadastrada com sucesso!");
+                    result.Messages.Add("Obra cadastrada com sucesso!");
                 else
-                    return new ResultResponseModel(true, "Erro ao cadastrar Obra. Tente novamente!");
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao cadastrar obra. Tente novamente!");
+                }
+
             }
             catch (Exception e)
             {
-                return new ResultResponseModel(true, "Erro ao cadastrar Obra. Entre em contato com o Administrador.");
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao cadastrar obra.");
             }
+
+            return result;
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using AdministrativoImperial.Domain.IBusiness;
 using AdministrativoImperial.Domain.Models.EntityDomain;
 using AdministrativoImperial.Models;
+using Gpnet.Common.ExecutionManager;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,19 +26,29 @@ namespace AdministrativoImperial.Controllers
             return View();
         }
 
-        [Route("[controller]/[action]")]
-        public async Task<ViewResult> Listar()
-        {
-            var result = await _obraBusiness.ObterCadastrados();
-            return View("Listar", result.Items);
-        }
+        #region Write
 
         [HttpPost]
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] ObraDTO obra)
         {
-            var resultado = await _obraBusiness.Cadastrar(obra);
-            return Json(new { erro = resultado.erro, mensagem = resultado.mensagem });
+            var result = await _obraBusiness.Cadastrar(obra);
+
+            if (result.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = result.Messages }) ;
+
+            return Json(new { erro = false, mensagem = result.Messages });
+        }
+
+        #endregion
+
+        #region Read
+
+        [Route("[controller]/[action]")]
+        public async Task<ViewResult> Listar()
+        {
+            var result = await _obraBusiness.ObterCadastrados();
+            return View("Listar", result.Items);
         }
 
         [HttpGet]
@@ -47,5 +58,7 @@ namespace AdministrativoImperial.Controllers
             var resultado = await _obraBusiness.ObterCadastrados();
             return Json(new { resultado });
         }
+
+        #endregion
     }
 }

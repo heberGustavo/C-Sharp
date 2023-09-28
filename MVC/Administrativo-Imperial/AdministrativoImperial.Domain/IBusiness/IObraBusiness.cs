@@ -8,7 +8,7 @@ namespace AdministrativoImperial.Domain.IBusiness
 {
     public interface IObraBusiness : IBusinessBase<ObraDTO>
     {
-        Task<ResultResponseModel> Cadastrar(ObraDTO obra);
+        Task<ResultInfo> Cadastrar(ObraDTO obra);
         Task<ResultInfo<ObraDTO>> ObterCadastrados();
     }
 }
