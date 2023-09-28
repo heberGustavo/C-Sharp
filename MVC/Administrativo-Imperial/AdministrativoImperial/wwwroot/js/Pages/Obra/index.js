@@ -3,26 +3,26 @@ var apelido;
 var endereco;
 var orcamento;
 var tabelaObra;
-var divListar;
 
 $(document).ready(function () {
-
-    InicializaVariaveis();
-    BuscarListaObras();   
-
+    Init();
 });
 
-function InicializaVariaveis() {
+function Init() {
+    Variaveis();
+    BuscarListaObras();
+}
+
+function Variaveis() {
     dataInicio = $('#dataInicio');
     apelido = $('#apelido');
     endereco = $('#endereco');
     orcamento = $('#orcamento');
     tabelaObra = $('#tabelaObra tbody');
-    divListar = $('.divListar');
 }
 
 function ModalObra() {
-    $('#modalObra').modal('show');
+    AlterarVisibilidadeAtualModal('modalObra');
 }
 
 function VerificarCamposObrigatorios() {
@@ -45,7 +45,7 @@ function BuscarListaObras() {
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         success: function (response) {
-            divListar.html(response)
+            $("#divListar").html(response)
         },
         error: function (response) {
             console.log(response);

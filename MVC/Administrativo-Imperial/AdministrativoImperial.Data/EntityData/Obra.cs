@@ -3,7 +3,7 @@ using System;
 
 namespace AdministrativoImperial.Data.EntityData
 {
-    [Table("Obra")]
+    [Table("TB_OBRA")]
     public class Obra
     {
         [Key]

@@ -7,5 +7,6 @@ namespace AdministrativoImperial.Domain.IRepository
 {
     public interface IObraRepository : IRepositoryBase<ObraDTO>
     {
+        Task<IList<ObraDTO>> Listar();
     }
 }

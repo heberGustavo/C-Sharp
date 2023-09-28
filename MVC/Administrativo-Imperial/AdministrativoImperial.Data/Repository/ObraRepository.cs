@@ -5,6 +5,7 @@ using AutoMapper;
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,5 +17,22 @@ namespace AdministrativoImperial.Data.Repository
         {
         }
 
+        public async Task<IList<ObraDTO>> Listar()
+        {
+            var resultData = await _dataContext.Connection.QueryAsync<ObraDTO>(@"SELECT
+	                                                                              ObrId
+	                                                                            , ObrApelido
+	                                                                            , ObrDataInicio
+	                                                                            , ObrDataFim
+	                                                                            , ObrEndereco
+	                                                                            , ObrOrcamento
+	                                                                            , ObrStatus
+                                                                            FROM
+	                                                                            TB_OBRA
+                                                                            ORDER BY 
+	                                                                            ObrStatus, ObrApelido
+                                                                            ");
+            return resultData.ToList();
+        }
     }
 }

@@ -4,6 +4,7 @@ using AdministrativoImperial.Domain.IBusiness;
 using AdministrativoImperial.Domain.IRepository;
 using AdministrativoImperial.Domain.Models.Common;
 using AdministrativoImperial.Domain.Models.EntityDomain;
+using Gpnet.Common.ExecutionManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,8 @@ namespace AdministrativoImperial.Domain.Business
         {
             _obraRepository = obraRepository;
         }
+
+        #region Write
 
         public async Task<ResultResponseModel> Cadastrar(ObraDTO obra)
         {
@@ -38,7 +41,29 @@ namespace AdministrativoImperial.Domain.Business
             }
         }
 
-        public async Task<IEnumerable<ObraDTO>> ObterCadastrados()
-            => await _obraRepository.GetAllAsync();
+        #endregion
+
+        #region Read
+
+        public async Task<ResultInfo<ObraDTO>> ObterCadastrados()
+        {
+            var result = new ResultInfo<ObraDTO>();
+
+            try
+            {
+                result.Items = await _obraRepository.Listar();
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao listar obras");
+            }
+
+            return result;
+        }
+            
+
+        #endregion
+
     }
 }

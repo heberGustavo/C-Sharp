@@ -1,0 +1,50 @@
+﻿
+<div class="modal fade" id="modalObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Obra</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+                        <form role="form" class="text-left">
+
+                            <input type="hidden" id="txtIdObraTemp"  />
+
+                            <div class="form-group">
+                                <label class="form-control-label">Início da Obra</label>
+                                <input id="dataInicio" class="form-control" type="date">
+                            </div>
+                            <div class="form-group">
+                                <label>Apelido</label>
+                                <div class="input-group mb-3">
+                                    <input id="apelido" type="text" class="form-control" placeholder="Apelido da Obra">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Endereço</label>
+                                <div class="input-group mb-3">
+                                    <input id="endereco" type="text" class="form-control" placeholder="Endereço da Obra">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Orçamento</label>
+                                <div class="input-group mb-3">
+                                    <input id="orcamento" type="text" class="form-control money" placeholder="Orçamento da Obra">
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button onclick="ModalObraFechar()" type="button" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                                <button onclick="ModalObraSalvar()" type="button" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

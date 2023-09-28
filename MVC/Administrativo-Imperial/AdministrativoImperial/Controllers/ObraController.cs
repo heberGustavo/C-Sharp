@@ -20,7 +20,7 @@ namespace AdministrativoImperial.Controllers
             _obraBusiness = obraBusiness;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -29,7 +29,7 @@ namespace AdministrativoImperial.Controllers
         public async Task<ViewResult> Listar()
         {
             var result = await _obraBusiness.ObterCadastrados();
-            return View("Listar", result);
+            return View("Listar", result.Items);
         }
 
         [HttpPost]

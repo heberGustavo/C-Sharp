@@ -6,19 +6,20 @@
     var DateMin = Convert.ToDateTime(DataDictionary.DATE_MIN);
 }
 
-<div class="table-responsive p-0">
-    <table id="tabelaObra" class="table align-items-center mt-2 mb-0">
-        <thead>
-            <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Apelido</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Início - Fim</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Orçamento</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Gasto Total</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Lucro</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
+<table id="tabelaObra" class="table align-items-center mt-2 mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Apelido</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Início - Fim</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Orçamento</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Gasto Total</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Lucro</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
             @foreach (var item in Model)
             {
                 <tr>
@@ -60,6 +61,18 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-</div>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Nenhum dado cadastrado</h6>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
