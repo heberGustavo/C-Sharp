@@ -59,6 +59,14 @@ namespace AdministrativoImperial.Controllers
             return Json(new { resultado });
         }
 
+        [HttpGet]
+        [Route("[controller]/[action]/{obrId:int}")]
+        public async Task<JsonResult> Selecionar(int obrId)
+        {
+            var result = await _obraBusiness.Selecionar(obrId);
+            return Json(new { data = result.Item });
+        }
+
         #endregion
     }
 }

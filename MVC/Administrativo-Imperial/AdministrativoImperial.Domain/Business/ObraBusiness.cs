@@ -29,6 +29,27 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
+                if (obra.ObrId <= 0)
+                    result = await Inserir(obra);
+                else
+                    result = await Alterar(obra);
+
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao salvar dados.");
+            }
+
+            return result;
+        }
+
+        private async Task<ResultInfo> Inserir(ObraDTO obra)
+        {
+            var result = new ResultInfo();
+
+            try
+            {
                 obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
 
                 var idCadastrado = await _obraRepository.CreateAsync(obra);
@@ -39,12 +60,38 @@ namespace AdministrativoImperial.Domain.Business
                     result.Type = ResultType.ValidationError;
                     result.Messages.Add("Erro ao cadastrar obra. Tente novamente!");
                 }
-
             }
             catch (Exception e)
             {
                 result.Type = ResultType.ValidationError;
                 result.Messages.Add("Erro ao cadastrar obra.");
+            }
+
+            return result;
+        }
+
+        private async Task<ResultInfo> Alterar(ObraDTO obra)
+        {
+            var result = new ResultInfo();
+
+            try
+            {
+                throw new Exception("teste");
+                obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
+
+                var modelAtualizada = await _obraRepository.UpdateAsync(obra);
+                if (modelAtualizada != null)
+                    result.Messages.Add("Obra atualizada com sucesso!");
+                else
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao atualizada obra. Tente novamente!");
+                }
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao atualizada obra.");
             }
 
             return result;
@@ -70,7 +117,23 @@ namespace AdministrativoImperial.Domain.Business
 
             return result;
         }
-            
+
+        public async Task<ResultInfo<ObraDTO>> Selecionar(int obrId)
+        {
+            var result = new ResultInfo<ObraDTO>();
+
+            try
+            {
+                result.Item = await _obraRepository.GetById(obrId);
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao selecionar obra");
+            }
+
+            return result;
+        }
 
         #endregion
 

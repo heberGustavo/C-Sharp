@@ -3,6 +3,7 @@ var apelido;
 var endereco;
 var orcamento;
 var tabelaObra;
+var txtIdObraTemp;
 
 $(document).ready(function () {
     Init();
@@ -13,12 +14,14 @@ function Init() {
     BuscarListaObras();
 }
 
+/*METODOS GERAIS*/
 function Variaveis() {
     dataInicio = $('#dataInicio');
     apelido = $('#apelido');
     endereco = $('#endereco');
     orcamento = $('#orcamento');
     tabelaObra = $('#tabelaObra tbody');
+    txtIdObraTemp = $("#txtIdObraTemp");
 }
 
 function ModalObra() {
@@ -38,6 +41,19 @@ function VerificarCamposObrigatorios() {
     return true;
 }
 
+function LimparCamposModal() {
+    dataInicio.val('')
+    apelido.val('')
+    endereco.val('')
+    orcamento.val('')
+}
+
+function ModalObraFechar() {
+    LimparCamposModal();
+    AlterarVisibilidadeAtualModal('modalObra');
+}
+
+/*AJAX*/
 function BuscarListaObras() {
 
     $.ajax({
@@ -55,14 +71,9 @@ function BuscarListaObras() {
 
 }
 
-function LimparCamposModal() {
-    dataInicio.val('')
-    apelido.val('')
-    endereco.val('')
-    orcamento.val('')
-}
-
-function ModalObraFechar() {
-    LimparCamposModal();
-    AlterarVisibilidadeAtualModal('modalObra');
+function PreencherModalObra(response) {
+    dataInicio.val(ConverterParaDataUSA(response.data.obrDataInicio));
+    apelido.val(response.data.obrApelido);
+    endereco.val(response.data.obrEndereco);
+    orcamento.val(FormatDinheiro(response.data.obrOrcamento));
 }

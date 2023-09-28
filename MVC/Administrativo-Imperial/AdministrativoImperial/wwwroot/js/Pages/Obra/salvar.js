@@ -2,6 +2,25 @@
 
 });
 
+function ObterDadosTelaJsonCadastrar() {
+
+    var orcamentoFloat;
+
+    if (!IsNullOrEmpty(orcamento.val()))
+        orcamentoFloat = ConverterParaFloat(orcamento.val());
+    else
+        orcamentoFloat = 0.0;
+
+    return {
+        ObrDataInicio: dataInicio.val(),
+        ObrApelido: apelido.val(),
+        ObrEndereco: endereco.val(),
+        ObrOrcamento: orcamentoFloat,
+        ObrId: txtIdObraTemp.val().length <= 0 ? 0 : parseInt(txtIdObraTemp.val())
+    }
+}
+
+/*MODAL*/
 function ModalObraSalvar() {
 
     if (VerificarCamposObrigatorios()) {
@@ -38,19 +57,28 @@ function ModalObraSalvar() {
     }
 }
 
-function ObterDadosTelaJsonCadastrar() {
+function ModalObraEditar(obrId) {
+    txtIdObraTemp.val(obrId);
 
-    var orcamentoFloat;
-
-    if (!IsNullOrEmpty(orcamento.val()))
-        orcamentoFloat = ConverterParaFloat(orcamento.val());
-    else
-        orcamentoFloat = 0.0;
-
-    return {
-        ObrDataInicio: dataInicio.val(),
-        ObrApelido: apelido.val(),
-        ObrEndereco: endereco.val(),
-        ObrOrcamento: orcamentoFloat
-    }
+    $.ajax({
+        url: "Obra/Selecionar/" + obrId,
+        type: "GET",
+        contentType: 'application/json; charset=UTF-8',
+        dataType: "json",
+        success: function (response) {
+            if (!response.erro) {
+                PreencherModalObra(response);
+                AlterarVisibilidadeAtualModal('modalObra');
+            }
+            else {
+                $.each(response.mensagem, function (index, value) {
+                    MostrarAlertMensagemErro(value)
+                });
+            }
+        },
+        error: function (response) {
+            console.log(response);
+            swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
+        }
+    });
 }
