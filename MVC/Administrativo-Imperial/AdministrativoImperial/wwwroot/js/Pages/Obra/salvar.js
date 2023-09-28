@@ -22,6 +22,7 @@ function ObterDadosTelaJsonCadastrar() {
 
 /*MODAL*/
 function ModalObraSalvar() {
+    LimparCamposModal();
 
     if (VerificarCamposObrigatorios()) {
         var json = ObterDadosTelaJsonCadastrar();
@@ -58,6 +59,8 @@ function ModalObraSalvar() {
 }
 
 function ModalObraEditar(obrId) {
+    LimparCamposModal();
+
     txtIdObraTemp.val(obrId);
 
     $.ajax({

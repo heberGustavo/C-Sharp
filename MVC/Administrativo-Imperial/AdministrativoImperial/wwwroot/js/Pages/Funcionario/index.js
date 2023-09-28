@@ -4,6 +4,7 @@ var valorDiaria;
 var valorMensal;
 var dataContratacao;
 var tabelaFuncionario;
+var txtIdFuncionarioTemp;
 
 $(document).ready(function () {
     Init();
@@ -27,10 +28,12 @@ function Variaveis() {
 
 /*MODAL*/
 function ModalFuncionarioCadastrar() {
+    LimparCamposModal();
     AlterarVisibilidadeAtualModal('modalFuncionario');
 }
 
 function ModalFuncionarioAtualizar(funId) {
+    LimparCamposModal();
 
     $("#txtIdFuncionarioTemp").val(funId);
 
@@ -128,7 +131,9 @@ function LimparCamposModal() {
     selectFuncao.val('0');
     valorDiaria.val('')
     valorMensal.val('')
-    dataContratacao.val('')
+    dataContratacao.val('');
+    txtIdFuncionarioTemp.val('');
+
 }
 
 function PreencherCamposModalFuncionario(dados) {

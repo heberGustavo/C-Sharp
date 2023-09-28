@@ -46,6 +46,7 @@ function LimparCamposModal() {
     apelido.val('')
     endereco.val('')
     orcamento.val('')
+    txtIdObraTemp.val('');
 }
 
 function ModalObraFechar() {
