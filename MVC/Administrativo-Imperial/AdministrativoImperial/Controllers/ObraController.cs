@@ -40,6 +40,17 @@ namespace AdministrativoImperial.Controllers
             return Json(new { erro = false, mensagem = result.Messages });
         }
 
+        [HttpGet]
+        [Route("[controller]/[action]/{obrId:int}")]
+        public async Task<JsonResult> Deletar(int obrId)
+        {
+            var result = await _obraBusiness.Deletar(obrId);
+            if(result.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = result.Messages });
+
+            return Json(new { erro = false, mensagem = result.Messages });
+        }
+
         #endregion
 
         #region Read

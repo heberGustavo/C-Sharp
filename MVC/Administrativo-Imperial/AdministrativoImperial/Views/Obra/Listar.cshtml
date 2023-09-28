@@ -55,7 +55,7 @@
                         <button class="btn btn-icon btn-2 btn-info" type="button" onclick="ModalObraEditar(@item.ObrId)" data-toggle="tooltip" data-original-title="Editar Função">
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </button>
-                        <button class="btn btn-icon btn-2 btn-danger" type="button" data-toggle="tooltip" data-original-title="Deletar Função">
+                        <button class="btn btn-icon btn-2 btn-danger" type="button" onclick="ConfirmarExclusao(@item.ObrId, '@item.ObrApelido')" data-toggle="tooltip" data-original-title="Deletar Função">
                             <span class="btn-inner--icon"><i class="fa-solid fa-trash"></i></span>
                         </button>
                     </td>

@@ -44,6 +44,32 @@ namespace AdministrativoImperial.Domain.Business
             return result;
         }
 
+        public async Task<ResultInfo> Deletar(int obrId)
+        {
+            var result = new ResultInfo();
+
+            try
+            {
+                var modelDeletar = await _obraRepository.GetById(obrId);
+                if(modelDeletar == null)
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao selecionar obra. Tente novamente!");
+                }
+
+                await _obraRepository.DeleteAsync(modelDeletar);
+                result.Messages.Add("Obra deletada com sucesso!");
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao deletar obra");
+            }
+            return result;
+        }
+
+        #region Métodos privados
+
         private async Task<ResultInfo> Inserir(ObraDTO obra)
         {
             var result = new ResultInfo();
@@ -96,6 +122,8 @@ namespace AdministrativoImperial.Domain.Business
 
             return result;
         }
+
+        #endregion
 
         #endregion
 

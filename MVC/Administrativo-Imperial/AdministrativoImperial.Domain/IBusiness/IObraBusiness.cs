@@ -11,5 +11,6 @@ namespace AdministrativoImperial.Domain.IBusiness
         Task<ResultInfo> Cadastrar(ObraDTO obra);
         Task<ResultInfo<ObraDTO>> ObterCadastrados();
         Task<ResultInfo<ObraDTO>> Selecionar(int obrId);
+        Task<ResultInfo> Deletar(int obrId);
     }
 }
