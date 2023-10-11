@@ -15,5 +15,6 @@ namespace AdministrativoImperial.Domain.IBusiness
         Task<ResultInfo> Create(MaterialDTO model);
         Task<IEnumerable<MaterialDTO>> ObterCadastradosAtivos();
         Task<ResultInfo> Deletar(int id);
+        Task<ResultInfo<MaterialDTO>> Selecionar(int mtrId);
     }
 }

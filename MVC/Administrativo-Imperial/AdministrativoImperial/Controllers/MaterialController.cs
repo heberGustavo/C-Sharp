@@ -76,7 +76,15 @@ namespace AdministrativoImperial.Controllers
             return View("Listar", result.Items);
         }
 
+        [HttpGet]
+        [Route("[controller]/[action]/{mtrId:int}")]
+        public async Task<JsonResult> Selecionar(int mtrId)
+        {
+            var result = await _materialBusiness.Selecionar(mtrId);
+            return Json(new { result.Item });
+        }
+
         #endregion
-      
+
     }
 }

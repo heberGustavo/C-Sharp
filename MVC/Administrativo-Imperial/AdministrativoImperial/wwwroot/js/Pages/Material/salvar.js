@@ -49,18 +49,3 @@ function ObterDadosTelaJsonCadastrar() {
         MtrDataCompra: txtDataCompra.val(),
     }
 }
-
-function AlterarFuncao(id, nome) {
-    try {
-        if (id <= 0 && nome.length <= 0) {
-            MostrarAlertMensagemErro("Erro ao selecionar dados. Tente novamente!");
-            return;
-        }
-
-        ModalFuncao(id, nome);
-
-    } catch (e) {
-        MostrarAlertMensagemErro("Erro ao selecionar dados. Contate o Administrador");
-        console.log(e);
-    }
-}

@@ -168,8 +168,25 @@ namespace AdministrativoImperial.Domain.Business
         public async Task<IEnumerable<MaterialDTO>> ObterCadastradosAtivos()
            => await _materialRepository.GetAllAsync(x => x.MtrDataCompra.ToString());
 
+        public async Task<ResultInfo<MaterialDTO>> Selecionar(int funId)
+        {
+            var result = new ResultInfo<MaterialDTO>();
+
+            try
+            {
+                result.Item = await _materialRepository.GetById(funId);
+            }
+            catch (Exception e)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao selecionar material");
+            }
+
+            return result;
+        }
+
         #endregion
 
-       
+
     }
 }

@@ -61,9 +61,42 @@ function VerificarCamposObrigatorios() {
     return true;
 }
 
+function PreencherCamposModalMaterial(dados) {
+    var campo = dados.item;
+
+    txtDataCompra.val(ConverterDataParaUSA(campo.mtrDataCompra));
+    ddlListaObras.val(campo.obrId);
+    txtNomeMaterial.val(campo.mtrNome);
+    txtDescricao.val(campo.mtrDescricao);
+    txtValor.val(FormatDinheiro(campo.mtrValor));
+}
+
+/*MODAL*/
 function ModalMaterial() {
     LimparCamposModal();
     $('#modalMaterial').modal('show');
+}
+
+function ModalMaterialEditar(mtrId) {
+    LimparCamposModal();
+
+    txtIdMaterialTemp.val(mtrId);
+
+    $.ajax({
+        url: "/Material/Selecionar/" + parseInt(mtrId),
+        type: "GET",
+        contentType: 'application/json; charset=UTF-8',
+        dataType: "json",
+        success: function (response) {
+            PreencherCamposModalMaterial(response);
+            AlterarVisibilidadeAtualModal('modalMaterial');
+        },
+        error: function (response) {
+            console.log(response);
+            swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
+        }
+    });
+
 }
 
 function ModalMaterialFechar() {
