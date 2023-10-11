@@ -72,7 +72,7 @@ namespace AdministrativoImperial
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            services.AddControllersWithViews(options => options.Filters.Add(typeof(ValidateModelState)));
+            //services.AddControllersWithViews(options => options.Filters.Add(typeof(ValidateModelState)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,7 +108,7 @@ namespace AdministrativoImperial
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Material}/{action=Index}/{id?}");
             });
         }
     }

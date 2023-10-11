@@ -11,6 +11,7 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
 
         [DataMember]
         public int ObrId { get; set; }
+        public string ObrApelido { get; set; }
 
         [DataMember]
         [StringLength(40, ErrorMessage = "O campo não deve ser maior que 40 caracteres")]

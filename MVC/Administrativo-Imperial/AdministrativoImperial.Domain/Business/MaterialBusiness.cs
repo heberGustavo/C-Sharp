@@ -89,15 +89,6 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                var funcaoSameName = await _materialRepository.GetAllAsync(nome => nome.MtrNome == funcaoFuncionario.MtrNome);
-
-                if (funcaoSameName.Count > 0)
-                {
-                    result.Messages.Add("Material já cadastrado!");
-                    result.Type = ResultType.ValidationError;
-                    return result;
-                }
-
                 var idResult = await _materialRepository.CreateAsync(funcaoFuncionario);
                 if (idResult <= 0)
                 {
@@ -127,15 +118,6 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                var funcaoSameName = await _materialRepository.GetAllAsync(item => item.MtrNome == funcaoFuncionario.MtrNome && item.MtrId != funcaoFuncionario.MtrId);
-
-                if (funcaoSameName.Count > 0)
-                {
-                    result.Messages.Add("Material já cadastrada!");
-                    result.Type = ResultType.ValidationError;
-                    return result;
-                }
-
                 var modelFuncao = await _materialRepository.UpdateAsync(funcaoFuncionario);
                 if (modelFuncao == null)
                 {
@@ -171,7 +153,7 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                result.Items = await _materialRepository.GetAllAsync(x => x.MtrNome);
+                result.Items = await _materialRepository.ObterCadastrados();
             }
             catch (Exception ex)
             {
@@ -184,7 +166,7 @@ namespace AdministrativoImperial.Domain.Business
         }
 
         public async Task<IEnumerable<MaterialDTO>> ObterCadastradosAtivos()
-           => await _materialRepository.GetAllAsync();
+           => await _materialRepository.GetAllAsync(x => x.MtrDataCompra.ToString());
 
         #endregion
 

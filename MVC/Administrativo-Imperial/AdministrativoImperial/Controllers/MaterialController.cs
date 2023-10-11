@@ -34,12 +34,22 @@ namespace AdministrativoImperial.Controllers
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] MaterialDTO model)
         {
-            var resultado = await _materialBusiness.Create(model);
+            if (ModelState.IsValid)
+            {
+                model.ObrId = 7;
+                var resultado = await _materialBusiness.Create(model);
 
-            if(resultado.Type != ResultType.CompleteExecution)
-                return Json(new { erro = true, mensagem = resultado.Messages });
+                if (resultado.Type != ResultType.CompleteExecution)
+                    return Json(new { erro = true, mensagem = resultado.Messages });
 
-            return Json(new { erro = false, mensagem = resultado.Messages });
+                return Json(new { erro = false, mensagem = resultado.Messages });
+            }
+            else
+            {
+                var erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { erro = true, mensagem = erros });
+            }
+
         }
 
         [HttpGet]

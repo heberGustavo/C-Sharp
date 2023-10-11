@@ -3,11 +3,12 @@
     @model IList<AdministrativoImperial.Domain.Models.EntityDomain.MaterialDTO>
 }
 
-<table id="tabelaFuncao" class="table align-items-center mt-2 mb-0">
+<table id="tabelaMateriais" class="table align-items-center mt-2 mb-0">
     <thead>
         <tr>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data de compra</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome do Material</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Obra</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Valor</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
         </tr>
@@ -19,7 +20,7 @@
                 <td>
                     <div class="d-flex px-3 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">@item.MtrDataCompra</h6>
+                            <h6 class="mb-0 text-sm">@item.MtrDataCompra.ToString("dd/MM/yyyy")</h6>
                         </div>
                     </div>
                 </td>
@@ -33,7 +34,14 @@
                 <td>
                     <div class="d-flex px-3 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">@item.MtrValor</h6>
+                            <h6 class="mb-0 text-sm">@item.ObrApelido</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">@item.MtrValor.ToString("C")</h6>
                         </div>
                     </div>
                 </td>
