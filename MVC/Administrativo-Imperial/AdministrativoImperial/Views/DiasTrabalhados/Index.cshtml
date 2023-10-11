@@ -7,91 +7,17 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Lista de Dias Trabalhados</h6>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="example-date-input" class="form-control-label">Data</label>
-                                <input id="dataContratacao" class="form-control" type="date">
-                            </div>
-                        </div>
-                    </div>
+                    <h6 class="titulo-lista">Lista Dias Trabalhados</h6>
+                    <button class="btn btn-primary float-end" onclick="ModalFuncao()">Cadastrar</button>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mt-2 mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Obra</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="width: 35%;">
-                                        <div class="d-flex px-3 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Pricila Marquis</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option selected disabled value="Selecione Obra">Selecione Obra</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 35%;">
-                                        <div class="d-flex px-3 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Heber Gustavo</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option selected disabled value="Selecione Obra">Selecione Obra</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 35%;">
-                                        <div class="d-flex px-3 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Cleitinho Motoqueiro</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option selected disabled value="Selecione Obra">Selecione Obra</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="divListar" class="table-responsive p-0"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/Pages/DiasTrabalhados/index.js" asp-append-version="true"></script>
+<script src="~/js/Pages/DiasTrabalhados/salvar.js" asp-append-version="true"></script>
+<script src="~/js/Pages/DiasTrabalhados/excluir.js" asp-append-version="true"></script>
