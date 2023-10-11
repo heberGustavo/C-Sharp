@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "";
+    @model IList<AdministrativoImperial.Domain.Models.EntityDomain.MaterialDTO>
+}
+
+<table id="tabelaFuncao" class="table align-items-center mt-2 mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Valor</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">@item.MtrDataCompra</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">@item.MtrNome</h6>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">@item.MtrValor</h6>
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middle">
+
+                    <button class="btn btn-border-red" type="button" onclick="AlterarFuncao(@item.MtrId, '@item.MtrNome')" data-toggle="tooltip" data-original-title="Editar Material">
+                        <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
+                    </button>
+                    <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.MtrId, '@item.MtrNome')" type="button" data-toggle="tooltip" data-original-title="Deletar Material">
+                        <span class="btn-inner--icon color-blue"><i class="fa-solid fa-trash"></i></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

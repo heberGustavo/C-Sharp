@@ -13,6 +13,7 @@ namespace AdministrativoImperial.CrossCutting.DependencyGroups
             serviceCollection.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
             serviceCollection.AddTransient<IFuncaoFuncionarioRepository, FuncaoFuncionarioRepository>();
             serviceCollection.AddTransient<IObraRepository, ObraRepository>();
+            serviceCollection.AddTransient<IMaterialRepository, MaterialRepository>();
         }
     }
 }

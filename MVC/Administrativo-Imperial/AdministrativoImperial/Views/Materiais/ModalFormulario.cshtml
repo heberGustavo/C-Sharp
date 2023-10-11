@@ -1,0 +1,52 @@
+﻿<div class="modal fade" id="modalMaterial" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Material</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+
+                        <input type="hidden" id="txtIdMaterialTemp" />
+
+                        <div class="form-group">
+                            <label class="form-control-label"></label>
+                            <input id="txtDataCompra" class="form-control" type="date" />
+                        </div>
+                        <div class="form-group">
+                            <label>Selecione Obra</label>
+                            <select class="form-control" id="ddlObra">
+                                <option disabled selected value="0">Selecione</option>
+                                @*@foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.ObraDTO>)ViewBag.ListaObras)
+                                {
+                                    <option value="@item.ObrId">@item.ObrApelido</option>
+                                }*@
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nome</label>
+                            <input id="txtNomeMaterial" type="text" class="form-control" placeholder="Nome do Material" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Descrição</label>
+                            <input id="txtDescricao" type="text" class="form-control" placeholder="Descrição" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Valor</label>
+                            <input id="txtValor" type="text" class="form-control" placeholder="Valor" />
+                        </div>
+
+
+                        <div class="text-center">
+                            <button type="button" onclick="ModalFuncionarioFechar()" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                            <button type="button" onclick="ModalFuncionarioSalvar()" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,9 +7,11 @@
   <ItemGroup>
     <None Remove="Scripts\202309191035_CREATE_TABLE_FUNCAO_FUNCIONARIO_E_TABLE_FUNCIONARIO.sql" />
     <None Remove="Scripts\202309191036_CREATE_TABLE_OBRA.sql" />
+    <None Remove="Scripts\202310110957_CREATE_TABLE_MATERIAL.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\202310110957_CREATE_TABLE_MATERIAL.sql" />
     <EmbeddedResource Include="Scripts\202309191036_CREATE_TABLE_OBRA.sql" />
     <EmbeddedResource Include="Scripts\202309191035_CREATE_TABLE_FUNCAO_FUNCIONARIO_E_TABLE_FUNCIONARIO.sql" />
   </ItemGroup>
