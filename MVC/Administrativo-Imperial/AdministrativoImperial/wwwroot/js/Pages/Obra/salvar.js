@@ -22,9 +22,11 @@ function ObterDadosTelaJsonCadastrar() {
 
 /*MODAL*/
 function ModalObraSalvar() {
-    LimparCamposModal();
 
     if (VerificarCamposObrigatorios()) {
+
+        MostraLoading();
+
         var json = ObterDadosTelaJsonCadastrar();
 
         $.ajax({
@@ -35,6 +37,7 @@ function ModalObraSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
+                    EncerraLoading();
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaObras();
@@ -44,12 +47,14 @@ function ModalObraSalvar() {
                     });
                 }
                 else {
+                    EncerraLoading();
                     $.each(response.mensagem, function (index, value) {
                         MostrarAlertMensagemErro(value)
                     });
                 }
             },
             error: function (response) {
+                EncerraLoading();
                 console.log(response);
                 swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
             }
@@ -63,23 +68,28 @@ function ModalObraEditar(obrId) {
 
     txtIdObraTemp.val(obrId);
 
+    MostraLoading();
+
     $.ajax({
         url: "Obra/Selecionar/" + obrId,
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
+            EncerraLoading();
             if (!response.erro) {
                 PreencherModalObra(response);
                 AlterarVisibilidadeAtualModal('modalObra');
             }
             else {
+                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

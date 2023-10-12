@@ -57,14 +57,17 @@ function ModalObraFechar() {
 /*AJAX*/
 function BuscarListaObras() {
 
+    MostraLoading();
     $.ajax({
         url: "/Obra/Listar",
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         success: function (response) {
+            EncerraLoading();
             $("#divListar").html(response)
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

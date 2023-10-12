@@ -346,6 +346,7 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    opacity: 0.7;
 }
 
 #loader .spinner-grow{

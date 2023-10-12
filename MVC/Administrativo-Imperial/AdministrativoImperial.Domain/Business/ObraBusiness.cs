@@ -102,7 +102,6 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                throw new Exception("teste");
                 obra.ObrDataFim = Convert.ToDateTime(DataDictionary.DATE_MIN);
 
                 var modelAtualizada = await _obraRepository.UpdateAsync(obra);
