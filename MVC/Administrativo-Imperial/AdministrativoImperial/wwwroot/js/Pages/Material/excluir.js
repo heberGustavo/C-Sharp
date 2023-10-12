@@ -14,6 +14,7 @@ function ConfirmarExclusao(id, nome) {
 }
 
 function DeletarMaterial(id) {
+    MostraLoading();
 
     $.ajax({
         url: "/Material/Deletar/" + parseInt(id),
@@ -33,8 +34,11 @@ function DeletarMaterial(id) {
                     MostrarAlertMensagemErro(value)
                 });
             }
+
+            EncerraLoading();
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

@@ -5,6 +5,8 @@
 function ModalMaterialSalvar() {
 
     if (VerificarCamposObrigatorios()) {
+        MostraLoading();
+
         var json = ObterDadosTelaJsonCadastrar();
 
         $.ajax({
@@ -14,7 +16,6 @@ function ModalMaterialSalvar() {
             dataType: "json",
             data: JSON.stringify(json),
             success: function (response) {
-
                 if (!response.erro) {
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
@@ -29,8 +30,11 @@ function ModalMaterialSalvar() {
                         MostrarAlertMensagemErro(value)
                     });
                 }
+
+                EncerraLoading();
             },
             error: function (response) {
+                EncerraLoading();
                 console.log(response);
                 swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
             }

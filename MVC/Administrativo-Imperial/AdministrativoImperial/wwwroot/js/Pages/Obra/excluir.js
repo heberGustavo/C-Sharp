@@ -24,7 +24,6 @@ function DeletarObra(id) {
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
-                EncerraLoading();
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
                         BuscarListaObras();
@@ -32,11 +31,12 @@ function DeletarObra(id) {
                 });
             }
             else {
-                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
+
+            EncerraLoading();
         },
         error: function (response) {
             console.log(response);

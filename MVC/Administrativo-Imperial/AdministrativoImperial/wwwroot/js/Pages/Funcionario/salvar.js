@@ -17,7 +17,6 @@ function ModalFuncionarioSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
-                    EncerraLoading();
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaFuncionarios();
@@ -27,11 +26,12 @@ function ModalFuncionarioSalvar() {
                     });
                 }
                 else {
-                    EncerraLoading();
                     $.each(response.mensagem, function (index, value) {
                         MostrarAlertMensagemErro(value)
                     });
                 }
+
+                EncerraLoading();
             },
             error: function (response) {
                 EncerraLoading();

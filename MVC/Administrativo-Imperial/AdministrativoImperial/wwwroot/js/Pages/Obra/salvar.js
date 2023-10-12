@@ -37,7 +37,6 @@ function ModalObraSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
-                    EncerraLoading();
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaObras();
@@ -47,11 +46,12 @@ function ModalObraSalvar() {
                     });
                 }
                 else {
-                    EncerraLoading();
                     $.each(response.mensagem, function (index, value) {
                         MostrarAlertMensagemErro(value)
                     });
                 }
+
+                EncerraLoading();
             },
             error: function (response) {
                 EncerraLoading();
@@ -76,17 +76,17 @@ function ModalObraEditar(obrId) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
-            EncerraLoading();
             if (!response.erro) {
                 PreencherModalObra(response);
                 AlterarVisibilidadeAtualModal('modalObra');
             }
             else {
-                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
+
+            EncerraLoading();
         },
         error: function (response) {
             EncerraLoading();

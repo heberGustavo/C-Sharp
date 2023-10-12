@@ -28,15 +28,18 @@ function Variaveis() {
 }
 
 function BuscarListaMateriais() {
+    MostraLoading();
 
     $.ajax({
         url: "/Material/Listar",
         type: "GET",
         cache: false,
         success: function (response) {
+            EncerraLoading();
             $("#divListar").html(response)
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }
@@ -78,6 +81,7 @@ function ModalMaterial() {
 }
 
 function ModalMaterialEditar(mtrId) {
+    MostraLoading();
     LimparCamposModal();
 
     txtIdMaterialTemp.val(mtrId);
@@ -88,10 +92,12 @@ function ModalMaterialEditar(mtrId) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
+            EncerraLoading();
             PreencherCamposModalMaterial(response);
             AlterarVisibilidadeAtualModal('modalMaterial');
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

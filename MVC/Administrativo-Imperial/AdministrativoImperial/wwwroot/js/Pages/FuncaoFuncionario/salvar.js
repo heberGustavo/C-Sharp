@@ -18,7 +18,6 @@ function ModalFuncaoSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
-                    EncerraLoading();
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaFuncaoFuncionario();
@@ -28,11 +27,12 @@ function ModalFuncaoSalvar() {
                     });
                 }
                 else {
-                    EncerraLoading();
                     $.each(response.mensagem, function (index, value) {
                         MostrarAlertMensagemErro(value)
                     });
                 }
+
+                EncerraLoading();
             },
             error: function (response) {
                 EncerraLoading();
@@ -52,15 +52,19 @@ function ObterDadosTelaJsonCadastrar() {
 }
 
 function AlterarFuncao(id, nome) {
+    MostraLoading();
+
     try {
         if (id <= 0 && nome.length <= 0) {
             MostrarAlertMensagemErro("Erro ao selecionar dados. Tente novamente!");
+            EncerraLoading();
             return;
         }
 
         ModalFuncao(id, nome);
 
     } catch (e) {
+        EncerraLoading();
         MostrarAlertMensagemErro("Erro ao selecionar dados. Contate o Administrador");
         console.log(e);
     }
@@ -73,6 +77,8 @@ function ModalFuncao(id, nome) {
     txtNomeFuncao.val(nome);
 
     $('#modalFuncao').modal('show');
+    EncerraLoading();
+
 }
 
 function LimparCamposModal() {

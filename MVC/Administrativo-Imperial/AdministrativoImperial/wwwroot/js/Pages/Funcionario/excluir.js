@@ -22,7 +22,6 @@ function DesativarFuncionario(funId) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
-            EncerraLoading();
             if (!response.erro) {
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
@@ -31,11 +30,12 @@ function DesativarFuncionario(funId) {
                 });
             }
             else {
-                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
+
+            EncerraLoading();
         },
         error: function (response) {
             EncerraLoading();

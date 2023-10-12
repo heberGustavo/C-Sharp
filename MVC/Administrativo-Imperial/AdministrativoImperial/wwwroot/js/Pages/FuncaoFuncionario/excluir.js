@@ -24,7 +24,6 @@ function DeletarFuncao(id) {
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
-                EncerraLoading();
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
                         BuscarListaFuncaoFuncionario();
@@ -32,11 +31,12 @@ function DeletarFuncao(id) {
                 });
             }
             else {
-                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
+
+            EncerraLoading();
         },
         error: function (response) {
             EncerraLoading();

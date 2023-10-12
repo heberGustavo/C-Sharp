@@ -245,12 +245,12 @@
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    color: #443ea2;
+    color: #fff;
 }
 
-    .menu-toggle:hover, .menu-toggle:active, .menu-toggle:focus {
+    .menu-toggle:hover {
         text-decoration: none;
-        color: #875de5;
+        color: #d2d1d1;
     }
 
     .menu-toggle i {
