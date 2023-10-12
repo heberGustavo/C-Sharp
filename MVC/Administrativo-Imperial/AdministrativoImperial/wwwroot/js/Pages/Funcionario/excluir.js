@@ -2,7 +2,7 @@
 
 });
 
-function DesativarFuncionario(funId, funNome) {
+function ConfirmacaoDesativar(funId, funNome) {
     swal(
         "Desativando Funcionário",
         "Tem certeza que deseja desativar o Funcionário: " + funNome + "?",
@@ -14,6 +14,7 @@ function DesativarFuncionario(funId, funNome) {
 }
 
 function DesativarFuncionario(funId) {
+    MostraLoading();
 
     $.ajax({
         url: "/Funcionario/Desativar/" + parseInt(funId),
@@ -21,6 +22,7 @@ function DesativarFuncionario(funId) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
+            EncerraLoading();
             if (!response.erro) {
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
@@ -29,12 +31,14 @@ function DesativarFuncionario(funId) {
                 });
             }
             else {
+                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

@@ -34,6 +34,7 @@ function ModalFuncionarioCadastrar() {
 
 function ModalFuncionarioAtualizar(funId) {
     LimparCamposModal();
+    MostraLoading();
 
     $("#txtIdFuncionarioTemp").val(funId);
 
@@ -43,10 +44,12 @@ function ModalFuncionarioAtualizar(funId) {
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
+            EncerraLoading();
             PreencherCamposModalFuncionario(response);
             AlterarVisibilidadeAtualModal('modalFuncionario');
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }
@@ -62,15 +65,18 @@ function ModalFuncionarioFechar() {
 
 /*AJAX*/
 function BuscarListaFuncionarios() {
+    MostraLoading();
 
     $.ajax({
         url: "/Funcionario/Listar",
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         success: function (response) {
+            EncerraLoading();
             $("#divListar").html(response);
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }
