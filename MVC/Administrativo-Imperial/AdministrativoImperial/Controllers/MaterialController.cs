@@ -16,15 +16,18 @@ namespace AdministrativoImperial.Controllers
     public class MaterialController : Controller
     {
         private readonly IMaterialBusiness _materialBusiness;
+        private readonly IObraBusiness _obraBusiness;
 
-        public MaterialController(IMaterialBusiness materialBusiness)
+        public MaterialController(IMaterialBusiness materialBusiness, IObraBusiness obraBusiness)
         {
             _materialBusiness = materialBusiness;
+            _obraBusiness = obraBusiness;
         }
 
         public IActionResult Index()
         {
             ViewBag.Titulo = "Lista de Materiais";
+            ViewBag.ListaObras = _obraBusiness.ObterCadastrados().Result.Items;
             return View();
         }
 
@@ -36,7 +39,6 @@ namespace AdministrativoImperial.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.ObrId = 7;
                 var resultado = await _materialBusiness.Create(model);
 
                 if (resultado.Type != ResultType.CompleteExecution)
