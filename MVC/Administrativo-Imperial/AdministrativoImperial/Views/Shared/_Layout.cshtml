@@ -30,13 +30,19 @@
     <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 
 </head>
+
 <body class="g-sidenav-show bg-gray-100">
+    <div id="loader">
+        <div class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div id="notificacoes">
         <div class="sh-toast-container" id="shToastContainerTop"></div>
         <div class="sh-toast-container" id="shToastContainerBottom"></div>
     </div>
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    
+
     <div class='dashboard'>
         <div class="dashboard-nav bg-primary">
             <header>

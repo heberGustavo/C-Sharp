@@ -15,6 +15,8 @@ function ConfirmarExclusao(id, nome) {
 
 function DeletarFuncao(id) {
 
+    MostraLoading();
+
     $.ajax({
         url: "/FuncaoFuncionario/Deletar/" + parseInt(id),
         type: "GET",
@@ -22,6 +24,7 @@ function DeletarFuncao(id) {
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
+                EncerraLoading();
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
                         BuscarListaFuncaoFuncionario();
@@ -29,12 +32,14 @@ function DeletarFuncao(id) {
                 });
             }
             else {
+                EncerraLoading();
                 $.each(response.mensagem, function (index, value) {
                     MostrarAlertMensagemErro(value)
                 });
             }
         },
         error: function (response) {
+            EncerraLoading();
             console.log(response);
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }

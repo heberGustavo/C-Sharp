@@ -6,6 +6,8 @@ function ModalFuncaoSalvar() {
 
     if (VerificarCamposObrigatorios()) {
 
+        MostraLoading();
+
         var json = ObterDadosTelaJsonCadastrar();
 
         $.ajax({
@@ -16,6 +18,7 @@ function ModalFuncaoSalvar() {
             data: JSON.stringify(json),
             success: function (response) {
                 if (!response.erro) {
+                    EncerraLoading();
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
                             BuscarListaFuncaoFuncionario();
@@ -25,12 +28,14 @@ function ModalFuncaoSalvar() {
                     });
                 }
                 else {
+                    EncerraLoading();
                     $.each(response.mensagem, function (index, value) {
                         MostrarAlertMensagemErro(value)
                     });
                 }
             },
             error: function (response) {
+                EncerraLoading();
                 console.log(response);
                 swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
             }

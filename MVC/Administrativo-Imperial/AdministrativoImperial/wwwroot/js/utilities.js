@@ -149,16 +149,6 @@ function ConverterParaDataComBarraParaBr(data) {
     return data;
 }
 
-function MostrarCarregamentoDaPagina() {
-    var loading =
-    `
-        <div class="loader-wrapper">
-            <span class="loader"><span class="loader-inner"></span></span>
-        </div>
-    `;
-    return loading;
-}
-
 function RemoverLinha(botao, idTabela) {
     var linha = $(botao).parent().parent();
 
@@ -702,7 +692,7 @@ function MostraLoading() {
 }
 
 function EncerraLoading() {
-    $('#loader').show().delay(500).fadeOut();
+    $('#loader').show().delay(300).fadeOut();
 }
 
 function PadLeft(str, max) {

@@ -23,15 +23,19 @@ function Variaveis() {
 
 function BuscarListaFuncaoFuncionario() {
 
+    MostraLoading();
+
     $.ajax({
         url: "/FuncaoFuncionario/Listar",
         type: "GET",
         cache: false,
         success: function (response) {
-            $("#divListar").html(response)
+            $("#divListar").html(response);
+            EncerraLoading();
         },
         error: function (response) {
             console.log(response);
+            EncerraLoading();
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }
     });

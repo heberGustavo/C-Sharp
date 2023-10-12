@@ -1,5 +1,4 @@
-﻿
-
+﻿/*MENUS CUSTOM*/
 .dashboard {
     display: -webkit-box;
     display: -webkit-flex;
@@ -334,4 +333,21 @@
     .dashboard-compact .dashboard-toolbar {
         left: 0;
     }
+}
+
+
+
+/*LOADING CUSTOM*/
+#loader {
+    background: #5e72e4;
+    position: fixed;
+    z-index: 9999;
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#loader .spinner-grow{
+    margin: auto;
 }
