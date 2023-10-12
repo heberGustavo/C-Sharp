@@ -69,9 +69,9 @@
 
                 <a asp-controller="Funcionario" asp-action="Index" class="dashboard-nav-item"><i class="fa fa-users"></i> Funcionários </a>
                 <a asp-controller="FuncaoFuncionario" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Função Funcionários </a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Perfil </a>
+                <a href="#" class="dashboard-nav-item" onclick="MensagemAvisoManutenção()"><i class="fas fa-user"></i> Perfil </a>
                 <div class="nav-item-divider"></div>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+                <a asp-controller="Login" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </nav>
         </div>
         <div class='dashboard-app'>

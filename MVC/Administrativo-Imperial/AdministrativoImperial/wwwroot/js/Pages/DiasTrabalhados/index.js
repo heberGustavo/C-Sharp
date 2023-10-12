@@ -6,7 +6,8 @@ var tabelaObra;
 var txtIdObraTemp;
 
 $(document).ready(function () {
-    Init();
+    //Init();
+    MensagemAvisoManutenção();
 });
 
 function Init() {
