@@ -1,12 +1,29 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Domain.Models.EntityDomain
 {
     public class UsuarioDTO
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
+        [DataMember]
+        public int UsaId { get; set; }
+
+        [DataMember]
+        [Required(ErrorMessage = "O campo Nome é obrigatório")]
+        public string UsaNome { get; set; }
+
+        [DataMember]
+        [Required(ErrorMessage = "O campo Email é obrigatório")]
+        public string UsaEmail { get; set; }
+
+        [DataMember]
+        [Required(ErrorMessage = "O campo Senha é obrigatório")]
+        public string UsaSenha { get; set; }
+
+        [DataMember]
+        public string UsaSalt { get; set; }
+
     }
 }

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="Effortless.Net.Encryption" Version="4.0.0" />
     <PackageReference Include="NETCore.Encrypt" Version="2.1.0" />
   </ItemGroup>
