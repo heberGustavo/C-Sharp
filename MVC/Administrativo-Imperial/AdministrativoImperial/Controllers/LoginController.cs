@@ -1,9 +1,11 @@
 ﻿using AdministrativoImperial.Domain.IBusiness;
+using AdministrativoImperial.Domain.Models.Body;
 using AdministrativoImperial.Domain.Models.EntityDomain;
 using Gpnet.Common.ExecutionManager;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using @BCryptNet = BCrypt.Net;
 
@@ -11,53 +13,41 @@ namespace AdministrativoImperial.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUsuarioBusiness usuarioBusiness;
-        
+        private readonly IUsuarioBusiness _usuarioBusiness;
+
+        public LoginController(IUsuarioBusiness usuarioBusiness)
+        {
+            _usuarioBusiness = usuarioBusiness;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
-        [Route("[controller]/[action]")]
-        public async Task<IActionResult> Login([FromBody] UsuarioDTO usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                var resultUsuario = await usuarioBusiness.Selecionar(usuario.UsaEmail, usuario.UsaSenha);
-                if (resultUsuario.Type != ResultType.CompleteExecution)
-                    Console.WriteLine("mostrar erro aq");
-
-                if(resultUsuario != null)
-                {
-                    var senhaSaltUsuario = usuario.UsaSenha + usuario.UsaSalt;
-                    var senhaSaltUsuarioCripto = BCryptNet.BCrypt.HashPassword(senhaSaltUsuario);
-
-                    if(resultUsuario.Item.UsaEmail.Equals(usuario.UsaEmail) && BCryptNet.BCrypt.Verify(senhaSaltUsuarioCripto, resultUsuario.Item.UsaSenha))
-                        Console.WriteLine("sucesso");
-                    else
-                        Console.WriteLine("email ou senha incorreto");
-                }
-                else
-                {
-                    //Usuario nao foi encontrado
-                }
-            }
-            return View();
-        }
-
         [HttpPost]
         [Route("[controller]/[action]")]
-        public async Task<JsonResult> Cadastrar([FromBody] UsuarioDTO usuario)
+        public async Task<IActionResult> Autenticar([FromBody] UsuarioBody usuario)
         {
             if (ModelState.IsValid)
             {
-                var resultado = await usuarioBusiness.Create(usuario);
+                var resultUsuario = await _usuarioBusiness.SelecionarPorEmail(usuario.email);
+                if (resultUsuario.Type != ResultType.CompleteExecution)
+                    return Json(new { erro = true, mensagem = resultUsuario.Messages });
 
-                if (resultado.Type != ResultType.CompleteExecution)
-                    return Json(new { erro = true, mensagem = resultado.Messages });
+                if (resultUsuario.Item != null)
+                {
+                    var hashSenhaArmazenada = Encoding.UTF8.GetString(resultUsuario.Item.UsaSenha);
+                    var saltString = Encoding.UTF8.GetString(resultUsuario.Item.UsaSalt);
+                    var hashSenhaAtual = BCryptNet.BCrypt.HashPassword(usuario.senha, saltString);
 
-                return Json(new { erro = false, mensagem = resultado.Messages });
+                    if (!hashSenhaAtual.Equals(hashSenhaArmazenada))
+                        return Json(new { erro = true, mensagem = "Senha inválida. Verifique e tente novamente!" });
+
+                    return Json(new { erro = false, mensagem = "Usuário autenticado!", infoUser = new { resultUsuario.Item.UsaId, resultUsuario.Item.UsaNome } } );
+                }
+                else
+                    return Json(new { erro = true, mensagem = "Email não encontrado. Verifique e tente novamente!" });
             }
             else
             {
@@ -66,5 +56,6 @@ namespace AdministrativoImperial.Controllers
             }
 
         }
+
     }
 }

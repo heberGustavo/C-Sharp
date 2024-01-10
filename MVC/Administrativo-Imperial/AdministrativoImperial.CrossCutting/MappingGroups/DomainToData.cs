@@ -8,6 +8,7 @@ namespace AdministrativoImperial.CrossCutting.MappingGroups
     {
         public DomainToData()
         {
+            CreateMap<UsuarioDTO, Usuario>();
             CreateMap<FuncionarioDTO, Funcionario>();
             CreateMap<FuncaoFuncionarioDTO, FuncaoFuncionario>();
             CreateMap<ObraDTO, Obra>();

@@ -695,6 +695,10 @@ function EncerraLoading() {
     $('#loader').show().delay(300).fadeOut();
 }
 
+function EsconderLoading() {
+    $('#loader').hide();
+}
+
 function PadLeft(str, max) {
     str = str.toString();
     return str.length < max ? PadLeft("0" + str, max) : str;

@@ -20,10 +20,11 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
 
         [DataMember]
         [Required(ErrorMessage = "O campo Senha é obrigatório")]
-        public string UsaSenha { get; set; }
+        public string senha { get; set; }
+        public byte[] UsaSenha { get; set; }
 
         [DataMember]
-        public string UsaSalt { get; set; }
+        public byte[] UsaSalt { get; set; }
 
     }
 }

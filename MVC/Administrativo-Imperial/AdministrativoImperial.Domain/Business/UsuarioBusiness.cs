@@ -30,12 +30,27 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                var salt = BCryptNet.BCrypt.GenerateSalt();
-                var senhaHash = BCryptNet.BCrypt.HashPassword(model.UsaSenha, salt);
-                
-                model.UsaSenha = senhaHash;
-                model.UsaSalt = salt;
+                var verificaUsuario = SelecionarPorEmail(model.UsaEmail).Result;
+                if (verificaUsuario.Type != ResultType.CompleteExecution)
+                {
+                    result.Messages = verificaUsuario.Messages;
+                    return result;
+                }
 
+                if (verificaUsuario.Item != null)
+                {
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Usuário já cadastrado!");
+                    return result;
+                }
+
+                var salt = BCryptNet.BCrypt.GenerateSalt();
+
+                var x = BCryptNet.BCrypt.HashPassword(model.senha, salt);
+
+                model.UsaSenha = Encoding.UTF8.GetBytes(BCryptNet.BCrypt.HashPassword(model.senha, salt));
+                model.UsaSalt = Encoding.UTF8.GetBytes(salt);
+                
                 var idResult = await _usuarioRepository.CreateAsync(model);
                 if (idResult <= 0)
                 {
@@ -62,18 +77,18 @@ namespace AdministrativoImperial.Domain.Business
 
         #region Read
 
-        public async Task<ResultInfo<UsuarioDTO>> Selecionar(string email, string senha)
+        public async Task<ResultInfo<UsuarioDTO>> SelecionarPorEmail(string email)
         {
             var result = new ResultInfo<UsuarioDTO>();
 
             try
             {
-                result.Item = await _usuarioRepository.ObterUsuario(email, senha);
+                result.Item = await _usuarioRepository.ObterUsuarioPorEmail(email);
             }
             catch (Exception e)
             {
                 result.Type = ResultType.ValidationError;
-                result.Messages.Add("Erro ao selecionar obra");
+                result.Messages.Add("Erro ao selecionar usuário. " + Mensagens.MENSAGEM_CONTATO_ADMINISTRADOR);
             }
 
             return result;

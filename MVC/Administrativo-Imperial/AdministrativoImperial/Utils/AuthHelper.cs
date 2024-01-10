@@ -39,7 +39,7 @@ namespace AdministrativoImperial.Portal.Utils
 
             if (usuario != null)
             {
-                usuario.UsaSenha = "";
+                usuario.senha = "";
                 claims.Add(new Claim(PolicyKeys.USUARIO_LOGADO, JsonConvert.SerializeObject(usuario)));
             }
 

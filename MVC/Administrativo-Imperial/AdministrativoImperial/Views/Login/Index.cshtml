@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AdministrativoImperial.Domain.Models.Body.UsuarioBody
+@{
     ViewData["Title"] = "Login";
     Layout = "";
 }
@@ -22,14 +23,27 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
+    <!-- Notifications -->
+    <link href="~/lib/sh-toastr-master/css/sh_toaster.css" rel="stylesheet" />
+
     <!-- CSS Files -->
     <link id="pagestyle" href="~/criativeTim/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site_layout_menu.css" />
 
     <!-- JS Script -->
     <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
 </head>
 <body>
+    <div id="loader">
+        <div class="spinner-grow text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div id="notificacoes">
+        <div class="sh-toast-container" id="shToastContainerTop"></div>
+        <div class="sh-toast-container" id="shToastContainerBottom"></div>
+    </div>
     <div class="container tela-login">
         <main role="main" class="main-content  mt-0">
             <section>
@@ -43,15 +57,15 @@
                                         <p class="mb-0">Informe seus dados de acesso</p>
                                     </div>
                                     <div class="card-body">
-                                        <form role="form">
+                                        <form method="get" role="form">
                                             <div class="mb-3">
-                                                <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                                                @Html.TextBoxFor(x => x.email, new { @type = "email", @class = "form-control form-control-lg", @placeholder = "Email" })
                                             </div>
                                             <div class="mb-3">
-                                                <input type="password" class="form-control form-control-lg" placeholder="Senha" aria-label="Senha">
+                                                @Html.PasswordFor(x => x.senha, new { @class = "form-control form-control-lg", @placeholder = "Senha" })
                                             </div>
                                             <div class="text-center">
-                                                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Acessar</a>
+                                                <button type="button" onclick="Autenticar()" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Acessar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -95,6 +109,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/criativeTim/js/argon-dashboard.min.js?v=2.0.2"></script>
+    <script src="~/lib/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+    <script src="~/js/utilities.js" asp-append-version="true"></script>
+    <script src="~/lib/sh-toastr-master/js/sh_toaster.js" asp-append-version="true"></script>
+
+    <script src="~/js/Pages/Usuario/autenticar.js" asp-append-version="true"></script>
 
 </body>
 </html>

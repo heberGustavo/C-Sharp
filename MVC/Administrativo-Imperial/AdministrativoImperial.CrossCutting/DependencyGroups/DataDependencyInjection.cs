@@ -10,6 +10,8 @@ namespace AdministrativoImperial.CrossCutting.DependencyGroups
         public static void Register(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<SqlDataContext, SqlDataContext>();
+
+            serviceCollection.AddTransient<IUsuarioRepository, UsuarioRepository>();
             serviceCollection.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
             serviceCollection.AddTransient<IFuncaoFuncionarioRepository, FuncaoFuncionarioRepository>();
             serviceCollection.AddTransient<IObraRepository, ObraRepository>();

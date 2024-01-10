@@ -5,14 +5,14 @@ using System.Text;
 
 namespace AdministrativoImperial.Data.EntityData
 {
-    [Table("Usuario")]
+    [Table("TB_USUARIO")]
     public class Usuario
     {
         [Key]
         public int UsaId { get; set; }
         public string UsaNome { get; set; }
         public string UsaEmail { get; set; }
-        public string UsaSenha { get; set; }
-        public string UsaSalt { get; set; }
+        public byte[] UsaSenha { get; set; }
+        public byte[] UsaSalt { get; set; }
     }
 }

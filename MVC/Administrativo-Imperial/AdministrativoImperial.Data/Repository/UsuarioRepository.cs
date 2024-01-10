@@ -35,14 +35,14 @@ namespace AdministrativoImperial.Data.Repository
             return resultData.ToList();
         }
 
-        public Task<UsuarioDTO> ObterUsuario(string email, string senha)
-            => _dataContext.Connection.QueryFirstOrDefault(@"SELECT 
-	                                                            * 
-                                                            FROM 
-	                                                            TB_USUARIO
-                                                            WHERE 
-	                                                            UsaEmail = @usaEmail 
-	                                                            AND UsaSenha = @usaSenha",
-                                                            new { usaEmail = email, usaSenha = senha });
+        public async Task<UsuarioDTO> ObterUsuarioPorEmail(string email)
+            => await _dataContext.Connection.QueryFirstOrDefaultAsync<UsuarioDTO>(@"SELECT 
+	                                                                                            * 
+                                                                                            FROM 
+	                                                                                            TB_USUARIO
+                                                                                            WHERE 
+	                                                                                            UsaEmail = @usaEmail ",
+                                                                                            new { usaEmail = email });
+
     }
 }

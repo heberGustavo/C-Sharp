@@ -8,7 +8,8 @@ namespace AdministrativoImperial.Domain.IBusiness
 {
     public interface IUsuarioBusiness : IBusinessBase<UsuarioDTO>
     {
-        Task<ResultInfo<UsuarioDTO>> Selecionar(string email, string senha);
         Task<ResultInfo> Create(UsuarioDTO usuario);
+
+        Task<ResultInfo<UsuarioDTO>> SelecionarPorEmail(string usaEmail);
     }
 }

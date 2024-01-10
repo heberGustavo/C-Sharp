@@ -7,6 +7,6 @@ namespace AdministrativoImperial.Domain.IRepository
 {
     public interface IUsuarioRepository : IRepositoryBase<UsuarioDTO>
     {
-        Task<UsuarioDTO> ObterUsuario(string email, string senha);
+        Task<UsuarioDTO> ObterUsuarioPorEmail(string email);
     }
 }
