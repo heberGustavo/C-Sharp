@@ -18,14 +18,14 @@ namespace GerenciamentoDeProdutosAPI.Data.Repository
         public async Task<IEnumerable<CategoriaDTO>> FindByCategorySituation(string nomeCategoria, bool situacao)
             => await _dataContext.Connection.QueryAsync<CategoriaDTO>(@"
                                                                     SELECT 
-	                                                                      CAT_ID
-	                                                                    , CAT_NOME
-	                                                                    , CAT_SITUACAO
+	                                                                      CatId
+	                                                                    , CatNome
+	                                                                    , CatSituacao
                                                                     FROM 
 	                                                                    TB_CATEGORIA
                                                                     WHERE 
-	                                                                    CAT_NOME LIKE @nomeCategoria
-	                                                                    AND CAT_SITUACAO = @situacao", 
+	                                                                    CatNome LIKE @nomeCategoria
+	                                                                    AND CatSituacao = @situacao", 
                                                                     new { nomeCategoria, situacao });
        
     }

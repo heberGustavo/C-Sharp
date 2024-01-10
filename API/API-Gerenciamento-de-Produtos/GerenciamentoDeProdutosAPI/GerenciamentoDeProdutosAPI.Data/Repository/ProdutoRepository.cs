@@ -18,19 +18,19 @@ namespace GerenciamentoDeProdutosAPI.Data.Repository
         public async Task<IEnumerable<ProdutoDTO>> FilterByCategoryDescriptionSituation(int idCategoria, string descricaoProduto, bool situacao)
             => await _dataContext.Connection.QueryAsync<ProdutoDTO>(@"
 																SELECT 
-																		P.PRO_ID
-																	,P.PRO_NOME
-																	,P.PRO_DESCRICAO
-																	,P.PRO_PRECO
-																	,P.PRO_SITUACAO
-																	,P.CAT_ID
+																		P.ProId
+																	,P.ProNome
+																	,P.ProDescricao
+																	,P.ProPreco
+																	,P.ProSituacao
+																	,P.CatId
 																FROM 
 																	TB_PRODUTO P
-																	INNER JOIN TB_CATEGORIA C WITH(NOLOCK) ON C.CAT_ID = P.CAT_ID
+																	INNER JOIN TB_CATEGORIA C WITH(NOLOCK) ON C.CatId = P.CatId
 																WHERE 
-																		P.CAT_ID = @idCategoria
-																	AND P.PRO_DESCRICAO LIKE @descricaoProduto
-																	AND P.PRO_SITUACAO = @situacao",
+																		P.CatId = @idCategoria
+																	AND P.ProDescricao LIKE @descricaoProduto
+																	AND P.ProSituacao = @situacao",
                                                                     new { idCategoria, descricaoProduto, situacao });
     }
 }

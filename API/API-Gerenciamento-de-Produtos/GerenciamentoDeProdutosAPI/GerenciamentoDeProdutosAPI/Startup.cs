@@ -56,8 +56,8 @@ namespace GerenciamentoDeProdutosAPI
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Gerenciado de Produtos API",
-                    Description = "Projeto desenvolvido em ASP.Net Core 3.1 com o objetivo de fazer o Gerenciamento de Produtos",
+                    Title = "API Product Management",
+                    Description = "The project was developed using .NET Web API, with the aim of carrying out Product Management",
                     Contact = new OpenApiContact
                     {
                         Name = "Heber Gustavo",

@@ -11,6 +11,6 @@ namespace GerenciamentoDeProdutosAPI.Domain.Models.EntityDomain
         public string ProDescricao { get; set; }
         public decimal ProPreco { get; set; }
         public bool ProSituacao { get; set; }
-        public int Cat_Id { get; set; }
+        public int CatId { get; set; }
     }
 }
