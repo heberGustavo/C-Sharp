@@ -4,9 +4,6 @@ using GerenciamentoDeProdutosAPI.Domain.Models.EntityDomain;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.UI.Controllers
@@ -28,13 +25,13 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
             try
             {
                 var resultItems = await _categoriaBusiness.FindAll();
-                var resultSuccess = new ResultResponseModel<IEnumerable<Categoria>>(false, "Sucesso ao buscar categorias", resultItems);
+                var resultSuccess = new ResultResponseModel<IEnumerable<CategoriaDTO>>(false, "Sucesso ao buscar categorias", resultItems);
 
                 return Ok(resultSuccess);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                var resultError = new ResultResponseModel<Categoria>(true, "Erro ao buscar categorias", null);
+                var resultError = new ResultResponseModel<CategoriaDTO>(true, "Erro ao buscar categorias", null);
                 return NotFound(resultError);
             }
         }
@@ -48,16 +45,16 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
 
                 if (resultModel == null)
                 {
-                    var resultError = new ResultResponseModel<Categoria>(true, string.Format("Categoria com ID: {0} não encontrada", id), null);
+                    var resultError = new ResultResponseModel<CategoriaDTO>(true, string.Format("Categoria com ID: {0} não encontrada", id), null);
                     return NotFound(resultError);
                 }
 
-                var resultSuccess = new ResultResponseModel<Categoria>(false, string.Format("Categoria com ID: {0} encontrada", id), resultModel.Id, resultModel);
+                var resultSuccess = new ResultResponseModel<CategoriaDTO>(false, string.Format("Categoria com ID: {0} encontrada", id), resultModel.CatId, resultModel);
                 return Ok(resultSuccess);
             }
             catch (Exception e)
             {
-                var resultError = new ResultResponseModel<Categoria>(true, "Erro ao busca categoria", null);
+                var resultError = new ResultResponseModel<CategoriaDTO>(true, "Erro ao busca categoria", null);
                 return BadRequest(resultError);
             }
         }
@@ -71,36 +68,36 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
 
                 if (resultModel == null)
                 {
-                    var resultError = new ResultResponseModel<Categoria>(true, string.Format("Não foram encontradas categorias com nome: {0} e situação: {1}", nomeCategoria, situacao), null);
+                    var resultError = new ResultResponseModel<CategoriaDTO>(true, string.Format("Não foram encontradas categorias com nome: {0} e situação: {1}", nomeCategoria, situacao), null);
                     return NotFound(resultError);
                 }
 
-                var resultSuccess = new ResultResponseModel<IEnumerable<Categoria>>(false, string.Format("Sucesso ao buscar categorias"), resultModel);
+                var resultSuccess = new ResultResponseModel<IEnumerable<CategoriaDTO>>(false, string.Format("Sucesso ao buscar categorias"), resultModel);
                 return Ok(resultSuccess);
             }
             catch (Exception)
             {
-                var resultError = new ResultResponseModel<Categoria>(true, "Erro ao buscar categorias", null);
+                var resultError = new ResultResponseModel<CategoriaDTO>(true, "Erro ao buscar categorias", null);
                 return BadRequest(resultError);
             }
            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Categoria categoria)
+        public async Task<IActionResult> Post([FromBody] CategoriaDTO categoria)
         {
             try
             {
                 if (categoria == null) return BadRequest();
 
-                if (categoria.Id <= 0)
+                if (categoria.CatId <= 0)
                 {
                     #region Create
 
                     var result = await _categoriaBusiness.Create(categoria);
                     var selecionarCategoriaCadastrada = await _categoriaBusiness.FindById(result);
 
-                    var resultSuccess = new ResultResponseModel<Categoria>(false, string.Format("Sucesso ao cadastrar categoria"), result, selecionarCategoriaCadastrada);
+                    var resultSuccess = new ResultResponseModel<CategoriaDTO>(false, string.Format("Sucesso ao cadastrar categoria"), result, selecionarCategoriaCadastrada);
                     return Ok(resultSuccess);
 
                     #endregion
@@ -110,9 +107,9 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
                     #region Update
 
                     var result = await _categoriaBusiness.Update(categoria);
-                    var selecionarCategoriaCadastrada = await _categoriaBusiness.FindById(categoria.Id);
+                    var selecionarCategoriaCadastrada = await _categoriaBusiness.FindById(categoria.CatId);
 
-                    var resultSuccess = new ResultResponseModel<Categoria>(false, string.Format("Sucesso ao atualizar categoria"), selecionarCategoriaCadastrada.Id, selecionarCategoriaCadastrada);
+                    var resultSuccess = new ResultResponseModel<CategoriaDTO>(false, string.Format("Sucesso ao atualizar categoria"), selecionarCategoriaCadastrada.CatId, selecionarCategoriaCadastrada);
                     return Ok(resultSuccess);
 
                     #endregion
@@ -121,7 +118,7 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
             }
             catch (Exception)
             {
-                var resultError = new ResultResponseModel<Categoria>(true, "Erro ao cadatrar categoria", null);
+                var resultError = new ResultResponseModel<CategoriaDTO>(true, "Erro ao cadatrar categoria", null);
                 return BadRequest(resultError);
             }
         }

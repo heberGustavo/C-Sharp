@@ -72,6 +72,8 @@ namespace GerenciamentoDeProdutosAPI
         {
             //migrationBusiness.ExecutarAtualizacaoBancoDados();
 
+            migrationBusiness.ExecutarAtualizacaoBancoDados();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

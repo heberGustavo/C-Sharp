@@ -1,7 +1,4 @@
 ﻿using Dapper.Contrib.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GerenciamentoDeProdutosAPI.Data.EntityData
 {
@@ -9,8 +6,8 @@ namespace GerenciamentoDeProdutosAPI.Data.EntityData
     public class CategoriaData
     {
         [Key]
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public bool Situacao { get; set; }
+        public int CatId { get; set; }
+        public string CatNome { get; set; }
+        public bool CatSituacao { get; set; }
     }
 }

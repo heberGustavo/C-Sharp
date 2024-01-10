@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.Domain.IBusiness
 {
-    public interface ICategoriaBusiness : IBusinessBase<Categoria>
+    public interface ICategoriaBusiness : IBusinessBase<CategoriaDTO>
     {
-        Task<IEnumerable<Categoria>> FindAll();
-        Task<Categoria> FindById(int id);
-        Task<int> Create(Categoria categoria);
-        Task<IEnumerable<Categoria>> FindByCategorySituation(string nomeCategoria, bool situacao);
-        Task<Categoria> Update(Categoria categoria);
+        Task<IEnumerable<CategoriaDTO>> FindAll();
+        Task<CategoriaDTO> FindById(int id);
+        Task<int> Create(CategoriaDTO categoria);
+        Task<IEnumerable<CategoriaDTO>> FindByCategorySituation(string nomeCategoria, bool situacao);
+        Task<CategoriaDTO> Update(CategoriaDTO categoria);
     }
 }

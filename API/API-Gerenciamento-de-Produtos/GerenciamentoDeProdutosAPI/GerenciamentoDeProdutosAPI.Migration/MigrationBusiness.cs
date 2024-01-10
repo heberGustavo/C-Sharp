@@ -1,11 +1,8 @@
 ﻿using GerenciamentoDeProdutosAPI.Common;
 using GerenciamentoDeProdutosAPI.Domain.IBusiness.Migration;
 using DbUp;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using System.Text;
 
 namespace GerenciamentoDeProdutosAPI.Migration
 {

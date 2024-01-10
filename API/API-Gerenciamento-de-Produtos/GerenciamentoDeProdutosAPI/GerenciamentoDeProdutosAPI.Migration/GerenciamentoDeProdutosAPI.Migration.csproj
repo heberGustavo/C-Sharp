@@ -5,8 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dbup" Version="5.0.8" />
-    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
+    <None Remove="Scripts\202304060641_CREATE_TABLE_TB_CATEGORIA.sql" />
+    <None Remove="Scripts\202304070642_CREATE_TABLE_TB_PRODUTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\202304060641_CREATE_TABLE_TB_CATEGORIA.sql" />
+    <EmbeddedResource Include="Scripts\202304070642_CREATE_TABLE_TB_PRODUTO.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.5.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>

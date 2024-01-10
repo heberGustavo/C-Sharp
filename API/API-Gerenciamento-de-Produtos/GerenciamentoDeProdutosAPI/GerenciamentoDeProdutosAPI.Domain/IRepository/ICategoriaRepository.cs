@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.Domain.IRepository
 {
-    public interface ICategoriaRepository : IRepositoryBase<Categoria>
+    public interface ICategoriaRepository : IRepositoryBase<CategoriaDTO>
     {
-        Task<IEnumerable<Categoria>> FindByCategorySituation(string nomeCategoria, bool situacao);
+        Task<IEnumerable<CategoriaDTO>> FindByCategorySituation(string nomeCategoria, bool situacao);
     }
 }

@@ -4,9 +4,6 @@ using GerenciamentoDeProdutosAPI.Domain.Models.EntityDomain;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.UI.Controllers
@@ -28,13 +25,13 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
             try
             {
                 var resultItems = await _produtoBusiness.FindAll();
-                var resultSuccess = new ResultResponseModel<IEnumerable<Produto>>(false, "Sucesso ao buscar produtos", resultItems);
+                var resultSuccess = new ResultResponseModel<IEnumerable<ProdutoDTO>>(false, "Sucesso ao buscar produtos", resultItems);
 
                 return Ok(resultSuccess);
             }
             catch (Exception)
             {
-                var resultError = new ResultResponseModel<Produto>(true, "Erro ao buscar produtos", null);
+                var resultError = new ResultResponseModel<ProdutoDTO>(true, "Erro ao buscar produtos", null);
                 return NotFound(resultError);
             }
         }
@@ -48,16 +45,16 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
 
                 if (resultModel == null)
                 {
-                    var resultError = new ResultResponseModel<Produto>(true, string.Format("Produto com ID: {0} não encontrado", id), null);
+                    var resultError = new ResultResponseModel<ProdutoDTO>(true, string.Format("Produto com ID: {0} não encontrado", id), null);
                     return NotFound(resultError);
                 }
 
-                var resultSuccess = new ResultResponseModel<Produto>(false, string.Format("Produto com ID: {0} encontrado", id), resultModel.Id, resultModel);
+                var resultSuccess = new ResultResponseModel<ProdutoDTO>(false, string.Format("Produto com ID: {0} encontrado", id), resultModel.ProId, resultModel);
                 return Ok(resultSuccess);
             }
             catch (Exception e)
             {
-                var resultError = new ResultResponseModel<Produto>(true, "Erro ao busca produto", null);
+                var resultError = new ResultResponseModel<ProdutoDTO>(true, "Erro ao busca produto", null);
                 return BadRequest(resultError);
             }
         }
@@ -71,36 +68,36 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
 
                 if (resultModel == null)
                 {
-                    var resultError = new ResultResponseModel<Produto>(true, string.Format("Não foram encontradas produtos com nome: {0} e situação: {1}", descricaoProduto, situacao), null);
+                    var resultError = new ResultResponseModel<ProdutoDTO>(true, string.Format("Não foram encontradas produtos com nome: {0} e situação: {1}", descricaoProduto, situacao), null);
                     return NotFound(resultError);
                 }
 
-                var resultSuccess = new ResultResponseModel<IEnumerable<Produto>>(false, string.Format("Sucesso ao buscar produtos"), resultModel);
+                var resultSuccess = new ResultResponseModel<IEnumerable<ProdutoDTO>>(false, string.Format("Sucesso ao buscar produtos"), resultModel);
                 return Ok(resultSuccess);
             }
             catch (Exception)
             {
-                var resultError = new ResultResponseModel<Produto>(true, "Erro ao buscar produtos", null);
+                var resultError = new ResultResponseModel<ProdutoDTO>(true, "Erro ao buscar produtos", null);
                 return BadRequest(resultError);
             }
            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Produto produto)
+        public async Task<IActionResult> Post([FromBody] ProdutoDTO produto)
         {
             try
             {
                 if (produto == null) return BadRequest();
 
-                if (produto.Id <= 0)
+                if (produto.ProId <= 0)
                 {
                     #region Create
 
                     var result = await _produtoBusiness.Create(produto);
                     var selecionarProdutoCadastrado = await _produtoBusiness.FindById(result);
 
-                    var resultSuccess = new ResultResponseModel<Produto>(false, string.Format("Sucesso ao cadastrar produto"), result ,selecionarProdutoCadastrado);
+                    var resultSuccess = new ResultResponseModel<ProdutoDTO>(false, string.Format("Sucesso ao cadastrar produto"), result ,selecionarProdutoCadastrado);
                     return Ok(resultSuccess);
 
                     #endregion
@@ -110,9 +107,9 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
                     #region Update
 
                     var result = await _produtoBusiness.Update(produto);
-                    var selecionarProdutoCadastrado = await _produtoBusiness.FindById(produto.Id);
+                    var selecionarProdutoCadastrado = await _produtoBusiness.FindById(produto.ProId);
 
-                    var resultSuccess = new ResultResponseModel<Produto>(false, string.Format("Sucesso ao atualizar produto"), selecionarProdutoCadastrado.Id, selecionarProdutoCadastrado);
+                    var resultSuccess = new ResultResponseModel<ProdutoDTO>(false, string.Format("Sucesso ao atualizar produto"), selecionarProdutoCadastrado.ProId, selecionarProdutoCadastrado);
                     return Ok(resultSuccess);
 
                     #endregion
@@ -121,7 +118,7 @@ namespace GerenciamentoDeProdutosAPI.UI.Controllers
             }
             catch (Exception)
             {
-                var resultError = new ResultResponseModel<Produto>(true, "Erro ao cadatrar produto", null);
+                var resultError = new ResultResponseModel<ProdutoDTO>(true, "Erro ao cadatrar produto", null);
                 return BadRequest(resultError);
             }
         }

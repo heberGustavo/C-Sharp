@@ -2,33 +2,30 @@
 using Dapper;
 using GerenciamentoDeProdutosAPI.Data.EntityData;
 using GerenciamentoDeProdutosAPI.Data.Repository.Base;
-using GerenciamentoDeProdutosAPI.Domain.Business.Base;
 using GerenciamentoDeProdutosAPI.Domain.IRepository;
 using GerenciamentoDeProdutosAPI.Domain.Models.EntityDomain;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.Data.Repository
 {
-    public class CategoriaRepository : RepositoryBase<Categoria, CategoriaData>, ICategoriaRepository
+    public class CategoriaRepository : RepositoryBase<CategoriaDTO, CategoriaData>, ICategoriaRepository
     {
         public CategoriaRepository(SqlDataContext dataContext, IMapper mapper) : base(dataContext, mapper)
         {
         }
 
-        public async Task<IEnumerable<Categoria>> FindByCategorySituation(string nomeCategoria, bool situacao)
-            => await _dataContext.Connection.QueryAsync<Categoria>(@"
+        public async Task<IEnumerable<CategoriaDTO>> FindByCategorySituation(string nomeCategoria, bool situacao)
+            => await _dataContext.Connection.QueryAsync<CategoriaDTO>(@"
                                                                     SELECT 
-	                                                                      ID
-	                                                                    , NOME
-	                                                                    , SITUACAO
+	                                                                      CAT_ID
+	                                                                    , CAT_NOME
+	                                                                    , CAT_SITUACAO
                                                                     FROM 
 	                                                                    TB_CATEGORIA
                                                                     WHERE 
-	                                                                    NOME LIKE @nomeCategoria
-	                                                                    AND SITUACAO = @situacao", 
+	                                                                    CAT_NOME LIKE @nomeCategoria
+	                                                                    AND CAT_SITUACAO = @situacao", 
                                                                     new { nomeCategoria, situacao });
        
     }

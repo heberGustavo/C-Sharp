@@ -11,8 +11,8 @@ namespace GerenciamentoDeProdutosAPI.CrossCutting.MappingGroups
     {
         public DataToDomain()
         {
-            CreateMap<CategoriaData, Categoria>();
-            CreateMap<ProdutoData, Produto>();
+            CreateMap<CategoriaData, CategoriaDTO>();
+            CreateMap<ProdutoData, ProdutoDTO>();
         }
     }
 }

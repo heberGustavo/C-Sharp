@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeProdutosAPI.Domain.Business
 {
-    public class CategoriaBusiness : BusinessBase<Categoria>, ICategoriaBusiness
+    public class CategoriaBusiness : BusinessBase<CategoriaDTO>, ICategoriaBusiness
     {
         private readonly ICategoriaRepository _categoriaRepository;
 
@@ -20,26 +20,26 @@ namespace GerenciamentoDeProdutosAPI.Domain.Business
 
         #region Read
 
-        public Task<IEnumerable<Categoria>> FindAll()
+        public Task<IEnumerable<CategoriaDTO>> FindAll()
             => _categoriaRepository.GetAllAsync();
 
-        public Task<IEnumerable<Categoria>> FindByCategorySituation(string nomeCategoria, bool situacao)
+        public Task<IEnumerable<CategoriaDTO>> FindByCategorySituation(string nomeCategoria, bool situacao)
             => _categoriaRepository.FindByCategorySituation(nomeCategoria, situacao);
 
-        public Task<Categoria> FindById(int id)
+        public Task<CategoriaDTO> FindById(int id)
             => _categoriaRepository.GetById(id);
 
         #endregion
 
         #region Write
 
-        public Task<int> Create(Categoria categoria)
+        public Task<int> Create(CategoriaDTO categoria)
         {
             var result = _categoriaRepository.CreateAsync(categoria);
             return result;
         }
 
-        public Task<Categoria> Update(Categoria categoria)
+        public Task<CategoriaDTO> Update(CategoriaDTO categoria)
         {
             var result = _categoriaRepository.UpdateAsync(categoria);
             return result;

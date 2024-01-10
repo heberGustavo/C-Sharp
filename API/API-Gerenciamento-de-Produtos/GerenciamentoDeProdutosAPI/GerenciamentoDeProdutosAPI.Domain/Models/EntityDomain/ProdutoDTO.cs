@@ -1,16 +1,16 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace GerenciamentoDeProdutosAPI.Data.EntityData
+namespace GerenciamentoDeProdutosAPI.Domain.Models.EntityDomain
 {
-    [Table("TB_PRODUTO")]
-    public class ProdutoData
+    public class ProdutoDTO
     {
-        [Key]
         public int ProId { get; set; }
         public string ProNome { get; set; }
         public string ProDescricao { get; set; }
         public decimal ProPreco { get; set; }
         public bool ProSituacao { get; set; }
-        public int CatId { get; set; }
+        public int Cat_Id { get; set; }
     }
 }
