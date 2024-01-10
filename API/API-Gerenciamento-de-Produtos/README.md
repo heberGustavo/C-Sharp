@@ -18,11 +18,12 @@ Note: It is extremely important to execute the scripts in order, otherwise there
 
 Note: It may be necessary to adjust the script configuration
 
-**Step 1**
+**Step 1: Properties**
 
-![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/bac9b101-53c0-45e1-9b95-891ad6a8e0df)
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/51768dfb-d6d3-4e7b-9ad4-337fc0c01ac0)
 
-**Step 2**
+
+**Step 2: Embedded resource**
 
 ![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/cf58f01a-22ea-481b-8f01-1f9b5478733c)
 
