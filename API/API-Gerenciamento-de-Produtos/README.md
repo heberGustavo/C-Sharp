@@ -1,27 +1,29 @@
-# Gerenciamento de Produtos
+# Product Management
 
-Esse é um projeto Web API .NET Core, onde o objetivo do mesmo é que o cliente consiga realizar o gerenciamento de seus produtos.
+### About the project:
+This is a Web API project using .NET, where the objective is for the user to manage the products.
 
-Metodos inclusos no sistema:
+### Endpoints:
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/7da9fa67-9e91-492d-8d17-c22b2bff3d7a)
 
-🔴 Categoria
-- Cadastro de Categorias 
-- Listagem de Categorias por Id
-- Listagem de Categorias por Nome e Situação
-- Update de Categoria
+### Connection String
 
+You must access the file which is located at: 0-Portal -> appsettings.json -> CONNECTION_STRING and CONNECTION_STRING_DEBUG
 
-🔴 Produto
-- Cadatro de Produtos
-- Listagem de Produto por Id
-- Listagem de Produto por Categoria, Descrição do Produto e Situação
-- Update de Produto
+As this system was developed to run localhost, it is necessary to create a Database with the name "ProjetoTeste".
 
+It is necessary to execute the scripts located in: MIGRATION > Scripts.
 
-Como esse sistema é para rodar local, é necessario a criação de um Database com o nome "ProjetoTeste".
-Caso querer alterar a CONNECTION_STRING você deve acessar o arquivo que esta localizado em: 0-Portal -> appsettings.json -> CONNECTION_STRING e CONNECTION_STRING_DEBUG
+Note: It is extremely important to execute the scripts in order, otherwise there will be errors in the database.
 
-É necessario a execução dos scripts que estão localizados em: MIGRATION > Scripts. 
-Obs: É de extrema importancia executar os scripts na ordem, caso contrario haverá erros no banco.
+Note: It may be necessary to adjust the script configuration
 
-Espero que ocorra tudo perfeitamente, caso de alguma dúvida ou erro entre em contato comigo via Linkedin (link na Bio).
+**Step 1**
+
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/bac9b101-53c0-45e1-9b95-891ad6a8e0df)
+
+**Step 2**
+
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/cf58f01a-22ea-481b-8f01-1f9b5478733c)
+
+I hope everything goes perfectly, if there are any questions or errors, please contact me via Linkedin (link in Bio).
