@@ -25,6 +25,6 @@ Note: It may be necessary to adjust the script configuration
 
 **Step 2: Embedded resource**
 
-![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/cf58f01a-22ea-481b-8f01-1f9b5478733c)
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/41bdd0f9-53e7-458e-8280-ea3701eaf1d3)
 
 I hope everything goes perfectly, if there are any questions or errors, please contact me via Linkedin (link in Bio).
