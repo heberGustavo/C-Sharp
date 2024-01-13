@@ -13,6 +13,7 @@ using RestWithNETUdemy.Repository;
 using Serilog;
 using RestWithNETUdemy.Repository.Base;
 using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
 
 namespace RestWithNETUdemy
 {
@@ -35,12 +36,16 @@ namespace RestWithNETUdemy
         {
             services.AddControllers();
 
-            //Conexão com o DB
+            #region Connection DB
+
             var conection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<MySQLContext>(option => option.UseMySql(conection));
 
-            //Adicionando suporte para Json e XML
-            services.AddMvc(option => 
+            #endregion
+
+            #region Support to Json and XML
+
+            services.AddMvc(option =>
             {
                 option.RespectBrowserAcceptHeader = true;
 
@@ -48,17 +53,47 @@ namespace RestWithNETUdemy
                 option.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
             }).AddXmlSerializerFormatters();
 
-            //Migration
+            #endregion
+
+            #region Swagger
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Person and Books - Web API",
+                    Description = "The project was developed using .NET 5.0 Web API and MySQL.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Heber Gustavo",
+                        Url = new Uri("https://www.linkedin.com/in/heber-gustavo/")
+                    }
+                });
+            });
+
+            #endregion
+
+            #region Migration
+
             MigrationDataBase(conection);
 
-            //Versionamento de API
-            services.AddApiVersioning();
+            #endregion
 
-            //Injeção de dependencia
+            #region API Versioning
+            
+            services.AddApiVersioning();
+            
+            #endregion
+
+            #region Dependency Injection
+
             services.AddScoped<IPersonBusiness, PersonBusinessImplamentation>();
             services.AddScoped<IBookBusiness, BookBusinessImplamentation>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            #endregion
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -68,10 +103,19 @@ namespace RestWithNETUdemy
                 app.UseDeveloperExceptionPage();
             }
 
+            #region Swagger
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "Person and Books - Web API");
+            });
+
+            #endregion
+
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
