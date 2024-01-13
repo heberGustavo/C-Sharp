@@ -1,3 +1,0 @@
-# ApiRestWithNET5
-
-Working...
