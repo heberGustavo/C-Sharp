@@ -26,6 +26,7 @@ function Variaveis() {
 
 function ModalUsuario() {
     AlterarVisibilidadeAtualModal(modalUsuario);
+    ToogleCampoSenha(false);
 }
 
 function VerificarCamposObrigatorios() {
@@ -37,7 +38,7 @@ function VerificarCamposObrigatorios() {
         MostrarModalErroCampoObrigatorioNaoPreenchido('E-mail');
         return false;
     }
-    else if (IsNullOrEmpty(txtSenha.val())) {
+    else if (IsNullOrEmpty(txtIdUsuarioTemp.val()) && IsNullOrEmpty(txtSenha.val())) {
         MostrarModalErroCampoObrigatorioNaoPreenchido('Senha');
         return false;
     }
@@ -66,7 +67,6 @@ function BuscarListaUsuarios() {
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         success: function (response) {
-            console.log(response)
             EncerraLoading();
             $("#divListar").html(response)
         },
@@ -80,6 +80,13 @@ function BuscarListaUsuarios() {
 }
 
 function PreencherModalUsuario(response) {
-    txtNome.val(response.data.nome);
-    txtEmail.val(response.data.email);
+    txtNome.val(response.data.usaNome);
+    txtEmail.val(response.data.usaEmail);
+    txtIdUsuarioTemp.val(response.data.usaId);
+
+    ToogleCampoSenha(true)
+}
+
+function ToogleCampoSenha(bool) {
+    txtSenha.attr("disabled", bool)
 }

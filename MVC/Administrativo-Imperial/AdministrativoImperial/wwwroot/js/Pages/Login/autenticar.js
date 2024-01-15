@@ -18,7 +18,7 @@ function Variaveis() {
 function Autenticar() {
     MostraLoading();
 
-    window.location.href = 'https://localhost:44391/Dashboard';
+    window.location.href = MontarUrl("Dashboard", "Index");
     return
 
     if (!VerificarCamposObrigatorios()) {

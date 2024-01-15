@@ -450,18 +450,6 @@ function IsString(value) {
 
 /******** MÉTODOS DE FORMATAÇÃO ********/
 
-function FormatarLivroFolhaNumero(livro, folha, numero) {
-
-    var livroFolhaNumeroFormatado = '-';
-
-    if (!IsNullOrEmpty(livro) || !IsNullOrEmpty(folha) || !IsNullOrEmpty(numero)) {
-
-        livroFolhaNumeroFormatado = 'Livro:' + livro + ', Folha:' + folha + ', Nº:' + numero;
-    }
-
-    return livroFolhaNumeroFormatado;
-}
-
 function FormatarDataDiaMesParaDataCompleta(dataDiaMes) {
 
     var year = moment().format('YYYY');
@@ -814,4 +802,16 @@ function AbrirModal(idModal) {
 
 function ElementoExiste(idElemento) {
     return document.getElementById(idElemento);
+}
+
+function MontarUrl(controller, action) {
+    var urlBase = window.location.origin + "/";
+
+    var url = urlBase + controller;
+
+    if (action != undefined && action.length > 0) {
+        url += '/' + action;
+    }
+
+    return url;
 }

@@ -23,13 +23,15 @@ namespace AdministrativoImperial.Controllers
             return View();
         }
 
+        #region Write
+
         [HttpPost]
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] UsuarioDTO usuario)
         {
             if (ModelState.IsValid)
             {
-                var resultado = await _usuarioBusiness.Create(usuario);
+                var resultado = await _usuarioBusiness.Cadastrar(usuario);
 
                 if (resultado.Type != ResultType.CompleteExecution)
                     return Json(new { erro = true, mensagem = resultado.Messages });
@@ -45,13 +47,19 @@ namespace AdministrativoImperial.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/[action]/{int:usaId}")]
+        [Route("[controller]/[action]/{usaId:int}")]
         public async Task<JsonResult> Deletar(int usaId)
         {
-            var result = _usuarioBusiness.Deletar(usaId);
+            var result = await _usuarioBusiness.Deletar(usaId);
+            if (result.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = result.Messages });
 
-            return Json(new { erro = "" });
+            return Json(new { erro = false, mensagem = result.Messages });
         }
+
+        #endregion
+
+        #region Read
 
         [HttpGet]
         [Route("[controller]/[action]")]
@@ -61,6 +69,18 @@ namespace AdministrativoImperial.Controllers
             return View("Listar", resultado.Items);
         }
 
+        [HttpGet]
+        [Route("[controller]/[action]/{usaId:int}")]
+        public async Task<JsonResult> Selecionar(int usaId)
+        {
+            var result = await _usuarioBusiness.Selecionar(usaId);
+            if(result.Type != ResultType.CompleteExecution)
+                return Json(new { erro = true, mensagem = result.Messages });
+
+            return Json(new { erro = false, mensagem = result.Messages, data = result.Item });
+        }
+
+        #endregion
 
     }
 }
