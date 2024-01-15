@@ -9,7 +9,8 @@ namespace AdministrativoImperial.Domain.IBusiness
     public interface IUsuarioBusiness : IBusinessBase<UsuarioDTO>
     {
         Task<ResultInfo> Create(UsuarioDTO usuario);
-
+        Task<ResultInfo> Deletar(int usaId);
+        Task<ResultInfo<UsuarioDTO>> Listar();
         Task<ResultInfo<UsuarioDTO>> SelecionarPorEmail(string usaEmail);
     }
 }

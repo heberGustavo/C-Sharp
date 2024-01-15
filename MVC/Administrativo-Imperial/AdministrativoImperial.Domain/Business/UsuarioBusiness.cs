@@ -73,6 +73,11 @@ namespace AdministrativoImperial.Domain.Business
             return result;
         }
 
+        public object Deletar(int usaId)
+        {
+            throw new Exception();
+        }
+
         #endregion
 
         #region Read
@@ -89,6 +94,23 @@ namespace AdministrativoImperial.Domain.Business
             {
                 result.Type = ResultType.ValidationError;
                 result.Messages.Add("Erro ao selecionar usuário. " + Mensagens.MENSAGEM_CONTATO_ADMINISTRADOR);
+            }
+
+            return result;
+        }
+
+        public async Task<ResultInfo<UsuarioDTO>> Listar()
+        {
+            var result = new ResultInfo<UsuarioDTO>();
+
+            try
+            {
+                result.Items = await _usuarioRepository.Listar();
+            }
+            catch (Exception)
+            {
+                result.Type = ResultType.ValidationError;
+                result.Messages.Add("Erro ao listar obras");
             }
 
             return result;

@@ -1,0 +1,60 @@
+﻿@using AdministrativoImperial.Common
+
+@{
+    Layout = "";
+    @model IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.UsuarioDTO>
+}
+
+<table id="tabelaUsuario" class="table align-items-center mt-2 mb-0">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Nome</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">E-mail</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex px-3 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">@item.UsaId</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="align-middle">
+                        <p class="text-xs font-weight-bold mb-0">@item.UsaNome</p>
+                    </td>
+                    <td class="align-middle">
+                        <p class="text-xs font-weight-bold mb-0">@item.UsaEmail</p>
+                    </td>
+                    <td class="align-middle">
+                        <button class="btn btn-icon btn-2 btn-info" type="button" onclick="ModalUsuarioEditar(@item.UsaId)" data-toggle="tooltip" data-original-title="Editar Usuário">
+                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        </button>
+                        <button class="btn btn-icon btn-2 btn-danger" type="button" onclick="ConfirmarExclusao(@item.UsaId, '@item.UsaNome')" data-toggle="tooltip" data-original-title="Deletar Usuário">
+                            <span class="btn-inner--icon"><i class="fa-solid fa-trash"></i></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Nenhum dado cadastrado</h6>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

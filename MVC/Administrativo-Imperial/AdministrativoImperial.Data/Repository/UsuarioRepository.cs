@@ -17,21 +17,17 @@ namespace AdministrativoImperial.Data.Repository
         {
         }
 
-        public async Task<IList<ObraDTO>> Listar()
+        public async Task<IList<UsuarioDTO>> Listar()
         {
-            var resultData = await _dataContext.Connection.QueryAsync<ObraDTO>(@"SELECT
-	                                                                              ObrId
-	                                                                            , ObrApelido
-	                                                                            , ObrDataInicio
-	                                                                            , ObrDataFim
-	                                                                            , ObrEndereco
-	                                                                            , ObrOrcamento
-	                                                                            , ObrStatus
-                                                                            FROM
-	                                                                            TB_OBRA
-                                                                            ORDER BY 
-	                                                                            ObrStatus, ObrApelido
-                                                                            ");
+            var resultData = await _dataContext.Connection.QueryAsync<UsuarioDTO>(@"SELECT
+	                                                                                  UsaId
+	                                                                                , UsaNome
+	                                                                                , UsaEmail
+                                                                                FROM
+	                                                                                TB_USUARIO
+                                                                                ORDER BY 
+	                                                                                UsaId
+                                                                                ");
             return resultData.ToList();
         }
 
@@ -43,6 +39,5 @@ namespace AdministrativoImperial.Data.Repository
                                                                                             WHERE 
 	                                                                                            UsaEmail = @usaEmail ",
                                                                                             new { usaEmail = email });
-
     }
 }

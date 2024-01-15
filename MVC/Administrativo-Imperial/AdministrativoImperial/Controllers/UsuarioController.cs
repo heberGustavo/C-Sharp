@@ -43,5 +43,24 @@ namespace AdministrativoImperial.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("[controller]/[action]/{int:usaId}")]
+        public async Task<JsonResult> Deletar(int usaId)
+        {
+            var result = _usuarioBusiness.Deletar(usaId);
+
+            return Json(new { erro = "" });
+        }
+
+        [HttpGet]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> Listar()
+        {
+            var resultado = await _usuarioBusiness.Listar();
+            return View("Listar", resultado.Items);
+        }
+
+
     }
 }

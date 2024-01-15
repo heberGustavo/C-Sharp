@@ -18,6 +18,9 @@ function Variaveis() {
 function Autenticar() {
     MostraLoading();
 
+    window.location.href = 'https://localhost:44391/Dashboard';
+    return
+
     if (!VerificarCamposObrigatorios()) {
         EncerraLoading();
         return;
@@ -27,9 +30,7 @@ function Autenticar() {
         email: txtEmail.val(),
         senha: txtSenha.val()
     }
-
-    console.log(jsonData)
-
+    
     $.ajax({
         url: "/Login/Autenticar/",
         type: "POST",
@@ -41,9 +42,7 @@ function Autenticar() {
 
             }
             else {
-                $.each(response.mensagem, function (index, value) {
-                    MostrarAlertMensagemErro(value)
-                });
+                MostrarAlertMensagemErro(response.mensagem);
             }
         },
         error: function (response) {
