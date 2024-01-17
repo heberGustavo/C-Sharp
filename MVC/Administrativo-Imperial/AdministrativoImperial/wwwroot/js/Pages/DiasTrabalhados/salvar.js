@@ -2,33 +2,23 @@
 
 });
 
-function ObterDadosTelaJsonCadastrar() {
-
-    var orcamentoFloat;
-
-    if (!IsNullOrEmpty(orcamento.val()))
-        orcamentoFloat = ConverterParaFloat(orcamento.val());
-    else
-        orcamentoFloat = 0.0;
-
+function ObterDadosJson() {
     return {
-        ObrDataInicio: dataInicio.val(),
-        ObrApelido: apelido.val(),
-        ObrEndereco: endereco.val(),
-        ObrOrcamento: orcamentoFloat,
-        ObrId: txtIdObraTemp.val().length <= 0 ? 0 : parseInt(txtIdObraTemp.val())
+        ObrId: parseInt(ddlObra.val()),
+        DitData: txtData.val(),
+        FunIds: Array.from(ddlFuncionarios.val()),
+        DitId: txtIdDiaTrabalhadoTemp.val().length <= 0 ? 0 : parseInt(txtIdDiaTrabalhadoTemp.val())
     }
 }
 
 /*MODAL*/
-function ModalObraSalvar() {
-    LimparCamposModal();
+function ModalDiaTrabalhadoSalvar() {
 
     if (VerificarCamposObrigatorios()) {
-        var json = ObterDadosTelaJsonCadastrar();
+        var json = ObterDadosJson();
 
         $.ajax({
-            url: "/Obra/Cadastrar",
+            url: "/DiasTrabalhados/Cadastrar",
             type: "POST",
             contentType: 'application/json; charset=UTF-8',
             dataType: "json",
@@ -37,9 +27,9 @@ function ModalObraSalvar() {
                 if (!response.erro) {
                     swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                         if (confirm) {
-                            BuscarListaObras();
+                            BuscarListaDiasTrabalhados();
                             LimparCamposModal();
-                            AlterarVisibilidadeAtualModal('modalObra');
+                            AlterarVisibilidadeAtualModal(modalDiaTrabalhado);
                         }
                     });
                 }
@@ -48,30 +38,32 @@ function ModalObraSalvar() {
                         MostrarAlertMensagemErro(value)
                     });
                 }
+
+                EncerraLoading();
             },
             error: function (response) {
+                EncerraLoading();
                 console.log(response);
                 swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
             }
         });
-
     }
 }
 
-function ModalObraEditar(obrId) {
+function ModalDiaTrabalhadoEditar(ditId) {
     LimparCamposModal();
 
-    txtIdObraTemp.val(obrId);
+    txtIdDiaTrabalhadoTemp.val(ditId);
 
     $.ajax({
-        url: "Obra/Selecionar/" + obrId,
+        url: "DiasTrabalhados/Selecionar/" + parseInt(ditId),
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
-                PreencherModalObra(response);
-                AlterarVisibilidadeAtualModal('modalObra');
+                PreencherModalDiaTrabalhado(response);
+                AlterarVisibilidadeAtualModal(modalDiaTrabalhado);
             }
             else {
                 $.each(response.mensagem, function (index, value) {

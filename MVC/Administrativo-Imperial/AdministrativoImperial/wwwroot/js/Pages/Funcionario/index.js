@@ -147,9 +147,8 @@ function PreencherCamposModalFuncionario(dados) {
 
     nome.val(campo.funNome);
     selectFuncao.val(campo.fnfId);
-    dataContratacao.val(ConverterDataParaUSA(campo.funDataContratacao));
+    dataContratacao.val(ConverterParaDataUSA(campo.funDataContratacao));
     ValidaPreenchimentoEClickNoRadioButtonModalFuncionario(campo.funDiaria, campo.funMensal);
-
 }
 
 function ValidaPreenchimentoEClickNoRadioButtonModalFuncionario(campoDiaria, campoMensal) {

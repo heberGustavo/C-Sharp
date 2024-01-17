@@ -5,18 +5,18 @@
 function ConfirmarExclusao(id, nome) {
     swal(
         "Confirmar Exclusão",
-        "Tem certeza que deseja excluir a obra: " + nome + "?",
+        "Tem certeza que deseja excluir o registro do: " + nome + "?",
         "warning").then((confirm) => {
             if (confirm) {
-                DeletarObra(id)
+                DeletarDiaTrabalhado(id)
             }
         });
 }
 
-function DeletarObra(id) {
+function DeletarDiaTrabalhado(id) {
 
     $.ajax({
-        url: "/Obra/Deletar/" + parseInt(id),
+        url: "/DiasTrabalhados/Deletar/" + parseInt(id),
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         dataType: "json",
@@ -24,7 +24,7 @@ function DeletarObra(id) {
             if (!response.erro) {
                 swal("Sucesso", response.mensagem[0], "success").then((confirm) => {
                     if (confirm) {
-                        BuscarListaObras();
+                        BuscarListaDiasTrabalhados();
                     }
                 });
             }

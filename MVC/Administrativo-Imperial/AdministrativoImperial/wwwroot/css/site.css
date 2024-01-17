@@ -46,6 +46,14 @@
     font-style: italic;
 }
 
+.btn-light {
+    background-color: #ececec !important;
+}
+
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+    color: #363f4d !important;
+}
+
 /*MESSAGE ALERT*/
 .sh-toast-container {
     font-size: 18px;

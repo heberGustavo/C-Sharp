@@ -1,65 +1,67 @@
-﻿var dataInicio;
-var apelido;
-var endereco;
-var orcamento;
-var tabelaObra;
-var txtIdObraTemp;
+﻿var ddlObra;
+var txtData;
+var ddlFuncionarios;
+var tabelaDiaTrabalhado;
+var txtIdDiaTrabalhadoTemp;
+var modalDiaTrabalhado;
 
 $(document).ready(function () {
-    //Init();
-    MensagemAvisoManutenção();
+    Init();
 });
 
 function Init() {
-    //Variaveis();
-    //BuscarListaObras();
+    Variaveis();
+    BuscarListaDiasTrabalhados();
 }
 
 /*METODOS GERAIS*/
 function Variaveis() {
-    dataInicio = $('#dataInicio');
-    apelido = $('#apelido');
-    endereco = $('#endereco');
-    orcamento = $('#orcamento');
-    tabelaObra = $('#tabelaObra tbody');
-    txtIdObraTemp = $("#txtIdObraTemp");
+    ddlObra = $('#ddlObra');
+    txtData = $('#txtData');
+    ddlFuncionarios = $('#ddlFuncionarios');
+    tabelaDiaTrabalhado = $('#tabelaDiaTrabalhado tbody');
+    txtIdDiaTrabalhadoTemp = $("#txtIdDiaTrabalhadoTemp");
+    modalDiaTrabalhado = "modalDiaTrabalhado";
 }
 
-function ModalObra() {
-    AlterarVisibilidadeAtualModal('modalObra');
+function ModalDiaTrabalhado() {
+    AlterarVisibilidadeAtualModal(modalDiaTrabalhado);
 }
 
 function VerificarCamposObrigatorios() {
-    if (IsNullOrEmpty(dataInicio.val())) {
-        MostrarModalErroCampoObrigatorioNaoPreenchido('Data de Início');
+    if (IsNullOrEmpty(ddlObra.val())) {
+        MostrarModalErroCampoObrigatorioNaoSelecionado('Obra');
         return false;
     }
-    else if (IsNullOrEmpty(apelido.val())) {
-        MostrarModalErroCampoObrigatorioNaoPreenchido('Apelido');
+    else if (IsNullOrEmpty(txtData.val())) {
+        MostrarModalErroCampoObrigatorioNaoPreenchido('Data');
+        return false;
+    }
+    else if (IsNullOrEmpty(ddlFuncionarios.val())) {
+        MostrarModalErroCampoObrigatorioNaoSelecionado('Funcionários');
         return false;
     }
 
     return true;
 }
 
-function LimparCamposModal() {
-    dataInicio.val('')
-    apelido.val('')
-    endereco.val('')
-    orcamento.val('')
-    txtIdObraTemp.val('');
+function LimparCamposModal(temp) {
+    ddlObra.val(0);
+    txtData.val('');
+    ddlFuncionarios.val(0);
+    txtIdDiaTrabalhadoTemp.val('')
 }
 
-function ModalObraFechar() {
+function ModalDiaTrabalhadoFechar() {
     LimparCamposModal();
-    AlterarVisibilidadeAtualModal('modalObra');
+    AlterarVisibilidadeAtualModal(modalDiaTrabalhado);
 }
 
 /*AJAX*/
-function BuscarListaObras() {
+function BuscarListaDiasTrabalhados() {
 
     $.ajax({
-        url: "/Obra/Listar",
+        url: "/DiasTrabalhados/Listar",
         type: "GET",
         contentType: 'application/json; charset=UTF-8',
         success: function (response) {
@@ -73,9 +75,11 @@ function BuscarListaObras() {
 
 }
 
-function PreencherModalObra(response) {
-    dataInicio.val(ConverterParaDataUSA(response.data.obrDataInicio));
-    apelido.val(response.data.obrApelido);
-    endereco.val(response.data.obrEndereco);
-    orcamento.val(FormatDinheiro(response.data.obrOrcamento));
+function PreencherModalDiaTrabalhado(response) {
+
+    console.log(response)
+
+    ddlObra.val(response.data.obrId);
+    txtData.val(ConverterParaDataUSA(response.data.ditData));
+    ddlObra.val(response.data.funId);
 }

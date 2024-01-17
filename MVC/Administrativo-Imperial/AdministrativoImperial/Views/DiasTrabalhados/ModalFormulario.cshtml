@@ -1,0 +1,48 @@
+﻿<div class="modal fade" id="modalDiaTrabalhado" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-primary text-gradient">Cadastro de Dia Trabalhado</h3>
+                        <p class="mb-0">Preencha os campos abaixo</p>
+                    </div>
+                    <div class="card-body pb-3">
+
+                        <input type="hidden" id="txtIdDiaTrabalhadoTemp" />
+
+                        <div class="form-group">
+                            <label>Obra</label>
+                            <select class="form-control" id="ddlObra">
+                                <option disabled selected value="0">Selecione</option>
+                               @foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.ObraDTO>)ViewBag.Obras)
+                                {
+                                    <option value="@item.ObrId">@item.ObrApelido</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Data</label>
+                            <input id="txtData" class="form-control" type="date" />
+                        </div>
+                        <div class="form-group">
+                            <label>Funcionários</label>
+                            <select class="selectpicker form-control" id="ddlFuncionarios" multiple aria-label="Default select example" placeholder="Selecione" data-live-search="true">
+                                @foreach (var item in (IEnumerable<AdministrativoImperial.Domain.Models.EntityDomain.FuncionarioDTO>)ViewBag.Funcionarios)
+                                {
+                                    <option value="@item.FunId">@item.FunNome</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" onclick="ModalDiaTrabalhadoFechar()" class="btn bg-gradient-danger btn-lg btn-rounded w-100 mt-4 mb-0">Cancelar</button>
+                            <button type="button" onclick="ModalDiaTrabalhadoSalvar()" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Salvar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

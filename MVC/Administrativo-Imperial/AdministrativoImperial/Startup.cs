@@ -32,7 +32,6 @@ namespace AdministrativoImperial
         public IWebHostEnvironment Env { get; set; }
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -71,11 +70,9 @@ namespace AdministrativoImperial
             PolicyKeys.ConfigurePolicies(services);
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
-
-            //services.AddControllersWithViews(options => options.Filters.Add(typeof(ValidateModelState)));
+            
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, [FromServices] IMigrationBusiness migrationBusiness)
         {
             #region Definindo a cultura padrão: pt-BR
@@ -108,7 +105,7 @@ namespace AdministrativoImperial
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=DiasTrabalhados}/{action=Index}/{id?}");
             });
         }
     }

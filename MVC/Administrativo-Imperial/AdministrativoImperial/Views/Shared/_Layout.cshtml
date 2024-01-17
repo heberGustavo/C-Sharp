@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="~/img/logo-sem-fundo.png">
     <title>@ViewData["Title"] - Administrativo Imperial</title>
 
     <!-- Fonts and icons -->
@@ -20,6 +20,9 @@
 
     <!-- Notifications -->
     <link href="~/lib/sh-toastr-master/css/sh_toaster.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" />
 
     <!-- CSS Files -->
     <link id="pagestyle" href="~/criativeTim/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
@@ -75,9 +78,9 @@
 
                 <a asp-controller="Funcionario" asp-action="Index" class="dashboard-nav-item"><i class="fa fa-users"></i> Funcionários </a>
                 <a asp-controller="FuncaoFuncionario" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Função Funcionários </a>
-                <a href="#" class="dashboard-nav-item" onclick="MensagemAvisoManutenção()"><i class="fas fa-user"></i> Perfil </a>
                 <a asp-controller="Usuario" asp-action="Index" class="dashboard-nav-item"><i class="fa-solid fa-users-gear"></i> Usuários </a>
                 <div class="nav-item-divider"></div>
+                <a href="#" class="dashboard-nav-item" onclick="MensagemAvisoManutenção()"><i class="fas fa-user"></i> Perfil </a>
                 <a asp-controller="Login" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </nav>
         </div>
@@ -114,10 +117,11 @@
         }
     </script>
     
-    <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/criativeTim/js/argon-dashboard.min.js?v=2.0.2"></script>
+
+    <!-- Bootstrap Select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
 
     <!--  JS Files   -->
     <script src="~/js/jquery.mask.min.js" asp-append-version="true"></script>
