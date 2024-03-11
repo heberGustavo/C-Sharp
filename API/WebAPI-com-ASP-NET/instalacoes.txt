@@ -1,7 +1,0 @@
-01. dotnet new webapi -n nomeDaAplicacao (Criação de uma WEB API para o sistema)
-02. Para instalar dependencias pelo VS Code > Usar a extensão de Nuget 
-03. - Criação do Migration ....
-    - Se não tiver instalado a dependencias do dotnet rodar --> dotnet tool install --global dotnet-ef --version 3.0.0
-    - Verificar se esta instalado, tem que aparecer o unicornio -> dotnet ef 
-    - Configurar banco de dados
-    - Migration --> dotnet ef migrations add initial
