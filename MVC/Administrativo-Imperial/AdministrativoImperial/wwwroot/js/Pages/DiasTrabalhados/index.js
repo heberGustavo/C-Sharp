@@ -54,9 +54,7 @@ function LimparCamposModal(temp) {
     ddlObra.val(0);
     txtData.val('');
     txtIdDiaTrabalhadoTemp.val('')
-
-    ddlFuncionarios.selectpicker("deselectAll");
-    ddlFuncionarios.selectpicker("refresh");
+    ddlFuncionarios.val('')
 }
 
 function ModalDiaTrabalhadoFechar() {
@@ -85,5 +83,4 @@ function BuscarListaDiasTrabalhados() {
 function PreencherModalDiaTrabalhado(response) {
     ddlObra.val(response.data.obrId);
     txtData.val(ConverterParaDataUSA(response.data.ditData));
-    ddlObra.val(response.data.funId);
 }

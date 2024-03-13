@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace AdministrativoImperial.Domain.Business
 {
@@ -34,8 +35,8 @@ namespace AdministrativoImperial.Domain.Business
             {
                 if (diaTrabalhado.DitId <= 0)
                     result = await Inserir(diaTrabalhado);
-                else
-                    result = await Alterar(diaTrabalhado);
+                //else
+                //    result = await Alterar(diaTrabalhado);
 
             }
             catch (Exception e)
@@ -53,6 +54,13 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
+                var listaFuncionarios = await _diaTrabalhadofuncionarioRepository.Listar(ditId);
+
+                foreach (var item in listaFuncionarios)
+                {
+                    await _diaTrabalhadofuncionarioRepository.DeleteAsync(item);
+                }
+
                 var modelDeletar = await _dao.GetById(ditId);
                 if(modelDeletar == null)
                 {
@@ -122,30 +130,6 @@ namespace AdministrativoImperial.Domain.Business
             {
                 result.Type = ResultType.ValidationError;
                 result.Messages.Add("Erro ao cadastrar Dia Trabalhado.");
-            }
-
-            return result;
-        }
-
-        private async Task<ResultInfo> Alterar(DiaTrabalhadoDTO diaTrabalhado)
-        {
-            var result = new ResultInfo();
-
-            try
-            {
-                var modelAtualizada = await _dao.UpdateAsync(diaTrabalhado);
-                if (modelAtualizada != null)
-                    result.Messages.Add("Dia Trabalhado atualizada com sucesso!");
-                else
-                {
-                    result.Type = ResultType.ValidationError;
-                    result.Messages.Add("Erro ao atualizada Dia Trabalhado. Tente novamente!");
-                }
-            }
-            catch (Exception e)
-            {
-                result.Type = ResultType.ValidationError;
-                result.Messages.Add("Erro ao atualizada Dia Trabalhado.");
             }
 
             return result;

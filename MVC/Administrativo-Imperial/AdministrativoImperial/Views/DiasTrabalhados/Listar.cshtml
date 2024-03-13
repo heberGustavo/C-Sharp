@@ -30,13 +30,12 @@
                     <p class="text-xs font-weight-bold mb-0">@String.Join(" / ", item.DiaTrabalhadoFuncionarios.Select(x => x.FunNome))</p>
                 </td>
                 <td class="align-middle">
-
                     @* <button class="btn btn-border-red" type="button" onclick="ModalDiaTrabalhadoEditar(@item.DitId)" data-toggle="tooltip" data-original-title="Editar Dia Trabalhado">
                         <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
                     </button> *@
-                    @* <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.DitId, '@item.FunNome')" type="button" data-toggle="tooltip" data-original-title="Deletar Dia Trabalhado">
+                    <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.DitId)" type="button" data-toggle="tooltip" data-original-title="Deletar Dia Trabalhado">
                         <span class="btn-inner--icon color-blue"><i class="fa-solid fa-trash"></i></span>
-                    </button> *@
+                    </button>
                 </td>
             </tr>
         }

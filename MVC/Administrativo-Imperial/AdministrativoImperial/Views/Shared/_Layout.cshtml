@@ -21,9 +21,6 @@
     <!-- Notifications -->
     <link href="~/lib/sh-toastr-master/css/sh_toaster.css" rel="stylesheet" />
 
-    <!-- Bootstrap Select -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" rel="stylesheet" />
-
     <!-- CSS Files -->
     <link id="pagestyle" href="~/criativeTim/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -72,7 +69,7 @@
                     </a>
                     <div class='dashboard-nav-dropdown-menu'>
                         <a asp-controller="DiasTrabalhados" asp-action="Index" class="dashboard-nav-dropdown-item">Dias trabalhados</a>
-                        <a asp-controller="Material" asp-action="Index" class="dashboard-nav-dropdown-item">Materiais</a>
+                        @* <a asp-controller="Material" asp-action="Index" class="dashboard-nav-dropdown-item">Materiais</a> *@
                     </div>
                 </div>
 
@@ -119,9 +116,6 @@
     
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="~/criativeTim/js/argon-dashboard.min.js?v=2.0.2"></script>
-
-    <!-- Bootstrap Select -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
 
     <!--  JS Files   -->
     <script src="~/js/jquery.mask.min.js" asp-append-version="true"></script>

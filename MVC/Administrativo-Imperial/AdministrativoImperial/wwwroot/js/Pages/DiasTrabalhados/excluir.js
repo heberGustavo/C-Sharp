@@ -5,7 +5,7 @@
 function ConfirmarExclusao(id, nome) {
     swal(
         "Confirmar Exclusão",
-        "Tem certeza que deseja excluir o registro do: " + nome + "?",
+        "Tem certeza que deseja excluir esse registro?",
         "warning").then((confirm) => {
             if (confirm) {
                 DeletarDiaTrabalhado(id)

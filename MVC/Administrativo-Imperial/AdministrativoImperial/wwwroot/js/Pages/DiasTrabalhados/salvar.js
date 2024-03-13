@@ -5,8 +5,6 @@
 /*MODAL*/
 function ModalDiaTrabalhadoSalvar() {
 
-    debugger;
-
     if (VerificarCamposObrigatorios()) {
         var json = ObterDadosJson();
 
