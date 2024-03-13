@@ -62,8 +62,8 @@
                         <i class="fa fa-money"></i> Receita
                     </a>
                     <div class='dashboard-nav-dropdown-menu'>
-                        <a href="#"
-                           class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item">Images</a><a href="#" class="dashboard-nav-dropdown-item">Video</a>
+                        @* <a href="#"
+                           class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item">Images</a><a href="#" class="dashboard-nav-dropdown-item">Video</a> *@
                     </div>
                 </div>
                 <div class='dashboard-nav-dropdown'>
@@ -78,9 +78,9 @@
 
                 <a asp-controller="Funcionario" asp-action="Index" class="dashboard-nav-item"><i class="fa fa-users"></i> Funcionários </a>
                 <a asp-controller="FuncaoFuncionario" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Função Funcionários </a>
-                <a asp-controller="Usuario" asp-action="Index" class="dashboard-nav-item"><i class="fa-solid fa-users-gear"></i> Usuários </a>
+                @* <a asp-controller="Usuario" asp-action="Index" class="dashboard-nav-item"><i class="fa-solid fa-users-gear"></i> Usuários </a> *@
                 <div class="nav-item-divider"></div>
-                <a href="#" class="dashboard-nav-item" onclick="MensagemAvisoManutenção()"><i class="fas fa-user"></i> Perfil </a>
+                @* <a href="#" class="dashboard-nav-item" onclick="MensagemAvisoManutenção()"><i class="fas fa-user"></i> Perfil </a> *@
                 <a asp-controller="Login" asp-action="Index" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </nav>
         </div>
@@ -93,7 +93,7 @@
 
                     <footer class="border-top footer text-muted mt-5">
                         <div class="container">
-                            &copy; 2022 - AdministrativoImperial
+                            &copy; 2024 - AdministrativoImperial
                         </div>
                     </footer>
                 </main>

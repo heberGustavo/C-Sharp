@@ -16,10 +16,12 @@ namespace AdministrativoImperial.Domain.Business
     public class DiaTrabalhadoBusiness : BusinessBase<DiaTrabalhadoDTO>, IDiaTrabalhadoBusiness
     {
         private readonly IDiaTrabalhadoRepository _dao;
+        private readonly IDiaTrabalhadoFuncionarioRepository _diaTrabalhadofuncionarioRepository;
 
-        public DiaTrabalhadoBusiness(IDiaTrabalhadoRepository dao) : base(dao)
+        public DiaTrabalhadoBusiness(IDiaTrabalhadoRepository dao, IDiaTrabalhadoFuncionarioRepository diaTrabalhadiFuncionarioRepository) : base(dao)
         {
             _dao = dao;
+            _diaTrabalhadofuncionarioRepository = diaTrabalhadiFuncionarioRepository;
         }
 
         #region Write
@@ -77,25 +79,44 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                if(diaTrabalhado.FunIds == null || diaTrabalhado.FunIds.Length == 0)
+                #region Validar FunIds
+
+                if (diaTrabalhado.FunIds == null || diaTrabalhado.FunIds.Length == 0)
                 {
                     result.Type = ResultType.ValidationError;
                     result.Messages.Add("Erro ao validar Funcionários. Tente novamente!");
                     return result;
                 }
 
-                foreach (var funId in diaTrabalhado.FunIds)
+                #endregion
+
+                #region Cadastrar Dia Trabalhado
+
+                var idCadastrado = await _dao.CreateAsync(diaTrabalhado);
+                if (idCadastrado <= 0)
                 {
-                    //diaTrabalhado.FunId = Convert.ToInt32(funId);
-                    var idCadastrado = await _dao.CreateAsync(diaTrabalhado);
-                    if (idCadastrado > 0)
-                        result.Messages.Add("Dia Trabalhado cadastrada com sucesso!");
-                    else
+                    result.Type = ResultType.ValidationError;
+                    result.Messages.Add("Erro ao cadastrar Dia Trabalhado. Tente novamente!");
+                }
+
+                #endregion
+
+                #region Cadastrar Dia Trabalhado Funcionário
+
+                foreach (var item in diaTrabalhado.FunIds)
+                {
+                    var idItem = await _diaTrabalhadofuncionarioRepository.CreateAsync(new DiaTrabalhadoFuncionarioDTO { DitId = idCadastrado, FunId = Convert.ToInt32(item) });
+                    if (idItem <= 0)
                     {
                         result.Type = ResultType.ValidationError;
-                        result.Messages.Add("Erro ao cadastrar Dia Trabalhado. Tente novamente!");
+                        result.Messages.Add("Erro ao vincular funcionários. Tente novamente!");
                     }
                 }
+
+                #endregion
+
+                result.Messages.Add("Dia Trabalhado cadastrada com sucesso!");
+
             }
             catch (Exception e)
             {
@@ -142,7 +163,20 @@ namespace AdministrativoImperial.Domain.Business
 
             try
             {
-                result.Items = await _dao.Listar();
+                var listaHelper = new List<DiaTrabalhadoDTO>();
+                var listaDiaTrabalhado = await _dao.Listar();
+
+                if (listaDiaTrabalhado.Count > 0)
+                {
+                    foreach (var item in listaDiaTrabalhado)
+                    {
+                        item.DiaTrabalhadoFuncionarios = await _diaTrabalhadofuncionarioRepository.Listar(item.DitId);
+                        listaHelper.Add(item);
+                    }
+                }
+
+                result.Items = listaHelper;
+
             }
             catch (Exception e)
             {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace AdministrativoImperial.Domain.Models.EntityDomain
 {
@@ -17,6 +15,7 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
 
         
         public string[] FunIds { get; set; }
+        public List<DiaTrabalhadoFuncionarioDTO> DiaTrabalhadoFuncionarios { get; set; }
 
     }
 }

@@ -8,7 +8,7 @@
         <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Obra</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Funcionário</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Funcionários</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Ações</th>
         </tr>
     </thead>
@@ -27,13 +27,13 @@
                     <p class="text-xs font-weight-bold mb-0">@item.DitData.ToString("dd/MM/yyyy")</p>
                 </td>
                 <td>
-                    @* <p class="text-xs font-weight-bold mb-0">@item.FunNome</p> *@
+                    <p class="text-xs font-weight-bold mb-0">@String.Join(" / ", item.DiaTrabalhadoFuncionarios.Select(x => x.FunNome))</p>
                 </td>
                 <td class="align-middle">
 
-                    <button class="btn btn-border-red" type="button" onclick="ModalDiaTrabalhadoEditar(@item.DitId)" data-toggle="tooltip" data-original-title="Editar Dia Trabalhado">
+                    @* <button class="btn btn-border-red" type="button" onclick="ModalDiaTrabalhadoEditar(@item.DitId)" data-toggle="tooltip" data-original-title="Editar Dia Trabalhado">
                         <span class="btn-inner--icon color-red"><i class="fas fa-edit"></i></span>
-                    </button>
+                    </button> *@
                     @* <button class="btn btn-border-blue btnExcluir" onclick="ConfirmarExclusao(@item.DitId, '@item.FunNome')" type="button" data-toggle="tooltip" data-original-title="Deletar Dia Trabalhado">
                         <span class="btn-inner--icon color-blue"><i class="fa-solid fa-trash"></i></span>
                     </button> *@

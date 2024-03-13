@@ -19,16 +19,13 @@ namespace AdministrativoImperial.Data.Repository
 
         public async Task<IList<DiaTrabalhadoDTO>> Listar()
         {
-            var resultData = await _dataContext.Connection.QueryAsync<DiaTrabalhadoDTO>(@"SELECT	
-	                                                                                          Dit.DitId
+            var resultData = await _dataContext.Connection.QueryAsync<DiaTrabalhadoDTO>(@"SELECT 
+	                                                                                        Dit.DitId
 	                                                                                        , Dit.DitData
-	                                                                                        , Fun.FunId
-	                                                                                        , Fun.FunNome
 	                                                                                        , Obr.ObrId
 	                                                                                        , Obr.ObrApelido
                                                                                         FROM 
 	                                                                                        dbo.TB_DIA_TRABALHADO Dit
-	                                                                                        INNER JOIN dbo.TB_FUNCIONARIO Fun ON Fun.FunId = Dit.FunId
 	                                                                                        INNER JOIN dbo.TB_OBRA Obr ON Obr.ObrId = Dit.ObrId
                                                                                         ORDER BY 
 	                                                                                        Dit.DitData DESC");

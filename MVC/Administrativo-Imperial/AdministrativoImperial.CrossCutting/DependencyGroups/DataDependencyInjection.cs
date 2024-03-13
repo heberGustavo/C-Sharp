@@ -17,6 +17,7 @@ namespace AdministrativoImperial.CrossCutting.DependencyGroups
             serviceCollection.AddTransient<IObraRepository, ObraRepository>();
             serviceCollection.AddTransient<IMaterialRepository, MaterialRepository>();
             serviceCollection.AddTransient<IDiaTrabalhadoRepository, DiaTrabalhadoRepository>(); 
+            serviceCollection.AddTransient<IDiaTrabalhadoFuncionarioRepository, DiaTrabalhadoFuncionarioRepository>(); 
         }
     }
 }

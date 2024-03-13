@@ -2,17 +2,10 @@
 
 });
 
-function ObterDadosJson() {
-    return {
-        ObrId: parseInt(ddlObra.val()),
-        DitData: txtData.val(),
-        FunIds: Array.from(ddlFuncionarios.val()),
-        DitId: txtIdDiaTrabalhadoTemp.val().length <= 0 ? 0 : parseInt(txtIdDiaTrabalhadoTemp.val())
-    }
-}
-
 /*MODAL*/
 function ModalDiaTrabalhadoSalvar() {
+
+    debugger;
 
     if (VerificarCamposObrigatorios()) {
         var json = ObterDadosJson();
@@ -76,4 +69,13 @@ function ModalDiaTrabalhadoEditar(ditId) {
             swal("Erro", "Aconteceu um imprevisto. Contate o administrador", "error");
         }
     });
+}
+
+function ObterDadosJson() {
+    return {
+        ObrId: parseInt(ddlObra.val()),
+        DitData: txtData.val(),
+        FunIds: Array.from(ddlFuncionarios.val()),
+        DitId: txtIdDiaTrabalhadoTemp.val().length <= 0 ? 0 : parseInt(txtIdDiaTrabalhadoTemp.val())
+    }
 }

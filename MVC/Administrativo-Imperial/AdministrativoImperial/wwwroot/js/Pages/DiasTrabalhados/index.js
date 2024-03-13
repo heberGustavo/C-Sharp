@@ -11,6 +11,7 @@ $(document).ready(function () {
 
 function Init() {
     Variaveis();
+    bindEvents();
     BuscarListaDiasTrabalhados();
 }
 
@@ -22,6 +23,10 @@ function Variaveis() {
     tabelaDiaTrabalhado = $('#tabelaDiaTrabalhado tbody');
     txtIdDiaTrabalhadoTemp = $("#txtIdDiaTrabalhadoTemp");
     modalDiaTrabalhado = "modalDiaTrabalhado";
+}
+
+function bindEvents() {
+
 }
 
 function ModalDiaTrabalhado() {
@@ -48,8 +53,10 @@ function VerificarCamposObrigatorios() {
 function LimparCamposModal(temp) {
     ddlObra.val(0);
     txtData.val('');
-    ddlFuncionarios.val(0);
     txtIdDiaTrabalhadoTemp.val('')
+
+    ddlFuncionarios.selectpicker("deselectAll");
+    ddlFuncionarios.selectpicker("refresh");
 }
 
 function ModalDiaTrabalhadoFechar() {
@@ -76,9 +83,6 @@ function BuscarListaDiasTrabalhados() {
 }
 
 function PreencherModalDiaTrabalhado(response) {
-
-    console.log(response)
-
     ddlObra.val(response.data.obrId);
     txtData.val(ConverterParaDataUSA(response.data.ditData));
     ddlObra.val(response.data.funId);

@@ -14,6 +14,7 @@ namespace AdministrativoImperial.CrossCutting.MappingGroups
             CreateMap<ObraDTO, Obra>();
             CreateMap<MaterialDTO, Material>();
             CreateMap<DiaTrabalhadoDTO, DiaTrabalhado>();
+            CreateMap<DiaTrabalhadoFuncionarioDTO, DiaTrabalhadoFuncionario>();
         }
     }
 }
