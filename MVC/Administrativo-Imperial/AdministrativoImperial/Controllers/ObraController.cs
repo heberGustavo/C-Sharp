@@ -1,18 +1,12 @@
 ﻿using AdministrativoImperial.Domain.IBusiness;
 using AdministrativoImperial.Domain.Models.EntityDomain;
-using AdministrativoImperial.Models;
 using Gpnet.Common.ExecutionManager;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdministrativoImperial.Controllers
 {
-    public class ObraController : Controller
+	public class ObraController : Controller
     {
         private readonly IObraBusiness _obraBusiness;
 
@@ -23,12 +17,12 @@ namespace AdministrativoImperial.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+			return View();
+		}
 
-        #region Write
+		#region Write
 
-        [HttpPost]
+		[HttpPost]
         [Route("[controller]/[action]")]
         public async Task<JsonResult> Cadastrar([FromBody] ObraDTO obra)
         {

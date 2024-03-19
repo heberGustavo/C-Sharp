@@ -32,5 +32,7 @@ namespace AdministrativoImperial.Domain.Models.EntityDomain
 
         [DataMember]
         public bool ObrStatus { get; set; }
+
+        public decimal GastosTotais { get; set; }
     }
 }

@@ -51,18 +51,18 @@
                 </a>
             </header>
             <nav class="dashboard-nav-list">
-                <a asp-controller="Dashboard" asp-action="Index" class="dashboard-nav-item active"><i class="fa fa-bar-chart"></i>Dashboard</a>
+                @* <a asp-controller="Dashboard" asp-action="Index" class="dashboard-nav-item active"><i class="fa fa-bar-chart"></i>Dashboard</a> *@
                 <a asp-controller="Obra" asp-action="Index" class="dashboard-nav-item"><i class="fa-solid fa-person-digging"></i> Obra</a>
 
-                <div class='dashboard-nav-dropdown'>
+                @* <div class='dashboard-nav-dropdown'>
                     <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
                         <i class="fa fa-money"></i> Receita
                     </a>
                     <div class='dashboard-nav-dropdown-menu'>
-                        @* <a href="#"
-                           class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item">Images</a><a href="#" class="dashboard-nav-dropdown-item">Video</a> *@
+                        <a href="#"
+                           class="dashboard-nav-dropdown-item">All</a><a href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#" class="dashboard-nav-dropdown-item">Images</a><a href="#" class="dashboard-nav-dropdown-item">Video</a> 
                     </div>
-                </div>
+                </div> *@
                 <div class='dashboard-nav-dropdown'>
                     <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
                         <i class="fa fa-credit-card"></i> Despesas
@@ -89,7 +89,7 @@
                     @RenderBody()
 
                     <footer class="border-top footer text-muted mt-5">
-                        <div class="container">
+                        <div class="dashboard-content">
                             &copy; 2024 - AdministrativoImperial
                         </div>
                     </footer>

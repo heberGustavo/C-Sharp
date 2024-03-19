@@ -2,6 +2,8 @@
 using AdministrativoImperial.Domain.Models.Body;
 using AdministrativoImperial.Domain.Models.EntityDomain;
 using Gpnet.Common.ExecutionManager;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -43,6 +45,9 @@ namespace AdministrativoImperial.Controllers
 
                     if (!hashSenhaAtual.Equals(hashSenhaArmazenada))
                         return Json(new { erro = true, mensagem = "Senha inválida. Verifique e tente novamente!" });
+
+                    HttpContext.Session.SetInt32("__Autenticado", 1);
+                    HttpContext.Session.SetString("__Usuario", resultUsuario.Item.UsaNome);
 
                     return Json(new { erro = false, mensagem = "Usuário autenticado!", infoUser = new { resultUsuario.Item.UsaId, resultUsuario.Item.UsaNome } } );
                 }

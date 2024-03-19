@@ -18,8 +18,8 @@ function Variaveis() {
 function Autenticar() {
     MostraLoading();
 
-    window.location.href = MontarUrl("Dashboard", "Index");
-    return
+    window.location.href = MontarUrl("Obra", "Index");
+    return;
 
     if (!VerificarCamposObrigatorios()) {
         EncerraLoading();
@@ -39,7 +39,7 @@ function Autenticar() {
         dataType: "json",
         success: function (response) {
             if (!response.erro) {
-
+                window.location.href = MontarUrl("Obra", "Index");
             }
             else {
                 MostrarAlertMensagemErro(response.mensagem);

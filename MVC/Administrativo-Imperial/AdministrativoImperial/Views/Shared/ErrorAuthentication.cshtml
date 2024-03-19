@@ -1,0 +1,37 @@
+﻿@{
+	ViewData["Title"] = "Error";
+	Layout = "";
+}
+<head>
+    <style>
+		 html, body {
+			 margin: 0;
+			 height: 100vh;
+			 font-family: 'Chicle', cursive;
+		}
+		 body {
+			background: url(https://localhost:44391/img/police.png);
+			 background-size: cover;
+			 background-position: 50% 50%;
+			 display: flex;
+			 justify-content: center;
+			 align-items: center;
+		}
+		 .container {
+			 background: rgba(255,255,255,0.8);
+			 padding: 1em 2em;
+			 font-size: 1.5em;
+			 text-align: center;
+			 margin-top: 30vh;
+		}
+		 h1 {
+			 color: #e60000;
+		}
+    </style>
+</head>
+
+<div class="container">
+    <h1>Desculpe pessoal, mas essa pagina não é permetida.</h1>
+    <p>Faça o login para ter acesso</p>
+	<a asp-controller="Login" asp-action="Index">Voltar para Login</a>
+</div>

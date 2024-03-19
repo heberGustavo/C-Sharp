@@ -10,7 +10,7 @@
     <thead>
         <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Apelido</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Início - Fim</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Início</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Orçamento</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Gasto Total</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Lucro</th>
@@ -22,6 +22,13 @@
         {
             @foreach (var item in Model)
             {
+                var corColunaLucro = "#02ca02";
+                var lucro = item.ObrOrcamento - item.GastosTotais;
+                if(lucro < 0)
+                {
+                    corColunaLucro = "#e50101";
+                }
+
                 <tr>
                     <td>
                         <div class="d-flex px-3 py-1">
@@ -33,23 +40,23 @@
                     <td>
                         <p class="text-xs font-weight-bold mb-0">
                             <span class="data-inicio">@item.ObrDataInicio.ToString("dd/MM/yyyy")</span>
-                            -
+                            @* -
                             @if (DateMin != item.ObrDataFim)
                             {
                                 <span class="data-fim">
                                     @item.ObrDataFim.ToString("dd/MM/yyyy")
                                 </span>
-                            }
+                            } *@
                         </p>
                     </td>
                     <td class="align-middle">
                         <p class="text-xs font-weight-bold mb-0">@item.ObrOrcamento.ToString("C")</p>
                     </td>
                     <td class="align-middle">
-                        <p class="text-xs font-weight-bold mb-0">0.00</p>
+                        <p class="text-xs font-weight-bold mb-0">@item.GastosTotais.ToString("C")</p>
                     </td>
                     <td class="align-middletext-sm">
-                        <p class="text-xs font-weight-bold mb-0">000.00</p>
+                        <p class="text-xs font-weight-bold mb-0" style="color:@corColunaLucro">@lucro.ToString("C")</p>
                     </td>
                     <td class="align-middle">
                         <button class="btn btn-icon btn-2 btn-info" type="button" onclick="ModalObraEditar(@item.ObrId)" data-toggle="tooltip" data-original-title="Editar Função">
