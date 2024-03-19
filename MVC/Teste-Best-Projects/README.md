@@ -1,12 +1,16 @@
-# Cadastro de contatos
-Esse projeto é um teste, onde o objetivo principal é que o cliente consiga realizar cadastro de seus contatos.
+# Registering Contacts
 
-Metodos inclusos no sistema: 
-- Cadastro (com verificaçoes nos campos Nome e Telefone Res.)
-- Exclusão
-- Listagem de todos os dados
+### About project
+This project is a test for the company, its objective is to register people in the contact list.
 
-Como esse sistema é para rodar local é necessario a criação de um Database com o nome "TesteBestProjects", mas caso querer alterar a CONNECTION_STRING você deve acessar o arquivo que esta localizado em: 0-Portal -> appsettings.json -> CONNECTION_STRING e CONNECTION_STRING_DEBUG
+Methods in the system:
+- Create (make verification in fields Name and Phone 1)
+- Delete
+- Data list
 
-Espero que ocorra tudo perfeitamente, caso de alguma dúvida ou erro entre em contato comigo!
-WhatsApp: 19 987087683
+### Connection String
+Note: To run this system it's necessary to change the Connection String, for this access: 0-Portal -> appsettings.json -> CONNECTION_STRING and CONNECTION_STRING_DEBUG
+
+
+![image](https://github.com/heberGustavo/C-Sharp/assets/44476616/6dc6de51-b889-47d3-86b2-213495be8914)
+
