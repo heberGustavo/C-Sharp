@@ -2,6 +2,7 @@
 
 ### About project
 This project is a test for the company, its objective is to register people in the contact list.
+It's was developed using ASP NET CORE MVC 3, SQL Server, Dapper, Bootstrap and jQuery
 
 Methods in the system:
 - Create (make verification in fields Name and Phone 1)
