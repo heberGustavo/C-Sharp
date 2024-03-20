@@ -26,6 +26,7 @@
     <None Remove="Scripts\202104300843_Alteracao_Tabela_Sorteio.sql" />
     <None Remove="Scripts\202104301102_Alteracao_Tabela_Pedido.sql" />
     <None Remove="Scripts\202109020847_Alteracao_Tabela_Usuario.sql" />
+    <None Remove="Scripts\202403200748_Insert_Tabela_Usuarios.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +50,7 @@
     <EmbeddedResource Include="Scripts\202104221126_Alteracao_Tabela_Pedido.sql" />
     <EmbeddedResource Include="Scripts\202104201200_Alteracao_Tabela_Pedido.sql" />
     <EmbeddedResource Include="Scripts\202104081432_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202403200748_Insert_Tabela_Usuarios.sql" />
     <EmbeddedResource Include="Scripts\202109020847_Alteracao_Tabela_Usuario.sql" />
   </ItemGroup>
 

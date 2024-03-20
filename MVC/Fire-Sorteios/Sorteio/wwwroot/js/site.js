@@ -19,7 +19,7 @@ $(document).on(
 
 $(function () {
 
-    swal("Atenção", "Estamos em manutenção! Volte mais tarde", "warning");
+    /*swal("Atenção", "Estamos em manutenção! Volte mais tarde", "warning");*/
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar, #content').toggleClass('active');
