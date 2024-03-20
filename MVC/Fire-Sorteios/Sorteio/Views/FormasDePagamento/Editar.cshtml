@@ -1,0 +1,102 @@
+﻿@using Sorteio.Common
+
+@{
+    ViewData["Title"] = "Editar Forma de Pagamento";
+    Layout = "_LayoutAcessoInterno";
+
+    @model Sorteio.Domain.Models.EntityDomain.FormasDePagamento;
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Editar Forma de Pagamento</h2>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="favorecido">Favorecido</label>
+                        <input value="@Model.favorecido" type="text" name="favorecido" id="favorecido" class="form-control" placeholder="Nome do Favorecido">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="cpf">CPF/CNPJ</label>
+                        <input value="@Model.cpf" type="text" name="cpf" id="cpf" class="form-control cpfcnpj" placeholder="CPF ou CNPJ">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="nome_banco">Banco</label>
+                        <input value="@Model.nome_banco" type="text" name="nome_banco" id="nome_banco" class="form-control" placeholder="Nome do Banco">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="codigo_banco">Código</label>
+                        <input value="@Model.codigo_banco" type="text" name="codigo_banco" id="codigo_banco" class="form-control number" placeholder="Código do Banco">
+                    </div>
+                    <div class="form-group col-md-3 alinhar-embaixo logo-banco">
+                        <label for="" class="required">Alterar Logo</label>
+                        <div class="custom-file">
+                            <input type="file" name="file_logo_banco" class="custom-file-input" id="logoBanco" accept=".png, .jpg, .jpeg" onchange="UploadImage(this,'lblArquivoLogoBanco','caminhoArquivoLogoBanco', 'logoBanco')">
+                            <input value="@Model.url_imagem" type="hidden" id="caminhoArquivoLogoBanco" />
+                            <label class="custom-file-label" for="logoBanco" id="lblArquivoLogoBanco">Escolher arquivo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="agencia">Agência</label>
+                        <input value="@Model.agencia" type="text" name="agencia" id="agencia" class="form-control number" placeholder="Número da Agência">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="conta">Conta</label>
+                        <input value="@Model.conta" type="text" name="conta" id="conta" class="form-control" placeholder="Número da Conta">
+                    </div>
+                    <div class="form-group col-md-3 alinhar-embaixo">
+                        <select id="select_tipo_conta" class="selectpicker" data-style="btn-dark">
+                            <option disabled selected value="0">Tipo da Conta</option>
+                            @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.TipoFormaDePagamento>)ViewBag.TipoFormaDePagamento)
+                            {
+                                if (item.id_tipo_forma_de_pagamento == Model.id_tipo_forma_de_pagamento)
+                                {
+                                    <option selected value="@item.id_tipo_forma_de_pagamento">@item.nome</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id_tipo_forma_de_pagamento">@item.nome</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                @if (Model.id_tipo_forma_de_pagamento == DataDictionary.CODIGO_PIX)
+                {
+                    <div id="campo_chave_pix" class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="pix">Chave Pix</label>
+                            <input value="@Model.pix" type="text" name="pix" id="pix" class="form-control" placeholder="Informe a chave">
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="campo_chave_pix" class="form-row d-none">
+                        <div class="form-group col-md-3">
+                            <label for="pix">Chave Pix</label>
+                            <input type="text" name="pix" id="pix" class="form-control" placeholder="Informe a chave">
+                        </div>
+                    </div>
+                }
+            </form>
+            <button class="btn btn-outline-success btn-sm" onclick="AtualizarFormaDePagamento()">Salvar</button>
+            <input value="@Model.id_forma_de_pagamento" type="hidden" id="idFormaDePagamentoEscolhida" />
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/FormasDePagamento/Criar.js" asp-append-version="true"></script>
+<script src="~/js/Pages/FormasDePagamento/Editar.js" asp-append-version="true"></script>

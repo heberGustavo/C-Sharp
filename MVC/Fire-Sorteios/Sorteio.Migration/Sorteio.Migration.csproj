@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\202104071044_Criacao_Tabela_Tipo_Usuario.sql" />
+    <None Remove="Scripts\202104071052_Criacao_Tabelas.sql" />
+    <None Remove="Scripts\202104071110_Criacao_Tabelas_FormasDePagamento.sql" />
+    <None Remove="Scripts\202104081300_Criacao_Tabela_Usuario.sql" />
+    <None Remove="Scripts\202104081310_Criacao_Tabela_Pedido.sql" />
+    <None Remove="Scripts\202104081323_Alteracao_Adicionando_Status_nas_Tabelas.sql" />
+    <None Remove="Scripts\202104081327_Criacao_Tabela_Numero_Escolhido.sql" />
+    <None Remove="Scripts\202104081334_Criacao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104081422_Criacao_Tabela_VencedorSorteio.sql" />
+    <None Remove="Scripts\202104081432_Alteracao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104201200_Alteracao_Tabela_Pedido.sql" />
+    <None Remove="Scripts\202104221126_Alteracao_Tabela_Pedido.sql" />
+    <None Remove="Scripts\202104221227_Alteracao_Tabela_Pedido.sql" />
+    <None Remove="Scripts\202104221353_Alteracao_Tabela_Usuario.sql" />
+    <None Remove="Scripts\202104261436_Alteracao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104261440_Alteracao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104270917_Alteracao_Tabela_FormasDePagamento.sql" />
+    <None Remove="Scripts\202104300839_Alteracao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104300843_Alteracao_Tabela_Sorteio.sql" />
+    <None Remove="Scripts\202104301102_Alteracao_Tabela_Pedido.sql" />
+    <None Remove="Scripts\202109020847_Alteracao_Tabela_Usuario.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\202104071044_Criacao_Tabela_Tipo_Usuario.sql" />
+    <EmbeddedResource Include="Scripts\202104071052_Criacao_Tabelas.sql" />
+    <EmbeddedResource Include="Scripts\202104071110_Criacao_Tabelas_FormasDePagamento.sql" />
+    <EmbeddedResource Include="Scripts\202104081300_Criacao_Tabela_Usuario.sql" />
+    <EmbeddedResource Include="Scripts\202104081310_Criacao_Tabela_Pedido.sql" />
+    <EmbeddedResource Include="Scripts\202104081323_Alteracao_Adicionando_Status_nas_Tabelas.sql" />
+    <EmbeddedResource Include="Scripts\202104081327_Criacao_Tabela_Numero_Escolhido.sql" />
+    <EmbeddedResource Include="Scripts\202104081334_Criacao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104081422_Criacao_Tabela_VencedorSorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104301102_Alteracao_Tabela_Pedido.sql" />
+    <EmbeddedResource Include="Scripts\202104300843_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104300839_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104270917_Alteracao_Tabela_FormasDePagamento.sql" />
+    <EmbeddedResource Include="Scripts\202104261440_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104261436_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202104221353_Alteracao_Tabela_Usuario.sql" />
+    <EmbeddedResource Include="Scripts\202104221227_Alteracao_Tabela_Pedido.sql" />
+    <EmbeddedResource Include="Scripts\202104221126_Alteracao_Tabela_Pedido.sql" />
+    <EmbeddedResource Include="Scripts\202104201200_Alteracao_Tabela_Pedido.sql" />
+    <EmbeddedResource Include="Scripts\202104081432_Alteracao_Tabela_Sorteio.sql" />
+    <EmbeddedResource Include="Scripts\202109020847_Alteracao_Tabela_Usuario.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.5.0" />
+    <PackageReference Include="dbup-sqlserver" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sorteio.Domain\Sorteio.Domain.csproj" />
+    <ProjectReference Include="..\Sorteio.Utils\Sorteio.Common.csproj" />
+  </ItemGroup>
+
+</Project>

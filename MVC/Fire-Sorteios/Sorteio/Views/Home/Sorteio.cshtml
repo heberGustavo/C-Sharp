@@ -1,0 +1,271 @@
+﻿@using Sorteio.Common;
+
+@{
+    ViewData["Title"] = "Sorteio";
+    Layout = "_LayoutSorteio";
+
+    @model Sorteio.Domain.Models.Body.SorteioBody
+}
+
+
+<input type="hidden" id="idSorteioSelecionado" value="@Model.sorteio.id_sorteio" />
+<input type="hidden" id="quantidadeNumerosSorteio" value="@Model.sorteio.quantidade_numeros" />
+
+<div class="main main-raised">
+    <div class="container">
+        <div class="section text-center">
+
+
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <h2 class="title mt-5 mb-0 p-0">@Model.sorteio.nome</h2>
+                    <h3 class="mt-0 mb-5 p-0 text-danger"><strong id="valor_rifa">@Convert.ToDecimal(Model.sorteio.valor).ToString("C")</strong></h3>
+                </div>
+
+                <div class="col-md-8">
+                    <ul class="pgwSlideshow">
+
+                        @foreach (var item in Model.linkImagens)
+                        {
+                            <li><img src="@item.url_imagem"></li>
+                        }
+
+                    </ul>
+                </div>
+                <div class="col-md-4 text-left" id="regulamento">
+                    <h4 class="title mt-0">REGULAMENTO / DESCRIÇÃO</h4>
+                    <div id="texto_longo_html" class="d-none">@Model.sorteio.descricao_longa</div>
+                    <div class="summernote" id="contentSummernote"></div>
+                </div>
+
+            </div>
+
+            @{
+                var myModel = (IList<Sorteio.Domain.Models.Body.NumeroEscolhidoBody>)ViewBag.NumerosDoSorteio;
+
+                int quantidadeReservado = myModel.Where(x => x.id_status_pedido == DataDictionary.STATUS_PEDIDO_PENDENTE).Count();
+                int quantidadePago = myModel.Where(x => x.id_status_pedido == DataDictionary.STATUS_PEDIDO_PAGO).Count();
+                int quantidadeDisponivel = Model.sorteio.quantidade_numeros - quantidadeReservado - quantidadePago;
+            }
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3 class="title">Números do Sorteio</h3>
+
+                    <div class="bloco-filtro-sorteio">
+                        <label onclick="BuscarTodosNumeros('@Model.sorteio.id_sorteio');" class="item item-todos">Todos (@Model.sorteio.quantidade_numeros)</label>
+                    </div>
+                    <div class="bloco-filtro-sorteio">
+                        <label onclick="BuscarNumerosDisponiveis('@Model.sorteio.id_sorteio');" class="item item-disponivel-padrao">Disponível (@quantidadeDisponivel)</label>
+                    </div>
+                    <div class="bloco-filtro-sorteio">
+                        <label onclick="BuscarNumerosReservados('@Model.sorteio.id_sorteio', '@DataDictionary.STATUS_PEDIDO_PENDENTE');" class="item item-reservado">Reservado (@quantidadeReservado)</label>
+                    </div>
+                    <div class="bloco-filtro-sorteio">
+                        <label onclick="BuscarNumerosPagos('@Model.sorteio.id_sorteio', '@DataDictionary.STATUS_PEDIDO_PAGO');" class="item item-pago">Pago (@quantidadePago)</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="bloco-filtro-sorteio">
+                        <label class="item consultar-meus-numero" onclick="ModalConsultarMeusNumeros()">Consultar meus números</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" id="lista_numeros_sorteio">
+                    @{
+                        @for (var i = 0; i < Model.sorteio.quantidade_numeros; i++)
+                        {
+                            if (myModel.Any(x => x.numero == i && x.id_status_pedido == DataDictionary.STATUS_PEDIDO_PENDENTE))
+                            {
+                                var nomeUsuario = myModel.Where(n => n.numero == i).Select(v => v.nome_usuario).First().ToString();
+
+                                <button class="itens-numero-sorteio item-reservado" data-toggle="tooltip" data-placement="top" title="Reservado para: @nomeUsuario">@i.ToString("000")</button>
+
+                            }
+                            else if (myModel.Any(x => x.numero == i && x.id_status_pedido == DataDictionary.STATUS_PEDIDO_PAGO))
+                            {
+                                var nomeUsuario = myModel.Where(n => n.numero == i).Select(v => v.nome_usuario).First().ToString();
+
+                                <button class="itens-numero-sorteio item-pago" data-toggle="tooltip" data-placement="top" title="Pago por: @nomeUsuario">@i.ToString("000")</button>
+
+                            }
+                            else
+                            {
+                                <button onclick="EscolhaItemDisponivel(this)" class="itens-numero-sorteio item-disponivel">@i.ToString("000")</button>
+                            }
+                        }
+
+                    }
+                </div>
+            </div>
+
+            <div class="row mt-4" id="dados-pagamento">
+                <div class="col-md-12">
+                    <h3 class="title">Dados para o Pagamento</h3>
+                </div>
+
+                @foreach (var item in (IEnumerable<Sorteio.Domain.Models.Body.FormaDePagamentoBody>)ViewBag.FormasDePamento)
+                {
+                    if (item.id_tipo_forma_de_pagamento == DataDictionary.CODIGO_PIX)
+                    {
+                        <div class="col-md-3">
+                            <div class="card" style="width: 17rem; height: 27rem;">
+                                <img class="card-img-top" style="background: url('@item.url_imagem'); width: 100%; height: 200px; background-position: center; background-size: contain; background-repeat: no-repeat; ">
+                                <div class="card-body dados-banco text-center">
+                                    <h4 class="title">@item.nome_banco</h4>
+                                    <h6><strong>Tipo:</strong> @item.nome_tipo_forma_de_pagamento</h6>
+                                    <h6><strong>Chave:</strong> @item.pix</h6>
+                                    <h6><strong>Favorecido:</strong> @item.favorecido</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3">
+                            <div class="card" style="width: 17rem; height: 27rem;">
+                                <img class="card-img-top" style="background: url('@item.url_imagem'); width: 100%; height: 200px; background-position: center; background-size: contain; background-repeat: no-repeat; ">
+                                <div class="card-body dados-banco text-center">
+                                    <h4 class="title">@item.nome_banco</h4>
+                                    <h6><strong>Tipo:</strong> @item.nome_tipo_forma_de_pagamento</h6>
+                                    <h6><strong>Cód Banco:</strong> @item.codigo_banco</h6>
+                                    <h6><strong>Favorecido:</strong> @item.favorecido</h6>
+                                    <h6><strong>CPF:</strong> @item.cpf</h6>
+                                    <h6><strong>Agência:</strong> @item.agencia</h6>
+                                    <h6><strong>Conta:</strong> @item.conta</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+
+        <nav id="sessao-fixa" class="fixed-bottom mb-0 p-4 d-none">
+            <div class="container">
+                <div class="row">
+                    <div id="numeros_selecionados" class="col-md-7"></div>
+                    <div class="col-md-3">
+                        <strong>Selecionado(s): <text id="quantidade_selecionado"></text> </strong>
+                        <br />
+                        <div class="d-none">
+                            <strong>Total a pagar: R$ <text id="valor_total"></text> </strong>
+                        </div>
+                        <strong>Total a pagar: R$ <text id="valor_total_visual"></text> </strong>
+                    </div>
+                    <div class="col-md-2">
+                        <button onclick="GerarTicket()" class="btn btn-success">GERAR TICKET <span class="material-icons">check</span></button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <div class="rodape">
+        <div class="container">
+            <div>
+                <img src="~/img/logo_preta.png" class="logo" />
+                <div class="row redes-sociais d-flex justify-content-center">
+                    <a href="https://www.instagram.com/fire.sorteios/" target="_blank">
+                        <img class="img-fluid" src="~/img/instagran.png" alt="Instagran" style="width: 50px; height: 50px;" />
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">
+                        <img class="img-fluid" src="~/img/whatsapp.png" alt="Whatsapp" style="width: 50px; height: 50px;" />
+                    </a>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a href="#home">HOME</a> | <a href="#ultimos-sorteios">ÚLTIMOS SORTEIOS</a>
+                    <br />
+                    <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">ENVIE SEU COMPROVANTE</a> | <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">TIRE SUAS DÚVIDAS</a>
+                    <br />
+                    <a asp-controller="Home" asp-action="PoliticaDePrivacidade">POLÍTICA DE PRIVACIDADE</a>
+                    <br />
+                </div>
+                <div class="copyright text-center">
+                    <b style="font-family: 'Roboto';">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        Fire Sorteios | Desenvolvido por <a style="font-family: 'Roboto';" href="https://www.instagram.com/servicequality_ae/" target="_blank"><b class="text-danger">Service Quality</b> <img src="~/img/logo-sq.png" width="25" alt="Service Quality" /> </a>
+                    </b>
+                </div>
+            </div>
+            <br /><br />
+        </div>
+    </div>
+</div>
+
+<!-- Modal Gerar Ticket -->
+<div class="modal fade" id="modalGerarTicket" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="title mt-0 mb-2 font-good-times">Informe seus dados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="title m-0">Confirmação de Reserva</h5>
+                <p>Preencha seus dados para gerar o bilhete!</p>
+                <form>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nomeLogin">Nome Completo</label>
+                            <input id="nomeLogin" name="nomeLogin" type="text" class="form-control" placeholder="Nome">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="celularLogin">Celular</label>
+                            <input id="celularLogin" name="celularLogin" type="text" class="form-control cel_with_ddd" placeholder="Celular">
+                        </div>
+                        <div class="form-group col-md-12 text-center align-self-center">
+                            <a onclick="CadastrarAcessarPortal()" class="btn btn-success text-light d-block">Acessar</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Consultar Numeros -->
+<div class="modal fade" id="modalConsultarNumeros" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="title mt-0 mb-2 font-good-times">Informe seu número</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-dark">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="celularConsultarNumero">Celular</label>
+                            <input id="celularConsultarNumero" name="celularConsultarNumero" type="text" class="form-control cel_with_ddd" placeholder="Celular">
+                        </div>
+                        <div class="form-group col-md-12 text-center align-self-center">
+                            <a onclick="ConsultarNumerosCliente()" class="btn btn-success text-light d-block">Consultar</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/Home/ItemSorteio.js" asp-append-version="true" type="text/javascript"></script>
+<script src="~/js/Pages/Home/ItemSorteioLogin.js" asp-append-version="true" type="text/javascript"></script>
+<script src="~/js/Pages/Home/ItemSorteioCadastrarAcessarPortal.js" asp-append-version="true" type="text/javascript"></script>
+<script src="~/js/Pages/Home/FiltrarNumeros.js" asp-append-version="true" type="text/javascript"></script>

@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Cadastrar Sorteio";
+    Layout = "_LayoutAcessoInterno";
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Novo Sorteio</h2>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-12 text-center">
+                    <label for="file-input" class="selecionar_arquivo">
+                        <p class="m-0">Selecionar fotos do sorteio</p>
+                        <i class="material-icons">cloud_upload</i>
+                    </label>
+                    <p id="quantidade_arquivo" class="font-weight-bold"></p>
+                    <input id="file-input" type="file" multiple accept=".png, .jpg, .jpeg"/>
+                    <div id="preview"></div>
+                </div>
+            </div>
+
+            <div id="inputs_de_links_gerados"></div>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Nome do Sorteio</label>
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Meu novo sorteio">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="edicao">Edição</label>
+                        <input type="text" name="edicao" id="edicao" class="form-control" placeholder="Número da Edição">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="valor">Valor</label>
+                        <input type="text" name="valor" id="valor" class="form-control money" placeholder="R$ 10,00">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="quantidade_numeros">Quant. de números</label>
+                        <input type="text" name="quantidade_numeros" id="quantidade_numeros" class="form-control number" placeholder="100">
+                    </div>
+                    <div class="form-group col-md-3 alinhar-embaixo">
+                        <select id="select_categoria_sorteio" class="selectpicker" data-style="btn-dark">
+                            <option disabled selected value="0">Categoria</option>
+                            @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.CategoriaSorteio>)ViewBag.CategoriaSorteio)
+                            {
+                                <option value="@item.id_categoria_sorteio">@item.nome</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="descricao_curta">Descrição curta</label>
+                        <input type="text" name="descricao_curta" id="descricao_curta" class="form-control" placeholder="Minha descrição curta">
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="summernote" id="contentSummernote"></div>
+                </div>
+            </div>
+
+            <button id="edit" class="btn btn-outline-info btn-sm" onclick="edit()">Editar</button>
+            <button id="save" class="btn btn-outline-success btn-sm" onclick="save()">Salvar</button>
+            <hr />
+            <button class="btn btn-dark" onclick="CadastrarSorteio();">Cadastrar</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="~/js/Pages/Sorteios/NovoSorteio.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/plugins/summernote-pt-br.js" type="text/javascript" asp-append-version="true"></script>

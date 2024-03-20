@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Effortless.Net.Encryption" Version="3.3.0" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sorteio.Utils\Sorteio.Common.csproj" />
+  </ItemGroup>
+
+</Project>

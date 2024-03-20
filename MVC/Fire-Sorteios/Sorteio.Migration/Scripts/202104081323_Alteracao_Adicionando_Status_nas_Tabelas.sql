@@ -1,0 +1,5 @@
+﻿ALTER TABLE dbo.Usuario ADD status BIT NOT NULL DEFAULT 0;
+ALTER TABLE dbo.CategoriaSorteio ADD status BIT NOT NULL DEFAULT 0;
+ALTER TABLE dbo.GaleriaFotos ADD status BIT NOT NULL DEFAULT 0;
+ALTER TABLE dbo.TipoFormaDePagamento ADD status BIT NOT NULL DEFAULT 0;
+ALTER TABLE dbo.FormasDePagamento ADD status BIT NOT NULL DEFAULT 0;

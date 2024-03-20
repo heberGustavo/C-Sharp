@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Pagamentos";
+    Layout = "_LayoutAcessoInterno";
+
+    @model IEnumerable<Sorteio.Domain.Models.EntityDomain.Sorteio>
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Pagamentos</h2>
+                </div>
+            </div>
+            <div id="accordion">
+
+                @foreach (var item in Model)
+                {
+                    <div class="card card-custom">
+                        <div class="card-header card-header-custom" id="heading_@item.id_sorteio">
+                            <h5 class="mb-0">
+                                <button onclick="ObterParticipantesSorteio('@item.id_sorteio')" class="btn btn-link" data-toggle="collapse" data-target="#collapse_@item.id_sorteio" aria-expanded="true" aria-controls="collapse_@item.id_sorteio">
+                                    @item.nome
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapse_@item.id_sorteio" class="collapse" aria-labelledby="heading_@item.id_sorteio" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-hover table-responsive-lg datatableListaParticipante">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th scope="col">Cod.</th>
+                                            <th scope="col">Participante</th>
+                                            <th scope="col">CPF</th>
+                                            <th scope="col">Numero</th>
+                                            <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirmar Pagamento -->
+<div class="modal fade" id="modalConfirmarPagamento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <input type="hidden" id="idPedidoSelecionado" />
+                <h5 class="title m-0 text-center">Confirmar Pagamento</h5>
+                <p class="text-center">Tem certeza que deseja <text class="font-weight-bold">confirmar o pagamento?</text></p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Fechar</button> &#160;
+                <button onclick="ConfirmarPagamentoRecebido()" type="button" class="btn btn-success btn-sm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Visualizar Numeros por Pedido -->
+<div class="modal fade" id="modalVisualizarNumerosPorPedido" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <h4 class="title text-center">Números do Pedido</h4>
+                <div class="row" style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
+                    <div class="numeros-pedido"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/Pagamento/Index.js" asp-append-version="true" type="text/javascript"></script>
+<script src="~/js/Pages/Pagamento/ConfirmarPagamento.js" asp-append-version="true" type="text/javascript"></script>
+<script src="~/js/Pages/Pagamento/VisualizarNumerosPorPedido.js" asp-append-version="true" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

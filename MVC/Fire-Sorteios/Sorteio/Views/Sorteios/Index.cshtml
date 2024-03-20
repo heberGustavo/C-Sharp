@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "Sorteios";
+    Layout = "_LayoutAcessoInterno";
+
+    @model IEnumerable<Sorteio.Domain.Models.NotMapped.SorteioNotMapped>
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Lista de Sorteios</h2>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <a asp-controller="Sorteios" asp-action="Novo" class="btn btn-outline-danger font-good-times">Novo Sorteio</a>
+            </div>
+            <table class="table table-hover table-responsive-lg" id="datatableListaSorteios">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Sorteio</th>
+                        <th scope="col">Ganhador</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.edicao_sorteio&deg; Edição - @item.nome_sorteio</td>
+                            <td>@item.nome_ganhador</td>
+                            @if (item.status == false)
+                            {
+                                <td>
+                                    <button class="btn btn-sm btn-warning">Em andamento</button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button onclick="AbrirInformaçõesUsuario('@item.id_usuario')" data-toggle="tooltip" data-placement="top" title="Visualizar Ganhador" class="btn btn-sm btn-success">Finalizado</button>
+                                </td>
+                            }
+                            <td>
+                                <a class="btn btn-sm btn-info" asp-controller="Sorteios" asp-action="Editar" asp-route-id="@item.id_sorteio"><span class="material-icons">create</span></a>
+                                <button onclick="AbrirModalExcluirSorteio('@item.id_sorteio')" class="btn btn-sm btn-danger"><span class="material-icons">delete</span></button>
+                                @if (item.status == false)
+                                {
+                                    <a onclick="AbrirModalFinalizarSorteio('@item.id_sorteio')" class="btn btn-sm btn-dark text-light"><span class="material-icons">assignment_turned_in</span></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Info Usuario -->
+<div class="modal fade" id="modalInformacoesUsuario" tabindex="-1" role="dialog" aria-labelledby="modalInformacoesUsuario" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0 text-center">
+                <h5 class="title m-0 text-center">Informações do Ganhador</h5>
+
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-9">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome e Sobrenome">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="telefone">Telefone/Celular</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Excluir Sorteio -->
+<div class="modal fade" id="modalExcluirSorteio" tabindex="-1" role="dialog" aria-labelledby="modalExcluirSorteio" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0 text-center">
+                <input type="hidden" id="idSorteioSelecionadoExclusao" />
+                <h5 class="title m-0 text-center">Finalizar Sorteio</h5>
+                <p>Você tem certeza que deseja excluir o sorteio selecionado?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Fechar</button> &#160;
+                <button type="button" onclick="ExcluirSorteio();" class="btn btn-success btn-sm">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Finalizar Sorteio -->
+<div class="modal fade" id="modalFinalizarSorteio" tabindex="-1" role="dialog" aria-labelledby="modalFinalizarSorteio" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <h5 class="title m-0 text-center">Finalizar Sorteio</h5>
+                <small class="m-auto d-block text-center">Para finalizar o sorteio preencha os campos abaixo</small>
+                <input type="hidden" id="idSorteioSelecionado" />
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="data_sorteio">Data</label>
+                            <input type="date" class="form-control" id="data_sorteio" name="data_sorteio">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <select id="select_nome_cliente" class="selectpicker w-100" data-style="btn-dark" data-live-search="true">
+                                <option disabled selected value="0">Nome do Ganhador</option>
+                                @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.Usuario>)ViewBag.Usuario)
+                                {
+                                    <option value="@item.id_usuario">@item.nome</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="numero_sorteado">Número Sorteado</label>
+                            <input type="text" class="form-control" id="numero_sorteado" name="numero_sorteado" placeholder="001">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Fechar</button> &#160;
+                <button type="button" onclick="FinalizarSorteio();" class="btn btn-success btn-sm">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="~/js/Pages/Sorteios/Index.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Pages/Sorteios/FinalizarSorteio.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Pages/Sorteios/ExcluirSorteio.js" type="text/javascript" asp-append-version="true"></script>

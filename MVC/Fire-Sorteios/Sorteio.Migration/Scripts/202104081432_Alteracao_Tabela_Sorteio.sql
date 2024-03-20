@@ -1,0 +1,2 @@
+﻿ALTER TABLE Sorteio ADD 
+						status BIT NOT NULL DEFAULT 0;

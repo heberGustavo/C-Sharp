@@ -1,0 +1,168 @@
+﻿@using Sorteio.Portal.Utils;
+@using Sorteio.Common;
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="icon" type="image/png" href="~/img/logo_preta.png" />
+
+    <!-- ICONES -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link href="~/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+
+    <!-- Editor de Texto -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    <!-- Input File -->
+    <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/wtf-forms.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- JS -->
+    <script src="~/js/core/jquery.min.js" asp-append-version="true" type="text/javascript"></script>
+
+</head>
+<body class="landing-page sidebar-collapse acesso-interno">
+
+    <div class="vertical-nav fundo_vermelho" id="sidebar">
+        <div class="py-4 px-3 mb-4">
+            <div class="media d-flex align-items-center">
+                @if (AuthHelper.USUARIO_LOGADO() != null)
+                {
+                    <img src="~/img/usuarios/cliente.png" alt="..." class="mr-3 rounded-circle img-thumbnail shadow-sm img-perfil">
+                    <div class="media-body">
+
+                        <h4 class="font-weight-bold text-light m-0">@AuthHelper.USUARIO_LOGADO().nome</h4>
+                        @if (AuthHelper.USUARIO_LOGADO().id_tipo_usuario == DataDictionary.USUARIO_ADMINISTRADOR)
+                        {
+                            <p class="font-weight-bold text-light mb-0">Administrador</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-bold text-light mb-0">Cliente</p>
+                        }
+                    </div>
+                }
+                else if (AuthHelper.USUARIO_LOGADO_ADM() != null)
+                {
+                    <img src="~/img/usuarios/admin.png" alt="..." class="mr-3 rounded-circle img-thumbnail shadow-sm img-perfil">
+                    <div class="media-body">
+
+                        <h4 class="font-weight-bold text-light m-0">@AuthHelper.USUARIO_LOGADO_ADM().nome</h4>
+                        @if (AuthHelper.USUARIO_LOGADO_ADM().id_tipo_usuario == DataDictionary.USUARIO_ADMINISTRADOR)
+                        {
+                            <p class="font-weight-bold text-light mb-0">Administrador</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-bold text-light mb-0">Cliente</p>
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+        <hr class="bg-light" />
+        <ul class="nav flex-column mb-0">
+
+            @if (AuthHelper.USUARIO_LOGADO_ADM() != null)
+            {
+                <li class="nav-item">
+                    <a asp-controller="Sorteios" asp-action="Index" class="nav-link text-light font-italic font-weight-bold">
+                        <i class="material-icons mr-3 text-light">bookmark_add</i>
+                        Sorteios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Pagamento" asp-action="Index" class="nav-link text-light font-italic font-weight-bold">
+                        <i class="material-icons mr-3 text-light">bookmark_add</i>
+                        Pagamentos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="CategoriaSorteio" asp-action="Index" class="nav-link text-light font-italic font-weight-bold">
+                        <i class="material-icons mr-3 text-light">category</i>
+                        Categorias
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="FormasDePagamento" asp-action="Index" class="nav-link text-light font-italic font-weight-bold">
+                        <i class="material-icons mr-3 text-light">account_balance</i>
+                        Formas de Pagamento
+                    </a>
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <main role="main">
+        <div class="page-content" id="content">
+            <nav class="navbar navbar-expand-lg fundo_vermelho">
+                <div class="ml-2 mr-2 w-100">
+                    <div class="navbar-translate">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm btn-sm" style="z-index: 9999; padding: 10px 30px; margin: 10px; box-shadow: 0 0px 0px 0 rgb(0 0 0), 0 0px 1px -2px rgb(0 0 0), 0 1px 5px 0 rgb(4 4 4 / 97%);"><i class="fas fa-bars mr-2 text-dark"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
+
+                        <div class="ml-auto">
+                            <a asp-controller="Login" asp-action="Logout" class="btn btn-secondary btn-sm btn-mobile" style="z-index: 9999;">Sair <i class="material-icons">exit_to_app</i></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- JS -->
+    <script src="~/js/core/popper.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/core/bootstrap-material-design.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/plugins/moment.min.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="~/js/plugins/bootstrap-datetimepicker.js" asp-append-version="true" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/js/plugins/nouislider.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/material-kit.js?v=2.0.4" asp-append-version="true" type="text/javascript"></script>
+
+    <script src="~/js/plugins/pgwslideshow.js" asp-append-version="true"></script>
+    <script src="~/js/plugins/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+
+    <script src="~/js/jquery.mask.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/upload-image.js" asp-append-version="true"></script>
+    <script src="~/js/utilities.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+
+        //$(function () {
+        //    swal("Manutenção", "Desculpe o transtorno. Estamos melhorando a sua interação com o site!", "warning")
+        //});
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

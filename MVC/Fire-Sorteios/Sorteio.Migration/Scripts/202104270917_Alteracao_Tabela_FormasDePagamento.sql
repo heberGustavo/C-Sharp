@@ -1,0 +1,1 @@
+﻿ALTER TABLE FormasDePagamento ADD pix VARCHAR(50) NULL GO;

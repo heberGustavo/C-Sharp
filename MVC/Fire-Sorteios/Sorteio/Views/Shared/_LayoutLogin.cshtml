@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="icon" type="image/png" href="~/img/logo_preta.png" />
+
+    <!-- ICONES -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link href="~/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- JS -->
+    <script src="~/js/core/jquery.min.js" asp-append-version="true" type="text/javascript"></script>
+
+</head>
+<body class="landing-page sidebar-collapse" id="home">
+    <header>
+        <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+            <div class="container">
+                <div class="navbar-translate">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                        <img id="logo_branca" src="~/img/logo_branca.png" alt="Logo" style="width: 45%;" />
+                        <img id="logo_preta" src="~/img/logo_preta.png" class="d-none" alt="Logo" style="width: 45%;" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon" style="background-color: #000;"></span>
+                        <span class="navbar-toggler-icon" style="background-color: #000;"></span>
+                        <span class="navbar-toggler-icon" style="background-color: #000;"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="material-icons">apps</i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="sorteio-em-andamento">
+                                <i class="material-icons">list_alt</i> Sorteios em Andamento
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">
+                                <i class="material-icons">confirmation_number</i> Envie seu comprovante
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">
+                                <i class="material-icons">help_outline</i> Tire suas dúvidas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="Index">
+                                <i class="material-icons">login</i> Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float_custom" target="_blank">
+            <i class="fab fa-whatsapp my-float"></i>
+        </a>
+        @RenderBody()
+    </main>
+
+    <!-- JS -->
+    <script src="~/js/core/popper.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/core/bootstrap-material-design.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/plugins/moment.min.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="~/js/plugins/bootstrap-datetimepicker.js" asp-append-version="true" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/js/plugins/nouislider.min.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/material-kit.js?v=2.0.4" asp-append-version="true" type="text/javascript"></script>
+
+    <script src="~/js/plugins/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+
+    <script src="~/js/jquery.mask.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/utilities.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+
+        //Efeito do Scroll
+        $(window).scroll(function () {
+            var $height = $(window).scrollTop();
+
+            if ($height > 100) {
+                $('#logo_branca').addClass('d-none');
+                $('#logo_preta').removeClass('d-none');
+            } else {
+                $('#logo_branca').removeClass('d-none');
+                $('#logo_preta').addClass('d-none');
+            }
+        });
+
+        //$(function () {
+        //    swal("Manutenção", "Desculpe o transtorno. Estamos melhorando a sua interação com o site!", "warning")
+        //});
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

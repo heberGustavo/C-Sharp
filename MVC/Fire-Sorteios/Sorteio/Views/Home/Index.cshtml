@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    @model IEnumerable<Sorteio.Domain.Models.NotMapped.InformacoesSorteio>;
+}
+
+<div class="page-header header-filter fundo_vermelho" data-parallax="true">
+    <div class="container">
+        <div class="row logo">
+            <div class="col-md-6">
+                <h3 class="display-6">NÓS SOMOS</h3>
+                <h1 class="display-5"><b class="font-good-times">FIRE SORTEIOS!</b></h1>
+                <h4>
+                    Estamos aqui para tornar o seu sonho em realidade de forma simples, rapida e 100% seguro. Sorteios através da Federal!
+                </h4>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main main-raised" id="sorteio-em-andamento">
+    <div class="container">
+        <div class="section text-center">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <h2 class="title">SORTEIOS EM ANDAMENTO</h2>
+                    <h4 class="description">Vários participantes já tiveram seus sonhos realizados.</h4>
+                    <h5 class="description text-dark"><b>Você pode ser o próximo!</b></h5>
+                </div>
+            </div>
+            <div class="features">
+                <div class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.status == false)
+                        {
+                            <div class="col-md-4">
+                                <div class="info">
+                                    <div class="card card-nav-tabs">
+                                        <div class="card-body card-img-principal" style="background: url('@item.url_imagem'); width: 100%; height: 250px; background-position: center; background-size: contain; background-repeat: no-repeat;">
+                                        </div>
+                                        <div class="card-header card-header-danger">
+                                            <text class="titulo-card-sorteios"><b>@item.edicao° Edição</b></text>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row info-numeros">
+                                                <div class="col-md-4">
+                                                    <h5>
+                                                        <b>@item.quantidade_numeros</b><br />números
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h5>
+                                                        <b>@item.numeros_reservados</b><br />reservados
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h5>
+                                                        <b>@item.numeros_pagos</b><br />pagos
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                            <p class="card-text">@item.nome</p>
+                                            <a asp-controller="Home" asp-action="Sorteio" asp-route-id="@item.id_sorteio" class="btn btn-dark font-good-times">Comprar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <div class="mb-5">
+                    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                    <div class="elfsight-app-de7181b3-165b-4043-984a-05b5e3764352"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main main-raised fundo_vermelho" id="ultimos-sorteios" style="margin-bottom: 60px;">
+    <div class="container">
+        <div class="section text-center">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <h2 class="title text-white">ÚLTIMOS SORTEIOS REALIZADOS</h2>
+                    <h4 class="description text-white">Confira abaixo os nossos últimos sorteios</h4>
+
+                    <select id="select_categoria_sorteio" class="selectpicker" data-style="btn-danger">
+                        <option selected value="0">Todos</option>
+
+                        @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.CategoriaSorteio>)ViewBag.CategoriaSorteio)
+                        {
+                            <option value="@item.id_categoria_sorteio">@item.nome</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+            <div class="features">
+                <div id="lista_ultimos_sorteios" class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.status == true)
+                        {
+                            <div class="col-md-4">
+                                <div class="info">
+                                    <div class="card card-nav-tabs">
+                                        <div class="card-body card-img-principal" style="background: url('@item.url_imagem'); width: 100%; height: 250px; background-position: center; background-size: contain; background-repeat: no-repeat;">
+                                        </div>
+                                        <div class="card-header card-header-danger">
+                                            <text class="titulo-card-sorteios"><b>@item.edicao° Edição</b></text>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4>
+                                                <b>GANHADOR</b> <br />
+                                                @item.nome_ganhador
+                                            </h4>
+                                            <h5>
+                                                <b>Sorteado: </b> n°@item.numero_sorteado
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main main-raised rodape">
+    <div class="container">
+        <br /><br />
+        <div>
+            <img src="~/img/logo_preta.png" class="logo" />
+            <div class="row redes-sociais d-flex justify-content-center">
+                <a href="https://www.instagram.com/fire.sorteios/" target="_blank">
+                    <img class="img-fluid" src="~/img/instagran.png" alt="Instagran" style="width: 50px; height: 50px;"/>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">
+                    <img class="img-fluid" src="~/img/whatsapp.png" alt="Whatsapp" style="width: 50px; height: 50px;"/>
+                </a>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="#home">HOME</a> | <a href="#ultimos-sorteios">ÚLTIMOS SORTEIOS</a>
+                <br />
+                <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">ENVIE SEU COMPROVANTE</a> | <a href="https://api.whatsapp.com/send?phone=5519997548893&text=Ol%C3%A1%2C%20tudo%20bem%20%3F%20Vim%20pelo%20site%20da%20Fire%20Sorteios!" target="_blank">TIRE SUAS DÚVIDAS</a>
+                <br />
+                <a asp-controller="Home" asp-action="PoliticaDePrivacidade">POLÍTICA DE PRIVACIDADE</a>
+                <br />
+            </div>
+            <div class="copyright text-center">
+                <b style="font-family: 'Roboto';">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    Fire Sorteios | Desenvolvido por <a style="font-family: 'Roboto';" href="https://www.instagram.com/servicequality_ae/" target="_blank"><b class="text-danger">Service Quality</b> <img src="~/img/logo-sq.png" width="25" alt="Service Quality" /> </a>
+                </b>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+</div>
+
+<script src="~/js/Pages/Home/Index.js" asp-append-version="true" type="text/javascript"></script>

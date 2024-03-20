@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutLogin";
+}
+
+<div class="page-header header-filter fundo_vermelho">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-9 ml-auto mr-auto">
+                <div class="card card-login">
+                    <form class="form form-custom-login" method="" action="">
+                        <div class="card-header card-header-danger text-center">
+                            <h4 class="card-title mt-3 mb-3 font-good-times">Login</h4>
+                        </div>
+                        <div class="card-body">
+                            <span class="bmd-form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">mail</i>
+                                        </span>
+                                    </div>
+                                    <input id="email" type="email" class="form-control" placeholder="Email">
+                                </div>
+                            </span>
+                            <span class="bmd-form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                    </div>
+                                    <input id="senha" type="password" class="form-control" placeholder="Senha">
+                                </div>
+                            </span>
+                        </div>
+                        <div class="footer text-center">
+                            <a onclick="RealizarLogin()" class="btn btn-dark text-light font-good-times">Entrar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/Pages/Login/Index.js" asp-append-version="true"></script>

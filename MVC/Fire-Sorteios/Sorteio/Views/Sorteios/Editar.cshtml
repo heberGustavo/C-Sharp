@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Editar Sorteio";
+    Layout = "_LayoutAcessoInterno";
+
+    @model Sorteio.Domain.Models.NotMapped.SorteioNotMapped;
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+@if (Model.status == true)
+{
+    <input value="1" type="hidden" id="statusSorteioSelecionado" />
+}
+else
+{
+    <input value="0" type="hidden" id="statusSorteioSelecionado" />
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Editar Sorteio</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    @if (Model.status == true)
+                    {
+                        <div class="bolha_vencedor">
+                            <h5 class="font-weight-bold m-0 p-0">Sorteio encerrado!</h5>
+                            <span class="data-sorteio">@Model.data_sorteio.ToString("dd/MM/yyyy")</span> <br />
+                            <span class="nome-ganhador">@Model.nome_ganhador</span> <br />
+                            <a class="btn btn-sm btn-info" onclick="AbrirModalEditarVencedorSorteio()"><span class="material-icons">create</span></a>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6 text-center align-self-center">
+                    <label for="file-input" class="selecionar_arquivo">
+                        <p class="m-0">Selecionar fotos do sorteio</p>
+                        <i class="material-icons">cloud_upload</i>
+                    </label>
+                    <p id="quantidade_arquivo" class="font-weight-bold">@Model.quantidade_imagens imagens</p>
+                    <input id="file-input" type="file" multiple accept=".png, .jpg, .jpeg"/>
+                    <div id="preview"></div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div id="inputs_de_links_gerados"></div>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label for="nome">Nome do Sorteio</label>
+                        <input value="@Model.nome_sorteio" type="text" name="nome" id="nome" class="form-control" placeholder="Meu novo sorteio">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="edicao">Edição</label>
+                        <input value="@Model.edicao_sorteio" type="text" name="edicao" id="edicao" class="form-control" placeholder="Número da Edição">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="valor">Valor</label>
+                        <input value="@Model.valor" type="text" name="valor" id="valor" class="form-control money" placeholder="R$ 10,00">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="quantidade_numeros">Quant. de números</label>
+                        <input value="@Model.quantidade_numeros" type="text" name="quantidade_numeros" id="quantidade_numeros" class="form-control number" placeholder="100">
+                    </div>
+                    <div class="form-group col-md-3 alinhar-embaixo">
+                        <select id="select_categoria_sorteio" class="selectpicker" data-style="btn-dark">
+                            <option disabled selected value="0">Categoria</option>
+                            @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.CategoriaSorteio>)ViewBag.CategoriaSorteio)
+                            {
+                                if (Model.id_categoria_sorteio == item.id_categoria_sorteio)
+                                {
+                                    <option selected value="@item.id_categoria_sorteio">@item.nome</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id_categoria_sorteio">@item.nome</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="descricao_curta">Descrição curta</label>
+                        <input value="@Model.descricao_curta" type="text" name="descricao_curta" id="descricao_curta" class="form-control" placeholder="Minha descrição curta">
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="texto_longo_html" class="d-none">@Model.descricao_longa</div>
+                    <div class="summernote" id="contentSummernote"></div>
+                </div>
+            </div>
+
+            <button id="edit" class="btn btn-outline-info btn-sm" onclick="edit()">Editar</button>
+            <button id="save" class="btn btn-outline-success btn-sm" onclick="save()">Salvar</button>
+            <hr />
+            <button class="btn btn-dark" onclick="AtualizarSorteio('@Model.id_sorteio');">Atualizar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Finalizar Sorteio -->
+<div class="modal fade" id="modalFinalizarSorteio" tabindex="-1" role="dialog" aria-labelledby="modalFinalizarSorteio" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <h5 class="title m-0 text-center">Edição Finalizar Sorteio</h5>
+                <small class="m-auto d-block text-center">Para finalizar o sorteio preencha os campos abaixo</small>
+                <input value="@Model.id_vencedor_sorteio" type="hidden" id="idVencedorSorteioSelecionado" />
+                <input value="@Model.id_sorteio" type="hidden" id="idSorteioSelecionado" />
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="data_sorteio">Data</label>
+                            <input value="@Model.data_sorteio.ToString("yyyy-MM-dd")" type="date" class="form-control" id="data_sorteio" name="data_sorteio">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <select id="select_nome_cliente" class="selectpicker w-100" data-style="btn-dark" data-live-search="true">
+                                <option disabled selected value="0">Nome do Ganhador</option>
+                                @foreach (var item in (IEnumerable<Sorteio.Domain.Models.EntityDomain.Usuario>)ViewBag.Usuario)
+                                {
+                                    if (Model.id_usuario == item.id_usuario)
+                                    {
+                                        <option selected value="@item.id_usuario">@item.nome</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.id_usuario">@item.nome</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="numero_sorteado">Número Sorteado</label>
+                            <input value="@Model.numero_sorteado" type="text" class="form-control" id="numero_sorteado" name="numero_sorteado" placeholder="001">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Fechar</button> &#160;
+                <button type="button" onclick="AtualizarFinalizarSorteio();" class="btn btn-success btn-sm">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="~/js/Pages/Sorteios/NovoSorteio.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Pages/Sorteios/EditarSorteio.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Pages/Sorteios/EditarFinalizarSorteio.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/plugins/summernote-pt-br.js" type="text/javascript" asp-append-version="true"></script>

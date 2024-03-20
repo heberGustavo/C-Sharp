@@ -1,0 +1,100 @@
+﻿@using Sorteio.Common;
+
+@{
+    ViewData["Title"] = "Formas de Pagamento";
+    Layout = "_LayoutAcessoInterno";
+
+    @model IEnumerable<Sorteio.Domain.Models.Body.FormaDePagamentoBody>
+}
+
+<partial name="~/Views/PartialViews/Loading.cshtml" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="title">Lista de Formas de Pagamentos</h2>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <a asp-controller="FormasDePagamento" asp-action="Novo" class="btn btn-outline-danger">Nova Forma de Pagamento</a>
+            </div>
+            <div class="col-md-12 mb-3">
+                <table class="table table-hover table-responsive-lg" id="datatableListaFormasDePagamento">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">Banco</th>
+                            <th scope="col">Agência</th>
+                            <th scope="col">Conta</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.id_tipo_forma_de_pagamento != DataDictionary.CODIGO_PIX))
+                        {
+                            <tr>
+                                <td>@item.nome_banco</td>
+                                <td>@item.agencia</td>
+                                <td>@item.conta</td>
+                                <td>
+                                    <a class='btn btn-sm btn-dark text-light' asp-controller="FormasDePagamento" asp-action="Editar" asp-route-id="@item.id_forma_de_pagamento"><i class='fas fa-edit'></i></a>
+                                    <a class='btn btn-sm btn-danger' onclick="ConfirmarExclusao('@item.id_forma_de_pagamento', '@item.nome_banco')"><i class='fas fa-trash'></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-hover table-responsive-lg" id="datatableListaFormasDePagamentoPix">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">Pix</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.id_tipo_forma_de_pagamento == DataDictionary.CODIGO_PIX))
+                        {
+                            <tr>
+                                <td>@item.pix</td>
+                                <td>
+                                    <a class='btn btn-sm btn-dark text-light' asp-controller="FormasDePagamento" asp-action="Editar" asp-route-id="@item.id_forma_de_pagamento"><i class='fas fa-edit'></i></a>
+                                    <a class='btn btn-sm btn-danger' onclick="ConfirmarExclusao('@item.id_forma_de_pagamento', '@item.nome_banco')"><i class='fas fa-trash'></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal Finalizar Sorteio -->
+<div class="modal fade" id="modalFinalizarSorteio" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <input type="hidden" id="idFormaDePagamentoExclusaoSelecionada" />
+                <h5 class="title m-0 text-center">Excluir Categoria</h5>
+                <p class="text-center">Tem certeza que deseja excluir a categoria <text id="nomeBancoExclusao" class="font-weight-bold"></text>?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Fechar</button> &#160;
+                <button onclick="ExcluirFormaDePagamento()" type="button" class="btn btn-success btn-sm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Pages/FormasDePagamento/Index.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Pages/FormasDePagamento/Excluir.js" type="text/javascript" asp-append-version="true"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
