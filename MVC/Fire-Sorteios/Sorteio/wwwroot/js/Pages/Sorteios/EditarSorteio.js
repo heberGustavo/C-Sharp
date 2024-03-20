@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    swal("Atenção", "A imagem é tentada ser enviada por BLOB da Azure, como não tem a conexão acontecerá erro", "error")
+
     var textoHtml = $('#texto_longo_html').text();
 
     setTimeout(function () {

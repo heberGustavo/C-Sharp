@@ -129,7 +129,7 @@ html {
 
 /* CSS CUSTOM */
 .fundo_vermelho {
-    background: linear-gradient(150deg, rgba(0,0,0,1) -20%, rgba(164,4,4,1) 60%, rgba(0,0,0,1) 120%);
+    background: linear-gradient(150deg, rgba(0, 0, 0, 1) -20%, rgb(153 153 153) 60%, rgba(0, 0, 0, 1) 120%);
 }
 
 .page-header .logo {

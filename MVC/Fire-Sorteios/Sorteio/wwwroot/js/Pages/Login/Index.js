@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    swal("Usuarios de Acesso", "Usuario Admin: admin@sorteios.com - Senha: admin \n Usuario Comum: user@sorteios.com - Senha: user");
+    swal("Usuarios de Acesso", "Usuario Admin: admin@sorteios.com - Senha: admin");
 });
 
 function RealizarLogin() {

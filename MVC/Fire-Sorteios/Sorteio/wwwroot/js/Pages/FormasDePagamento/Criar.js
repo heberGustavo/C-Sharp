@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    swal("Atenção", "A imagem é tentada ser enviada por BLOB da Azure, como não tem a conexão acontecerá erro", "error")
+
     $('#select_tipo_conta').change(function () {
 
         var idSelecionado = $(this).val();
